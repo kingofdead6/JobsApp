@@ -1,7 +1,7 @@
 import Profile from '../models/Profile.js';
 import User from '../models/User.js';
 import { ApiError, asyncHandler } from '../utils/ApiError.js';
-import { publicPath } from '../middleware/upload.js';
+import { storeFile, removeFile } from '../middleware/upload.js';
 
 // GET /api/profile/me — السيرة الذاتية الرقمية (3.5)
 export const getMyProfile = asyncHandler(async (req, res) => {
@@ -80,31 +80,41 @@ export const removeEducation = asyncHandler(async (req, res) => {
 
 // POST /api/profile/cv — رفع ملف PDF (3.5)
 export const uploadCvFile = asyncHandler(async (req, res) => {
-  if (!req.file) throw new ApiError(400, 'لم يتم إرفاق أي ملف');
+  const stored = await storeFile(req.file, 'cv');
+
+  // نحتفظ بمعرّف النسخة السابقة لحذفها بعد نجاح الاستبدال
+  const previous = await Profile.findOne({ user: req.user._id }).select('cvPublicId');
 
   const profile = await Profile.findOneAndUpdate(
     { user: req.user._id },
     {
       $set: {
-        cvFile: publicPath(req.file, 'cv'),
+        cvFile: stored.url,
+        cvPublicId: stored.publicId,
         cvFileName: req.file.originalname.slice(0, 120),
       },
     },
     { new: true, upsert: true }
   );
 
+  if (previous?.cvPublicId) await removeFile(previous.cvPublicId, 'raw');
+
   res.json({ success: true, message: 'تم رفع السيرة الذاتية', data: { profile } });
 });
 
 // POST /api/profile/avatar — الصورة الشخصية
 export const uploadAvatarFile = asyncHandler(async (req, res) => {
-  if (!req.file) throw new ApiError(400, 'لم يتم إرفاق أي ملف');
+  const stored = await storeFile(req.file, 'avatars');
+
+  const previous = await User.findById(req.user._id).select('+avatarPublicId');
 
   const user = await User.findByIdAndUpdate(
     req.user._id,
-    { avatar: publicPath(req.file, 'avatars') },
+    { avatar: stored.url, avatarPublicId: stored.publicId },
     { new: true }
   );
+
+  if (previous?.avatarPublicId) await removeFile(previous.avatarPublicId, 'image');
 
   res.json({ success: true, message: 'تم تحديث الصورة', data: { user } });
 });

@@ -19,13 +19,19 @@ class ApiClient {
   ApiClient._();
   static final ApiClient instance = ApiClient._();
 
-  /// عنوان الخادم.
-  /// 10.0.2.2 هو المنفذ الذي يرى به محاكي Android جهاز المضيف.
-  /// عند التشغيل على هاتف حقيقي، ضع عنوان IP للحاسوب على الشبكة المحلية.
-  static const String baseUrl = String.fromEnvironment(
+  /// عنوان الخادم المنشور على Render.
+  /// للتطوير محليًا مرّر العنوان عند التشغيل:
+  ///   flutter run --dart-define=API_URL=http://10.0.2.2:5000
+  /// (10.0.2.2 هو عنوان جهاز المضيف من داخل محاكي Android)
+  static const String _rawBaseUrl = String.fromEnvironment(
     'API_URL',
-    defaultValue: 'http://10.0.2.2:5000',
+    defaultValue: 'https://jobsapp-5pvi.onrender.com',
   );
+
+  /// يُزال الشرطة المائلة الأخيرة حتى لا ينتج `//api` عند التركيب
+  static String get baseUrl => _rawBaseUrl.endsWith('/')
+      ? _rawBaseUrl.substring(0, _rawBaseUrl.length - 1)
+      : _rawBaseUrl;
 
   static String get apiUrl => '$baseUrl/api';
 
@@ -129,7 +135,8 @@ class ApiClient {
         return _decode(await http.Response.fromStream(streamed));
       });
 
-  /// تحويل مسار نسبي (/uploads/...) إلى عنوان كامل
+  /// روابط Cloudinary تصل مطلقة (https://…) فتُعاد كما هي.
+  /// أمّا مسارات التخزين المحلي (/uploads/…) فيُضاف إليها عنوان الخادم.
   static String? fileUrl(String? path) {
     if (path == null || path.isEmpty) return null;
     if (path.startsWith('http')) return path;

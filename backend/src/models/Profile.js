@@ -53,8 +53,9 @@ const profileSchema = new mongoose.Schema(
     birthDate: { type: Date },
     address: { type: String, maxlength: 200 },
 
-    cvFile: { type: String },      // ملف PDF مرفوع
+    cvFile: { type: String },      // رابط ملف PDF على Cloudinary
     cvFileName: { type: String },
+    cvPublicId: { type: String },  // لحذف النسخة القديمة عند الاستبدال
 
     // هل تظهر السيرة الذاتية للمؤسسات المشتركة (نموذج الأعمال، الفصل 8)
     visibleToCompanies: { type: Boolean, default: true },

@@ -8,6 +8,7 @@ const companySchema = new mongoose.Schema(
 
     name: { type: String, required: true, trim: true, maxlength: 120 },
     logo: { type: String },
+    logoPublicId: { type: String, select: false },
     sector: { type: String, enum: SECTOR_KEYS, required: true },
     description: { type: String, maxlength: 2000 },
 
@@ -26,6 +27,7 @@ const companySchema = new mongoose.Schema(
     // شارة «مؤسسة موثّقة» بعد التحقّق من السجل التجاري — 3.8
     commercialRegister: { type: String, trim: true },
     registerDocument: { type: String },
+    registerDocumentPublicId: { type: String, select: false },
     verificationStatus: {
       type: String,
       enum: ['unverified', 'pending', 'verified', 'rejected'],

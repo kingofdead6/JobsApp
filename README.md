@@ -27,10 +27,30 @@ JobsPlatdorm/
 ```bash
 cd backend
 npm install
-cp .env.example .env     # عدّل JWT_SECRET قبل الإنتاج
+cp .env.example .env     # عدّل JWT_SECRET ومفاتيح Cloudinary
 npm run seed             # بيانات أوّلية للتجريب
 npm run dev              # http://localhost:5000
 ```
+
+### تخزين الملفات — Cloudinary
+
+السير الذاتية (PDF) والشعارات والصور الشخصية تُرفع إلى **Cloudinary**.
+اضبط المفاتيح الثلاثة في `.env`:
+
+```
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+```
+
+تجدها في [لوحة تحكّم Cloudinary](https://console.cloudinary.com/settings/api-keys).
+
+- **إن تُركت فارغة**: تُخزَّن الملفات محليًا في `uploads/` — للتطوير فقط.
+- **ضرورية على Render**: نظام ملفات Render مؤقّت، وكل إعادة نشر تمحو
+  ما رُفع محليًا، فبدون Cloudinary تضيع ملفات المستخدمين.
+
+الصور تُضغط تلقائيًا (حد أقصى 1200×1200، جودة تلقائية)، وملفات PDF تُرفع
+بنوع `raw`. عند استبدال ملف يُحذف القديم من Cloudinary تلقائيًا.
 
 ### حسابات التجريب
 
@@ -104,12 +124,24 @@ icacls "C:\Program Files\flutter" /grant "$env:USERNAME:(OI)(CI)M" /T
 
 ### عنوان الخادم
 
-القيمة الافتراضية `http://10.0.2.2:5000` وهي عنوان المضيف من داخل محاكي
-Android. للتشغيل على هاتف حقيقي:
+التطبيق يتّصل افتراضيًا بالخادم المنشور:
+
+```
+https://jobsapp-5pvi.onrender.com
+```
+
+للتطوير على خادم محلّي مرّر العنوان عند التشغيل:
 
 ```bash
+# محاكي Android (10.0.2.2 = جهاز المضيف من داخل المحاكي)
+flutter run --dart-define=API_URL=http://10.0.2.2:5000
+
+# هاتف حقيقي على نفس الشبكة
 flutter run --dart-define=API_URL=http://192.168.1.X:5000
 ```
+
+> الخطّة المجانية على Render تُنيم الخادم بعد فترة خمول، فقد يستغرق
+> أوّل نداء بعد النوم ~50 ثانية. الشاشات تعرض حالة تحميل في هذه الأثناء.
 
 ### الخط العربي
 

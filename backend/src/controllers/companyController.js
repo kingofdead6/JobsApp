@@ -1,7 +1,7 @@
 import Company from '../models/Company.js';
 import JobOffer from '../models/JobOffer.js';
 import { ApiError, asyncHandler } from '../utils/ApiError.js';
-import { publicPath } from '../middleware/upload.js';
+import { storeFile, removeFile } from '../middleware/upload.js';
 import { OFFER_STATUS } from '../config/constants.js';
 
 // GET /api/companies — دليل المؤسسات (3.8)
@@ -105,14 +105,19 @@ export const updateMyCompany = asyncHandler(async (req, res) => {
 
 // POST /api/companies/me/logo
 export const uploadCompanyLogo = asyncHandler(async (req, res) => {
-  if (!req.file) throw new ApiError(400, 'لم يتم إرفاق أي ملف');
+  // نتحقّق من وجود المؤسسة قبل الرفع حتى لا نُحمّل ملفًا بلا داعٍ
+  const existing = await Company.findOne({ owner: req.user._id }).select('+logoPublicId');
+  if (!existing) throw new ApiError(404, 'ملف المؤسسة غير موجود');
+
+  const stored = await storeFile(req.file, 'logos');
 
   const company = await Company.findOneAndUpdate(
     { owner: req.user._id },
-    { logo: publicPath(req.file, 'logos') },
+    { logo: stored.url, logoPublicId: stored.publicId },
     { new: true }
   );
-  if (!company) throw new ApiError(404, 'ملف المؤسسة غير موجود');
+
+  if (existing.logoPublicId) await removeFile(existing.logoPublicId, 'image');
 
   res.json({ success: true, message: 'تم تحديث الشعار', data: { company } });
 });
@@ -126,10 +131,16 @@ export const requestVerification = asyncHandler(async (req, res) => {
   }
 
   if (req.body.commercialRegister) company.commercialRegister = req.body.commercialRegister;
-  if (req.file) company.registerDocument = publicPath(req.file, 'logos');
 
+  // نتحقّق من رقم السجل قبل رفع الوثيقة
   if (!company.commercialRegister) {
     throw new ApiError(400, 'رقم السجل التجاري مطلوب');
+  }
+
+  if (req.file) {
+    const stored = await storeFile(req.file, 'logos');
+    company.registerDocument = stored.url;
+    company.registerDocumentPublicId = stored.publicId;
   }
 
   company.verificationStatus = 'pending';

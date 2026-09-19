@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema(
 
     wilaya: { type: String, enum: WILAYA_NAMES },
     avatar: { type: String },
+    avatarPublicId: { type: String, select: false },
 
     // تأكيد الهوية برمز OTP
     phoneVerified: { type: Boolean, default: false },
