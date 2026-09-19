@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import http from 'node:http';
-import app from './app.js';
-import { connectDB } from './config/db.js';
-import { initSocket } from './services/socket.js';
-import { startScheduler } from './services/scheduler.js';
+import app from './src/app.js';
+import { connectDB } from './src/config/db.js';
+import { initSocket } from './src/services/socket.js';
+import { startScheduler } from './src/services/scheduler.js';
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5006;
 
 async function start() {
   await connectDB();
