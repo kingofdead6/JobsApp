@@ -6,6 +6,12 @@ import Profile from '../models/Profile.js';
 import Company from '../models/Company.js';
 import JobOffer from '../models/JobOffer.js';
 import Banner from '../models/Banner.js';
+import Application from '../models/Application.js';
+import Conversation from '../models/Conversation.js';
+import Message from '../models/Message.js';
+import Notification from '../models/Notification.js';
+import Report from '../models/Report.js';
+import SavedItem from '../models/SavedItem.js';
 import { OFFER_STATUS, ROLES } from '../config/constants.js';
 
 // بيانات أوّلية للتجريب — تعكس الشاشات الواردة في نموذج التصميم
@@ -194,6 +200,7 @@ const OFFERS = [
 async function seed() {
   await connectDB();
 
+  // تُحذف كل المجموعات حتى تكون الحالة الابتدائية نظيفة تمامًا
   console.log('[seed] حذف البيانات السابقة...');
   await Promise.all([
     User.deleteMany({}),
@@ -201,6 +208,12 @@ async function seed() {
     Company.deleteMany({}),
     JobOffer.deleteMany({}),
     Banner.deleteMany({}),
+    Application.deleteMany({}),
+    Conversation.deleteMany({}),
+    Message.deleteMany({}),
+    Notification.deleteMany({}),
+    Report.deleteMany({}),
+    SavedItem.deleteMany({}),
   ]);
 
   // حساب المشرف
