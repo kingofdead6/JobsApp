@@ -1,0 +1,14 @@
+// خطأ تشغيلي معروف — يُعاد نصّه إلى العميل بالعربية كما هو
+export class ApiError extends Error {
+  constructor(statusCode, message, details = undefined) {
+    super(message);
+    this.statusCode = statusCode;
+    this.details = details;
+    this.isOperational = true;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+// يلتقط أخطاء الدوال غير المتزامنة ويمرّرها إلى معالج الأخطاء
+export const asyncHandler = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);

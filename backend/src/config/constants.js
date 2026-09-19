@@ -1,0 +1,150 @@
+// المراجع الثابتة — ملاحق دفتر الشروط (أ، ب، ج)
+
+// ملحق ج — الولايات الـ58
+export const WILAYAS = [
+  { code: 1, ar: 'أدرار', fr: 'Adrar' },
+  { code: 2, ar: 'الشلف', fr: 'Chlef' },
+  { code: 3, ar: 'الأغواط', fr: 'Laghouat' },
+  { code: 4, ar: 'أم البواقي', fr: 'Oum El Bouaghi' },
+  { code: 5, ar: 'باتنة', fr: 'Batna' },
+  { code: 6, ar: 'بجاية', fr: 'Béjaïa' },
+  { code: 7, ar: 'بسكرة', fr: 'Biskra' },
+  { code: 8, ar: 'بشار', fr: 'Béchar' },
+  { code: 9, ar: 'البليدة', fr: 'Blida' },
+  { code: 10, ar: 'البويرة', fr: 'Bouira' },
+  { code: 11, ar: 'تمنراست', fr: 'Tamanrasset' },
+  { code: 12, ar: 'تبسة', fr: 'Tébessa' },
+  { code: 13, ar: 'تلمسان', fr: 'Tlemcen' },
+  { code: 14, ar: 'تيارت', fr: 'Tiaret' },
+  { code: 15, ar: 'تيزي وزو', fr: 'Tizi Ouzou' },
+  { code: 16, ar: 'الجزائر العاصمة', fr: 'Alger' },
+  { code: 17, ar: 'الجلفة', fr: 'Djelfa' },
+  { code: 18, ar: 'جيجل', fr: 'Jijel' },
+  { code: 19, ar: 'سطيف', fr: 'Sétif' },
+  { code: 20, ar: 'سعيدة', fr: 'Saïda' },
+  { code: 21, ar: 'سكيكدة', fr: 'Skikda' },
+  { code: 22, ar: 'سيدي بلعباس', fr: 'Sidi Bel Abbès' },
+  { code: 23, ar: 'عنابة', fr: 'Annaba' },
+  { code: 24, ar: 'قالمة', fr: 'Guelma' },
+  { code: 25, ar: 'قسنطينة', fr: 'Constantine' },
+  { code: 26, ar: 'المدية', fr: 'Médéa' },
+  { code: 27, ar: 'مستغانم', fr: 'Mostaganem' },
+  { code: 28, ar: 'المسيلة', fr: "M'Sila" },
+  { code: 29, ar: 'معسكر', fr: 'Mascara' },
+  { code: 30, ar: 'ورقلة', fr: 'Ouargla' },
+  { code: 31, ar: 'وهران', fr: 'Oran' },
+  { code: 32, ar: 'البيض', fr: 'El Bayadh' },
+  { code: 33, ar: 'إليزي', fr: 'Illizi' },
+  { code: 34, ar: 'برج بوعريريج', fr: 'Bordj Bou Arréridj' },
+  { code: 35, ar: 'بومرداس', fr: 'Boumerdès' },
+  { code: 36, ar: 'الطارف', fr: 'El Tarf' },
+  { code: 37, ar: 'تندوف', fr: 'Tindouf' },
+  { code: 38, ar: 'تيسمسيلت', fr: 'Tissemsilt' },
+  { code: 39, ar: 'الوادي', fr: 'El Oued' },
+  { code: 40, ar: 'خنشلة', fr: 'Khenchela' },
+  { code: 41, ar: 'سوق أهراس', fr: 'Souk Ahras' },
+  { code: 42, ar: 'تيبازة', fr: 'Tipaza' },
+  { code: 43, ar: 'ميلة', fr: 'Mila' },
+  { code: 44, ar: 'عين الدفلى', fr: 'Aïn Defla' },
+  { code: 45, ar: 'النعامة', fr: 'Naâma' },
+  { code: 46, ar: 'عين تموشنت', fr: 'Aïn Témouchent' },
+  { code: 47, ar: 'غرداية', fr: 'Ghardaïa' },
+  { code: 48, ar: 'غليزان', fr: 'Relizane' },
+  { code: 49, ar: 'تيميمون', fr: 'Timimoun' },
+  { code: 50, ar: 'برج باجي مختار', fr: 'Bordj Badji Mokhtar' },
+  { code: 51, ar: 'أولاد جلال', fr: 'Ouled Djellal' },
+  { code: 52, ar: 'بني عباس', fr: 'Béni Abbès' },
+  { code: 53, ar: 'عين صالح', fr: 'In Salah' },
+  { code: 54, ar: 'عين قزام', fr: 'In Guezzam' },
+  { code: 55, ar: 'تقرت', fr: 'Touggourt' },
+  { code: 56, ar: 'جانت', fr: 'Djanet' },
+  { code: 57, ar: 'المغير', fr: "El M'Ghair" },
+  { code: 58, ar: 'المنيعة', fr: 'El Meniaa' },
+];
+
+export const WILAYA_NAMES = WILAYAS.map((w) => w.ar);
+
+// ملحق أ — أنواع العقود المعتمدة
+export const CONTRACT_TYPES = [
+  { key: 'full_time', ar: 'دوام كامل' },
+  { key: 'part_time', ar: 'دوام جزئي' },
+  { key: 'cdd', ar: 'مؤقت (CDD)' },
+  { key: 'internship', ar: 'تربّص' },
+  { key: 'seasonal', ar: 'عمل موسمي' },
+  { key: 'remote', ar: 'عمل عن بُعد' },
+];
+
+export const CONTRACT_KEYS = CONTRACT_TYPES.map((c) => c.key);
+
+// ملحق ب — القطاعات
+export const SECTORS = [
+  { key: 'construction', ar: 'البناء والأشغال العمومية' },
+  { key: 'transport', ar: 'النقل واللوجستيك' },
+  { key: 'hospitality', ar: 'المطاعم والفندقة' },
+  { key: 'industry', ar: 'الصناعة' },
+  { key: 'commerce', ar: 'التجارة' },
+  { key: 'it', ar: 'الإعلام الآلي' },
+  { key: 'health', ar: 'الصحة' },
+  { key: 'education', ar: 'التعليم' },
+  { key: 'agriculture', ar: 'الفلاحة' },
+  { key: 'services', ar: 'الخدمات' },
+  { key: 'crafts', ar: 'الحرف' },
+];
+
+export const SECTOR_KEYS = SECTORS.map((s) => s.key);
+
+// المستوى الدراسي
+export const EDUCATION_LEVELS = [
+  { key: 'none', ar: 'دون مستوى' },
+  { key: 'primary', ar: 'ابتدائي' },
+  { key: 'middle', ar: 'متوسط' },
+  { key: 'secondary', ar: 'ثانوي' },
+  { key: 'vocational', ar: 'تكوين مهني' },
+  { key: 'bac', ar: 'بكالوريا' },
+  { key: 'licence', ar: 'ليسانس' },
+  { key: 'master', ar: 'ماستر' },
+  { key: 'doctorate', ar: 'دكتوراه' },
+];
+
+export const EDUCATION_KEYS = EDUCATION_LEVELS.map((e) => e.key);
+
+// مستوى الخبرة
+export const EXPERIENCE_LEVELS = [
+  { key: 'none', ar: 'بدون خبرة' },
+  { key: 'junior', ar: 'أقل من سنتين' },
+  { key: 'mid', ar: 'من 2 إلى 5 سنوات' },
+  { key: 'senior', ar: 'أكثر من 5 سنوات' },
+];
+
+export const EXPERIENCE_KEYS = EXPERIENCE_LEVELS.map((e) => e.key);
+
+// حالات عرض العمل
+export const OFFER_STATUS = {
+  PENDING: 'pending',     // في انتظار مصادقة المشرف
+  APPROVED: 'approved',   // منشور
+  REJECTED: 'rejected',   // مرفوض مع سبب
+  PAUSED: 'paused',       // موقوف من طرف المؤسسة
+  EXPIRED: 'expired',     // انتهت صلاحيته
+};
+
+// حالات الترشّح
+export const APPLICATION_STATUS = {
+  PENDING: 'pending',     // قيد الدراسة
+  ACCEPTED: 'accepted',   // مقبول
+  REJECTED: 'rejected',   // مرفوض
+};
+
+export const REPORT_REASONS = [
+  { key: 'fake', ar: 'عرض وهمي' },
+  { key: 'scam', ar: 'محاولة احتيال' },
+  { key: 'money_request', ar: 'طلب مال' },
+  { key: 'offensive', ar: 'محتوى مسيء' },
+  { key: 'duplicate', ar: 'عرض مكرر' },
+  { key: 'other', ar: 'سبب آخر' },
+];
+
+export const ROLES = {
+  SEEKER: 'seeker',
+  COMPANY: 'company',
+  ADMIN: 'admin',
+};

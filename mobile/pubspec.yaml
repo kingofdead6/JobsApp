@@ -1,0 +1,58 @@
+name: bahth_aan_amal_dz
+description: "بحث عن عمل DZ — منصّة التشغيل الجزائرية"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # إدارة الحالة
+  provider: ^6.1.2
+
+  # الشبكة والتخزين
+  http: ^1.2.2
+  shared_preferences: ^2.3.2
+
+  # الواجهة
+  cupertino_icons: ^1.0.8
+  intl: ^0.19.0
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
+
+  # المراسلة الآنية
+  socket_io_client: ^2.0.3+1
+
+  # رفع الملفات ومشاركتها
+  file_picker: ^8.1.2
+  image_picker: ^1.1.2
+  share_plus: ^10.0.2
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+
+  # الخط العربي Cairo:
+  # ضع ملفات الخط في assets/fonts/ ثم أزل التعليق عن الكتلة التالية.
+  # حمّلها من: https://fonts.google.com/specimen/Cairo
+  # fonts:
+  #   - family: Cairo
+  #     fonts:
+  #       - asset: assets/fonts/Cairo-Regular.ttf
+  #         weight: 400
+  #       - asset: assets/fonts/Cairo-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/Cairo-Bold.ttf
+  #         weight: 700
