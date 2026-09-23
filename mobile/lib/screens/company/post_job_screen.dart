@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -123,7 +124,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
       await showDialog<void>(
         context: context,
         builder: (ctx) => AlertDialog(
-          icon: const Icon(Icons.check_circle_rounded,
+          icon: Icon(PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
               color: AppColors.success, size: 48),
           title: const Text('تم إرسال العرض', textAlign: TextAlign.center),
           content: const Text(
@@ -188,7 +189,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
         appBar: AppBar(
           title: Text(_isEditing ? 'تعديل العرض' : 'نشر عرض عمل'),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_forward_rounded),
+            icon: Icon(PhosphorIcons.arrowRight(PhosphorIconsStyle.bold)),
             onPressed: _back,
           ),
         ),
@@ -245,7 +246,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   ),
                   child: Center(
                     child: _step > index
-                        ? const Icon(Icons.check_rounded,
+                        ? Icon(PhosphorIcons.check(PhosphorIconsStyle.bold),
                             size: 16, color: Colors.white)
                         : Text(
                             '${index + 1}',
@@ -420,7 +421,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                 _label('المهارات المطلوبة'),
                 TextButton.icon(
                   onPressed: _addSkill,
-                  icon: const Icon(Icons.add_rounded, size: 18),
+                  icon: Icon(PhosphorIcons.plus(PhosphorIconsStyle.bold), size: 18),
                   label: const Text('إضافة'),
                 ),
               ],
@@ -436,7 +437,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                     .map((s) => Chip(
                           label: Text(s, style: const TextStyle(fontSize: 12)),
                           onDeleted: () => setState(() => _skills.remove(s)),
-                          deleteIcon: const Icon(Icons.close_rounded, size: 15),
+                          deleteIcon: Icon(PhosphorIcons.x(PhosphorIconsStyle.bold), size: 15),
                         ))
                     .toList(),
               ),
@@ -499,12 +500,12 @@ class _PostJobScreenState extends State<PostJobScreen> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: AppColors.info.withValues(alpha: 0.3)),
             ),
-            child: const Row(
+            child: Row(
               children: [
-                Icon(Icons.info_outline_rounded,
+                Icon(PhosphorIcons.info(PhosphorIconsStyle.bold),
                     color: AppColors.info, size: 20),
-                SizedBox(width: 10),
-                Expanded(
+                const SizedBox(width: 10),
+                const Expanded(
                   child: Text(
                     'سيراجع المشرف عرضك قبل نشره، حمايةً للمستخدمين من الإعلانات الوهمية.',
                     style: TextStyle(fontSize: 12.5, height: 1.5),
@@ -646,8 +647,8 @@ class _PostJobScreenState extends State<PostJobScreen> {
                       )
                     : Icon(
                         _step == 2
-                            ? Icons.send_rounded
-                            : Icons.arrow_back_rounded,
+                            ? PhosphorIcons.paperPlaneTilt(PhosphorIconsStyle.fill)
+                            : PhosphorIcons.arrowLeft(PhosphorIconsStyle.bold),
                         size: 19,
                       ),
                 label: Text(_step == 2

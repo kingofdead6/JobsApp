@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -82,11 +83,11 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                 TextField(
                   controller: _searchCtrl,
                   onChanged: _onSearchChanged,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'ابحث عن مؤسسة...',
-                    prefixIcon: Icon(Icons.search_rounded),
+                    prefixIcon: Icon(PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold)),
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -138,7 +139,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.verified_rounded,
+                            Icon(PhosphorIcons.sealCheck(PhosphorIconsStyle.fill),
                                 size: 16,
                                 color: _verifiedOnly
                                     ? AppColors.info
@@ -177,8 +178,8 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
     if (_error != null) return ErrorState(message: _error!, onRetry: _load);
 
     if (_items.isEmpty) {
-      return const EmptyState(
-        icon: Icons.business_outlined,
+      return EmptyState(
+        icon: PhosphorIcons.buildings(PhosphorIconsStyle.regular),
         title: 'لا توجد مؤسسات',
         subtitle: 'جرّب تغيير معايير البحث',
       );
@@ -237,7 +238,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                           const SizedBox(height: 6),
                           Row(
                             children: [
-                              const Icon(Icons.location_on_rounded,
+                              Icon(PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
                                   size: 13, color: AppColors.tileGreen),
                               const SizedBox(width: 2),
                               Text(
@@ -270,7 +271,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                         ],
                       ),
                     ),
-                    const Icon(Icons.chevron_left_rounded,
+                    Icon(PhosphorIcons.caretLeft(PhosphorIconsStyle.bold),
                         color: AppColors.textMuted),
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -173,12 +174,12 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   border:
                       Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(Icons.info_outline_rounded,
+                    Icon(PhosphorIcons.info(PhosphorIconsStyle.bold),
                         color: AppColors.warning, size: 20),
-                    SizedBox(width: 10),
-                    Expanded(
+                    const SizedBox(width: 10),
+                    const Expanded(
                       child: Text(
                         'أنشئ ملف مؤسستك لتتمكّن من نشر عروض العمل.',
                         style: TextStyle(fontSize: 12.5, height: 1.5),
@@ -204,7 +205,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                             color: AppColors.primary,
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.camera_alt_rounded,
+                          child: Icon(PhosphorIcons.camera(PhosphorIconsStyle.fill),
                               size: 14, color: Colors.white),
                         ),
                       ),
@@ -325,11 +326,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   Widget _verificationCard() {
     final status = _company!.verificationStatus;
     final (label, color, icon) = switch (status) {
-      'verified' => ('مؤسسة موثّقة', AppColors.success, Icons.verified_rounded),
+      'verified' => ('مؤسسة موثّقة', AppColors.success, PhosphorIcons.sealCheck(PhosphorIconsStyle.fill)),
       'pending' => ('طلب التوثيق قيد المراجعة', AppColors.warning,
-          Icons.hourglass_top_rounded),
-      'rejected' => ('طلب التوثيق مرفوض', AppColors.danger, Icons.cancel_rounded),
-      _ => ('غير موثّقة', AppColors.textMuted, Icons.gpp_maybe_rounded),
+          PhosphorIcons.hourglassMedium(PhosphorIconsStyle.fill)),
+      'rejected' => ('طلب التوثيق مرفوض', AppColors.danger, PhosphorIcons.xCircle(PhosphorIconsStyle.fill)),
+      _ => ('غير موثّقة', AppColors.textMuted, PhosphorIcons.shieldWarning(PhosphorIconsStyle.fill)),
     };
 
     return Card(

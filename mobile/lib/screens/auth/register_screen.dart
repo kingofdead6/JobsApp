@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -93,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Expanded(
                       child: _RoleCard(
                         selected: _role == 'seeker',
-                        icon: Icons.person_search_rounded,
+                        icon: PhosphorIcons.userFocus(PhosphorIconsStyle.fill),
                         title: 'باحث عن عمل',
                         subtitle: 'أبحث عن وظيفة',
                         onTap: () => setState(() => _role = 'seeker'),
@@ -103,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Expanded(
                       child: _RoleCard(
                         selected: _role == 'company',
-                        icon: Icons.business_center_rounded,
+                        icon: PhosphorIcons.briefcase(PhosphorIconsStyle.fill),
                         title: 'مؤسسة',
                         subtitle: 'أبحث عن موظفين',
                         onTap: () => setState(() => _role = 'company'),
@@ -117,9 +118,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   controller: _fullName,
                   textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'أحمد بن يوسف',
-                    prefixIcon: Icon(Icons.badge_outlined),
+                    prefixIcon: Icon(PhosphorIcons.identificationCard(PhosphorIconsStyle.regular)),
                   ),
                   validator: (v) {
                     final t = v?.trim() ?? '';
@@ -138,9 +139,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(10),
                   ],
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: '0555123456',
-                    prefixIcon: Icon(Icons.phone_outlined),
+                    prefixIcon: Icon(PhosphorIcons.phone(PhosphorIconsStyle.bold)),
                     helperText: 'سيصلك رمز تأكيد عبر رسالة قصيرة',
                   ),
                   validator: (v) {
@@ -158,9 +159,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: _email,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'ahmed@gmail.com',
-                    prefixIcon: Icon(Icons.email_outlined),
+                    prefixIcon: Icon(PhosphorIcons.envelopeSimple(PhosphorIconsStyle.bold)),
                   ),
                   validator: (v) {
                     final t = v?.trim() ?? '';
@@ -177,8 +178,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 DropdownButtonFormField<String>(
                   initialValue: _wilaya,
                   isExpanded: true,
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.location_on_outlined),
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(PhosphorIcons.mapPin(PhosphorIconsStyle.regular)),
                   ),
                   hint: const Text('اختر الولاية'),
                   items: Labels.wilayas
@@ -195,11 +196,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     hintText: '6 محارف على الأقل',
-                    prefixIcon: const Icon(Icons.lock_outline_rounded),
+                    prefixIcon: Icon(PhosphorIcons.lock(PhosphorIconsStyle.bold)),
                     suffixIcon: IconButton(
                       icon: Icon(_obscure
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined),
+                          ? PhosphorIcons.eye(PhosphorIconsStyle.bold)
+                          : PhosphorIcons.eyeSlash(PhosphorIconsStyle.bold)),
                       onPressed: () => setState(() => _obscure = !_obscure),
                     ),
                   ),

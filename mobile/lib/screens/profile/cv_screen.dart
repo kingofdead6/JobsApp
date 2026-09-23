@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -128,7 +129,7 @@ class _CvScreenState extends State<CvScreen> {
           if (!_loading && _profile != null)
             IconButton(
               tooltip: 'تعديل',
-              icon: const Icon(Icons.edit_rounded),
+              icon: Icon(PhosphorIcons.pencilSimple(PhosphorIconsStyle.fill)),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -186,7 +187,7 @@ class _CvScreenState extends State<CvScreen> {
                         ? NetworkImage(_user!.avatarUrl!)
                         : null,
                     child: _user?.avatarUrl == null
-                        ? const Icon(Icons.person_rounded,
+                        ? Icon(PhosphorIcons.user(PhosphorIconsStyle.fill),
                             size: 34, color: AppColors.primary)
                         : null,
                   ),
@@ -201,7 +202,7 @@ class _CvScreenState extends State<CvScreen> {
                           color: AppColors.primary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.camera_alt_rounded,
+                        child: Icon(PhosphorIcons.camera(PhosphorIconsStyle.fill),
                             size: 13, color: Colors.white),
                       ),
                     ),
@@ -228,7 +229,7 @@ class _CvScreenState extends State<CvScreen> {
                       const SizedBox(height: 5),
                       Row(
                         children: [
-                          const Icon(Icons.location_on_rounded,
+                          Icon(PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
                               size: 13, color: AppColors.tileGreen),
                           const SizedBox(width: 3),
                           Text(
@@ -309,7 +310,7 @@ class _CvScreenState extends State<CvScreen> {
                   color: AppColors.danger.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.picture_as_pdf_rounded,
+                child: Icon(PhosphorIcons.filePdf(PhosphorIconsStyle.fill),
                     color: AppColors.danger, size: 22),
               ),
               const SizedBox(width: 12),
@@ -384,7 +385,7 @@ class _CvScreenState extends State<CvScreen> {
                         color: AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Icon(Icons.work_rounded,
+                      child: Icon(PhosphorIcons.briefcase(PhosphorIconsStyle.fill),
                           size: 18, color: AppColors.primary),
                     ),
                     title: Text('${map['title'] ?? ''}',
@@ -396,7 +397,7 @@ class _CvScreenState extends State<CvScreen> {
                           fontSize: 12, color: AppColors.textSecondary),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete_outline_rounded,
+                      icon: Icon(PhosphorIcons.trash(PhosphorIconsStyle.bold),
                           size: 19, color: AppColors.danger),
                       onPressed: () => _removeExperience('${map['_id']}'),
                     ),
@@ -420,7 +421,7 @@ class _CvScreenState extends State<CvScreen> {
                         color: AppColors.tilePurple.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Icon(Icons.school_rounded,
+                      child: Icon(PhosphorIcons.graduationCap(PhosphorIconsStyle.fill),
                           size: 18, color: AppColors.tilePurple),
                     ),
                     title: Text('${map['degree'] ?? ''}',
@@ -432,7 +433,7 @@ class _CvScreenState extends State<CvScreen> {
                           fontSize: 12, color: AppColors.textSecondary),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete_outline_rounded,
+                      icon: Icon(PhosphorIcons.trash(PhosphorIconsStyle.bold),
                           size: 19, color: AppColors.danger),
                       onPressed: () => _removeEducation('${map['_id']}'),
                     ),

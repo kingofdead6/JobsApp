@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -298,7 +299,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     .map((s) => Chip(
                           label: Text(s, style: const TextStyle(fontSize: 12)),
                           onDeleted: () => setState(() => _skills.remove(s)),
-                          deleteIcon: const Icon(Icons.close_rounded, size: 15),
+                          deleteIcon: Icon(PhosphorIcons.x(PhosphorIconsStyle.bold), size: 15),
                         ))
                     .toList(),
               ),
@@ -324,7 +325,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: const TextStyle(fontSize: 11.5),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete_outline_rounded,
+                      icon: Icon(PhosphorIcons.trash(PhosphorIconsStyle.bold),
                           size: 19, color: AppColors.danger),
                       onPressed: () => setState(() => _languages.remove(l)),
                     ),
@@ -336,13 +337,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             // الخبرات والشهادات تُحفظ مباشرة عبر الـ API
             OutlinedButton.icon(
               onPressed: _addExperience,
-              icon: const Icon(Icons.add_rounded),
+              icon: Icon(PhosphorIcons.plus(PhosphorIconsStyle.bold)),
               label: const Text('إضافة خبرة مهنية'),
             ),
             const SizedBox(height: 10),
             OutlinedButton.icon(
               onPressed: _addEducation,
-              icon: const Icon(Icons.add_rounded),
+              icon: Icon(PhosphorIcons.plus(PhosphorIconsStyle.bold)),
               label: const Text('إضافة شهادة'),
             ),
             const SizedBox(height: 28),
@@ -372,7 +373,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   const TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
           TextButton.icon(
             onPressed: onAdd,
-            icon: const Icon(Icons.add_rounded, size: 18),
+            icon: Icon(PhosphorIcons.plus(PhosphorIconsStyle.bold), size: 18),
             label: const Text('إضافة'),
           ),
         ],
@@ -492,7 +493,7 @@ class _ExperienceDialogState extends State<_ExperienceDialog> {
                 title: Text(_start == null
                     ? 'تاريخ البداية *'
                     : '${_start!.month}/${_start!.year}'),
-                trailing: const Icon(Icons.calendar_today_rounded, size: 18),
+                trailing: Icon(PhosphorIcons.calendarBlank(PhosphorIconsStyle.bold), size: 18),
                 onTap: () => _pickDate(isStart: true),
               ),
               CheckboxListTile(
@@ -508,7 +509,7 @@ class _ExperienceDialogState extends State<_ExperienceDialog> {
                   title: Text(_end == null
                       ? 'تاريخ النهاية'
                       : '${_end!.month}/${_end!.year}'),
-                  trailing: const Icon(Icons.calendar_today_rounded, size: 18),
+                  trailing: Icon(PhosphorIcons.calendarBlank(PhosphorIconsStyle.bold), size: 18),
                   onTap: () => _pickDate(isStart: false),
                 ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -101,7 +102,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     color: AppColors.primary.withValues(alpha: 0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.lock_reset_rounded,
+                  child: Icon(PhosphorIcons.lockKeyOpen(PhosphorIconsStyle.duotone),
                       size: 42, color: AppColors.primary),
                 ),
               ),
@@ -124,9 +125,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(10),
                 ],
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: '0555123456',
-                  prefixIcon: Icon(Icons.phone_outlined),
+                  prefixIcon: Icon(PhosphorIcons.phone(PhosphorIconsStyle.bold)),
                   labelText: 'رقم الهاتف',
                 ),
               ),
@@ -155,11 +156,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   obscureText: _obscure,
                   decoration: InputDecoration(
                     labelText: 'كلمة المرور الجديدة',
-                    prefixIcon: const Icon(Icons.lock_outline_rounded),
+                    prefixIcon: Icon(PhosphorIcons.lock(PhosphorIconsStyle.bold)),
                     suffixIcon: IconButton(
                       icon: Icon(_obscure
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined),
+                          ? PhosphorIcons.eye(PhosphorIconsStyle.bold)
+                          : PhosphorIcons.eyeSlash(PhosphorIconsStyle.bold)),
                       onPressed: () => setState(() => _obscure = !_obscure),
                     ),
                   ),

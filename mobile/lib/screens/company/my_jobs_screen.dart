@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -128,7 +129,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
           MaterialPageRoute(builder: (_) => const PostJobScreen()),
         ).then((_) => _load()),
         backgroundColor: AppColors.primary,
-        icon: const Icon(Icons.add_rounded, color: Colors.white),
+        icon: Icon(PhosphorIcons.plus(PhosphorIconsStyle.bold), color: Colors.white),
         label: const Text('عرض جديد',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
       ),
@@ -197,8 +198,8 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
     if (_error != null) return ErrorState(message: _error!, onRetry: _load);
 
     if (_items.isEmpty) {
-      return const EmptyState(
-        icon: Icons.work_off_rounded,
+      return EmptyState(
+        icon: PhosphorIcons.briefcase(PhosphorIconsStyle.duotone),
         title: 'لا توجد عروض',
         subtitle: 'انشر عرضك الأول ليصل إلى المترشّحين',
       );
@@ -269,11 +270,11 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      _stat(Icons.visibility_rounded, '${o.viewsCount}'),
+                      _stat(PhosphorIcons.eye(PhosphorIconsStyle.fill), '${o.viewsCount}'),
                       const SizedBox(width: 16),
-                      _stat(Icons.people_rounded, '${o.applicationsCount}'),
+                      _stat(PhosphorIcons.users(PhosphorIconsStyle.fill), '${o.applicationsCount}'),
                       const SizedBox(width: 16),
-                      const Icon(Icons.location_on_rounded,
+                      Icon(PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
                           size: 14, color: AppColors.textMuted),
                       const SizedBox(width: 3),
                       Flexible(
@@ -302,7 +303,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                               ),
                             ),
                           ),
-                          icon: const Icon(Icons.people_outline_rounded,
+                          icon: Icon(PhosphorIcons.users(PhosphorIconsStyle.regular),
                               size: 17),
                           label: const Text('الترشّحات',
                               style: TextStyle(fontSize: 12.5)),
@@ -315,13 +316,13 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                             MaterialPageRoute(
                                 builder: (_) => PostJobScreen(editing: o)),
                           ).then((_) => _load()),
-                          icon: const Icon(Icons.edit_outlined, size: 17),
+                          icon: Icon(PhosphorIcons.pencilSimple(PhosphorIconsStyle.regular), size: 17),
                           label: const Text('تعديل',
                               style: TextStyle(fontSize: 12.5)),
                         ),
                       ),
                       PopupMenuButton<String>(
-                        icon: const Icon(Icons.more_vert_rounded, size: 20),
+                        icon: Icon(PhosphorIcons.dotsThreeVertical(PhosphorIconsStyle.bold), size: 20),
                         onSelected: (v) =>
                             v == 'delete' ? _delete(o) : _action(o, v),
                         itemBuilder: (_) => [

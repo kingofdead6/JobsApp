@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -71,11 +72,11 @@ class _WilayaJobsScreenState extends State<WilayaJobsScreen> {
             child: TextField(
               controller: _searchCtrl,
               onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'ابحث عن ولاية...',
-                prefixIcon: Icon(Icons.search_rounded),
+                prefixIcon: Icon(PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold)),
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               ),
             ),
           ),
@@ -86,8 +87,8 @@ class _WilayaJobsScreenState extends State<WilayaJobsScreen> {
                 : _error != null
                     ? ErrorState(message: _error!, onRetry: _load)
                     : wilayas.isEmpty
-                        ? const EmptyState(
-                            icon: Icons.search_off_rounded,
+                        ? EmptyState(
+                            icon: PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.duotone),
                             title: 'لا توجد ولاية بهذا الاسم',
                           )
                         : GridView.builder(

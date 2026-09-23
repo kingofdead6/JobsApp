@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -109,7 +110,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     color: AppColors.primary.withValues(alpha: 0.08),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.sms_rounded,
+                  child: Icon(PhosphorIcons.chatCircleText(PhosphorIconsStyle.duotone),
                       size: 46, color: AppColors.primary),
                 ),
               ),
@@ -185,7 +186,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       )
                     : TextButton.icon(
                         onPressed: _resend,
-                        icon: const Icon(Icons.refresh_rounded, size: 18),
+                        icon: Icon(PhosphorIcons.arrowClockwise(PhosphorIconsStyle.bold), size: 18),
                         label: const Text('إعادة إرسال الرمز'),
                       ),
               ),
