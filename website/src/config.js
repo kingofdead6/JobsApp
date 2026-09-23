@@ -13,10 +13,10 @@
  *
  * ما دام الرابط '#' فسيعرض الموقع رسالة «سيتوفّر قريبًا» بدل رابط مكسور.
  */
-export const APK_URL = '#';
+export const APK_URL = 'https://jobs-appapp.vercel.app/JobsFinder.apk';
 
 /** حجم الملف كما يظهر للزائر */
-export const APK_SIZE = '21 ميغابايت';
+export const APK_SIZE = '56 ميغابايت';
 
 /** رقم الإصدار */
 export const APP_VERSION = '1.0.0';
