@@ -258,7 +258,6 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                       ),
                     ],
                   ),
-
                   if (o.status == 'rejected' && o.rejectionReason != null) ...[
                     const SizedBox(height: 8),
                     Container(
@@ -274,7 +273,6 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                       ),
                     ),
                   ],
-
                   const SizedBox(height: 10),
                   Row(
                     children: [
@@ -296,7 +294,6 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                       ),
                     ],
                   ),
-
                   const Divider(height: 22),
                   Row(
                     children: [

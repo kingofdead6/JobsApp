@@ -130,7 +130,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   static (IconData, Color) _visual(String type) => switch (type) {
         'matching_offer' => (Icons.work_rounded, AppColors.tileGreen),
-        'application_status' => (Icons.assignment_turned_in_rounded, AppColors.info),
+        'application_status' => (
+            Icons.assignment_turned_in_rounded,
+            AppColors.info
+          ),
         'new_message' => (Icons.chat_bubble_rounded, AppColors.tilePurple),
         'offer_approved' => (Icons.check_circle_rounded, AppColors.success),
         'offer_rejected' => (Icons.cancel_rounded, AppColors.danger),
@@ -147,7 +150,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       appBar: AppBar(
         flexibleSpace: const DecoratedBox(
           decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),        title: const Text('الإشعارات'),
+        ),
+        title: const Text('الإشعارات'),
         automaticallyImplyLeading: false,
         actions: [
           if (hasUnread)

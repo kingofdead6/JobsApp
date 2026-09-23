@@ -88,9 +88,10 @@ class _SavedScreenState extends State<SavedScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),          title: const Text('المحفوظات'),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('المحفوظات'),
           bottom: const TabBar(
             indicatorColor: AppColors.gold,
             indicatorWeight: 3,
@@ -150,7 +151,8 @@ class _SavedScreenState extends State<SavedScreen> {
               index: i,
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => JobDetailScreen(offerId: o.id)),
+                MaterialPageRoute(
+                    builder: (_) => JobDetailScreen(offerId: o.id)),
               ).then((_) => _load()),
             ),
           );
@@ -253,9 +255,8 @@ class _SavedScreenState extends State<SavedScreen> {
                             ? Icons.notifications_active_rounded
                             : Icons.notifications_off_rounded,
                         size: 18,
-                        color: alertOn
-                            ? AppColors.primary
-                            : AppColors.textMuted,
+                        color:
+                            alertOn ? AppColors.primary : AppColors.textMuted,
                       ),
                       const SizedBox(width: 6),
                       const Text('تنبيهني بالعروض الجديدة',

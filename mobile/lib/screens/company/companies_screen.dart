@@ -72,9 +72,10 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('الشركات')),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('الشركات')),
       body: Column(
         children: [
           Container(
@@ -102,15 +103,14 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                         hint: const Text('كل القطاعات',
                             style: TextStyle(fontSize: 13)),
                         decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         ),
                         items: [
                           const DropdownMenuItem<String>(
                               value: null, child: Text('كل القطاعات')),
-                          ...Labels.sectors.entries.map((e) =>
-                              DropdownMenuItem(
-                                  value: e.key, child: Text(e.value))),
+                          ...Labels.sectors.entries.map((e) => DropdownMenuItem(
+                              value: e.key, child: Text(e.value))),
                         ],
                         onChanged: (v) {
                           setState(() => _sector = v);

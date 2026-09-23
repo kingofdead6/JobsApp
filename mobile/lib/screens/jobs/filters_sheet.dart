@@ -48,8 +48,9 @@ class JobFilters {
       JobFilters(
         wilaya: wilaya == _sentinel ? this.wilaya : wilaya as String?,
         sector: sector == _sentinel ? this.sector : sector as String?,
-        contractType:
-            contractType == _sentinel ? this.contractType : contractType as String?,
+        contractType: contractType == _sentinel
+            ? this.contractType
+            : contractType as String?,
         salaryMin: salaryMin == _sentinel ? this.salaryMin : salaryMin as int?,
         educationLevel: educationLevel == _sentinel
             ? this.educationLevel
@@ -57,8 +58,9 @@ class JobFilters {
         experienceLevel: experienceLevel == _sentinel
             ? this.experienceLevel
             : experienceLevel as String?,
-        postedWithin:
-            postedWithin == _sentinel ? this.postedWithin : postedWithin as int?,
+        postedWithin: postedWithin == _sentinel
+            ? this.postedWithin
+            : postedWithin as int?,
         sort: sort ?? this.sort,
       );
 
@@ -139,33 +141,32 @@ class _FiltersSheetState extends State<FiltersSheet> {
                         .map((e) => _chip(
                               label: e.value,
                               selected: _f.sort == e.key,
-                              onTap: () => setState(
-                                  () => _f = _f.copyWith(sort: e.key)),
+                              onTap: () =>
+                                  setState(() => _f = _f.copyWith(sort: e.key)),
                             ))
                         .toList(),
                   ),
                   const SizedBox(height: 20),
-
                   _section('الولاية'),
                   _dropdown<String>(
                     value: _f.wilaya,
                     hint: 'كل الولايات',
                     items: Labels.wilayas,
                     labelOf: (w) => w,
-                    onChanged: (v) => setState(() => _f = _f.copyWith(wilaya: v)),
+                    onChanged: (v) =>
+                        setState(() => _f = _f.copyWith(wilaya: v)),
                   ),
                   const SizedBox(height: 20),
-
                   _section('القطاع / المهنة'),
                   _dropdown<String>(
                     value: _f.sector,
                     hint: 'كل القطاعات',
                     items: Labels.sectors.keys.toList(),
                     labelOf: Labels.sector,
-                    onChanged: (v) => setState(() => _f = _f.copyWith(sector: v)),
+                    onChanged: (v) =>
+                        setState(() => _f = _f.copyWith(sector: v)),
                   ),
                   const SizedBox(height: 20),
-
                   _section('نوع العقد'),
                   Wrap(
                     spacing: 8,
@@ -181,7 +182,6 @@ class _FiltersSheetState extends State<FiltersSheet> {
                         .toList(),
                   ),
                   const SizedBox(height: 20),
-
                   _section('الراتب الأدنى'),
                   Wrap(
                     spacing: 8,
@@ -196,7 +196,6 @@ class _FiltersSheetState extends State<FiltersSheet> {
                         .toList(),
                   ),
                   const SizedBox(height: 20),
-
                   _section('تاريخ النشر'),
                   Wrap(
                     spacing: 8,
@@ -206,14 +205,12 @@ class _FiltersSheetState extends State<FiltersSheet> {
                               label: e.value,
                               selected: _f.postedWithin == e.key,
                               onTap: () => setState(() => _f = _f.copyWith(
-                                  postedWithin: _f.postedWithin == e.key
-                                      ? null
-                                      : e.key)),
+                                  postedWithin:
+                                      _f.postedWithin == e.key ? null : e.key)),
                             ))
                         .toList(),
                   ),
                   const SizedBox(height: 20),
-
                   _section('المستوى الدراسي'),
                   _dropdown<String>(
                     value: _f.educationLevel,
@@ -224,7 +221,6 @@ class _FiltersSheetState extends State<FiltersSheet> {
                         setState(() => _f = _f.copyWith(educationLevel: v)),
                   ),
                   const SizedBox(height: 20),
-
                   _section('مستوى الخبرة'),
                   Wrap(
                     spacing: 8,

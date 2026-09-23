@@ -99,9 +99,8 @@ class _JobsListScreenState extends State<JobsListScreen> {
       setState(() {
         _items
           ..clear()
-          ..addAll(widget.featuredOnly
-              ? items.where((o) => o.featured)
-              : items);
+          ..addAll(
+              widget.featuredOnly ? items.where((o) => o.featured) : items);
         _pages = pages;
         _loading = false;
       });
@@ -134,9 +133,8 @@ class _JobsListScreenState extends State<JobsListScreen> {
       setState(() {
         _page++;
         _pages = pages;
-        _items.addAll(widget.featuredOnly
-            ? items.where((o) => o.featured)
-            : items);
+        _items.addAll(
+            widget.featuredOnly ? items.where((o) => o.featured) : items);
       });
     } on ApiException catch (_) {
       // تجاهل خطأ تحميل الصفحة التالية
@@ -147,7 +145,8 @@ class _JobsListScreenState extends State<JobsListScreen> {
 
   void _onSearchChanged(String _) {
     _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 450), () => _load(reset: true));
+    _debounce =
+        Timer(const Duration(milliseconds: 450), () => _load(reset: true));
   }
 
   Future<void> _openFilters() async {
@@ -210,7 +209,8 @@ class _JobsListScreenState extends State<JobsListScreen> {
       appBar: AppBar(
         flexibleSpace: const DecoratedBox(
           decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),        title: Text(widget.companyName ??
+        ),
+        title: Text(widget.companyName ??
             (widget.featuredOnly ? 'العروض المميّزة' : 'عروض العمل')),
       ),
       body: Column(
@@ -238,8 +238,8 @@ class _JobsListScreenState extends State<JobsListScreen> {
                               _load(reset: true);
                             },
                           ),
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -249,7 +249,8 @@ class _JobsListScreenState extends State<JobsListScreen> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       _filterChip(
-                        label: activeCount > 0 ? 'تصفية ($activeCount)' : 'تصفية',
+                        label:
+                            activeCount > 0 ? 'تصفية ($activeCount)' : 'تصفية',
                         icon: Icons.tune_rounded,
                         active: activeCount > 0,
                         onTap: _openFilters,

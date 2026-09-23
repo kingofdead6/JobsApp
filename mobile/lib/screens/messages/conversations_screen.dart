@@ -65,9 +65,10 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),          title: const Text('الرسائل'),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('الرسائل'),
           automaticallyImplyLeading: false,
           bottom: const TabBar(
             indicatorColor: AppColors.gold,
@@ -152,8 +153,8 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
                     c.offerTitle!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 11, color: AppColors.primary),
+                    style:
+                        const TextStyle(fontSize: 11, color: AppColors.primary),
                   ),
                 Text(
                   c.lastMessage ?? '',
@@ -181,8 +182,8 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
                 const SizedBox(height: 6),
                 if (unread)
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 7, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                     decoration: BoxDecoration(
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(10),

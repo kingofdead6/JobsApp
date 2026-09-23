@@ -1,10 +1,12 @@
 import '../core/network/api_client.dart';
 
 /// تحويل آمن للأرقام القادمة من JSON (قد تصل كـ int أو double أو String)
-int? _asInt(dynamic v) =>
-    v == null ? null : (v is int ? v : (v is double ? v.toInt() : int.tryParse('$v')));
+int? _asInt(dynamic v) => v == null
+    ? null
+    : (v is int ? v : (v is double ? v.toInt() : int.tryParse('$v')));
 
-DateTime? _asDate(dynamic v) => v == null ? null : DateTime.tryParse('$v')?.toLocal();
+DateTime? _asDate(dynamic v) =>
+    v == null ? null : DateTime.tryParse('$v')?.toLocal();
 
 List<String> _asStrings(dynamic v) =>
     v is List ? v.map((e) => '$e').toList() : const <String>[];
@@ -172,8 +174,9 @@ class JobOffer {
 
   /// نص الراتب كما يظهر في البطاقة: «50,000 - 80,000 دج»
   String get salaryLabel {
-    String fmt(int v) => v.toString().replaceAllMapped(
-        RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]},');
+    String fmt(int v) => v
+        .toString()
+        .replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]},');
 
     if (salaryMin != null && salaryMax != null) {
       return '${fmt(salaryMin!)} - ${fmt(salaryMax!)} دج';
@@ -216,9 +219,11 @@ class ApplicationModel {
       coverLetter: j['coverLetter'] as String?,
       statusNote: j['statusNote'] as String?,
       createdAt: _asDate(j['createdAt']),
-      offer: rawOffer is Map<String, dynamic> ? JobOffer.fromJson(rawOffer) : null,
-      applicant:
-          rawApplicant is Map<String, dynamic> ? UserModel.fromJson(rawApplicant) : null,
+      offer:
+          rawOffer is Map<String, dynamic> ? JobOffer.fromJson(rawOffer) : null,
+      applicant: rawApplicant is Map<String, dynamic>
+          ? UserModel.fromJson(rawApplicant)
+          : null,
       cvSnapshot: j['cvSnapshot'] as Map<String, dynamic>?,
       viewedByCompany: j['viewedByCompany'] == true,
     );
@@ -303,8 +308,10 @@ class ConversationModel {
       lastMessage: j['lastMessage'] as String?,
       lastMessageAt: _asDate(j['lastMessageAt']),
       unreadCount: _asInt(j['unreadCount']) ?? 0,
-      otherParty: other is Map<String, dynamic> ? UserModel.fromJson(other) : null,
-      offerTitle: offer is Map<String, dynamic> ? offer['title'] as String? : null,
+      otherParty:
+          other is Map<String, dynamic> ? UserModel.fromJson(other) : null,
+      offerTitle:
+          offer is Map<String, dynamic> ? offer['title'] as String? : null,
     );
   }
 }
@@ -357,7 +364,8 @@ class NotificationModel {
 
   bool get isRead => readAt != null;
 
-  factory NotificationModel.fromJson(Map<String, dynamic> j) => NotificationModel(
+  factory NotificationModel.fromJson(Map<String, dynamic> j) =>
+      NotificationModel(
         id: '${j['_id']}',
         type: '${j['type'] ?? ''}',
         title: '${j['title'] ?? ''}',

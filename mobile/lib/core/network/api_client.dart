@@ -65,7 +65,8 @@ class ApiClient {
     final cleaned = query?.map((k, v) => MapEntry(k, v?.toString()))
       ?..removeWhere((_, v) => v == null || v.isEmpty);
     return Uri.parse('$apiUrl$path').replace(
-      queryParameters: (cleaned?.isEmpty ?? true) ? null : cleaned!.cast<String, String>(),
+      queryParameters:
+          (cleaned?.isEmpty ?? true) ? null : cleaned!.cast<String, String>(),
     );
   }
 
@@ -96,24 +97,29 @@ class ApiClient {
     }
   }
 
-  Future<Map<String, dynamic>> get(String path, {Map<String, dynamic>? query}) =>
-      _guard(() async => _decode(await http.get(_uri(path, query), headers: _headers())));
+  Future<Map<String, dynamic>> get(String path,
+          {Map<String, dynamic>? query}) =>
+      _guard(() async =>
+          _decode(await http.get(_uri(path, query), headers: _headers())));
 
-  Future<Map<String, dynamic>> post(String path, [Map<String, dynamic>? body]) =>
+  Future<Map<String, dynamic>> post(String path,
+          [Map<String, dynamic>? body]) =>
       _guard(() async => _decode(await http.post(
             _uri(path),
             headers: _headers(),
             body: body == null ? null : jsonEncode(body),
           )));
 
-  Future<Map<String, dynamic>> patch(String path, [Map<String, dynamic>? body]) =>
+  Future<Map<String, dynamic>> patch(String path,
+          [Map<String, dynamic>? body]) =>
       _guard(() async => _decode(await http.patch(
             _uri(path),
             headers: _headers(),
             body: body == null ? null : jsonEncode(body),
           )));
 
-  Future<Map<String, dynamic>> delete(String path, [Map<String, dynamic>? body]) =>
+  Future<Map<String, dynamic>> delete(String path,
+          [Map<String, dynamic>? body]) =>
       _guard(() async => _decode(await http.delete(
             _uri(path),
             headers: _headers(),

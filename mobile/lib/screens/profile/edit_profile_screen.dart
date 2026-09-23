@@ -29,12 +29,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   late final _fullName = TextEditingController(text: widget.user.fullName);
   late final _email = TextEditingController(text: widget.user.email ?? '');
-  late final _headline = TextEditingController(text: widget.profile.headline ?? '');
+  late final _headline =
+      TextEditingController(text: widget.profile.headline ?? '');
   late final _bio = TextEditingController(text: widget.profile.bio ?? '');
   late final _profession =
       TextEditingController(text: widget.profile.profession ?? '');
-  late final _years = TextEditingController(
-      text: '${widget.profile.yearsOfExperience}');
+  late final _years =
+      TextEditingController(text: '${widget.profile.yearsOfExperience}');
 
   late String? _wilaya = widget.user.wilaya;
   late String? _sector = widget.profile.sector;
@@ -166,7 +167,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         flexibleSpace: const DecoratedBox(
           decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),        title: const Text('تعديل الملف الشخصي'),
+        ),
+        title: const Text('تعديل الملف الشخصي'),
         actions: [
           TextButton(
             onPressed: _saving ? null : _save,
@@ -363,7 +365,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget _label(String text) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Text(text,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
+            style:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
       );
 
   Widget _sectionHeader(String title, {required VoidCallback onAdd}) => Row(
@@ -481,7 +484,8 @@ class _ExperienceDialogState extends State<_ExperienceDialog> {
             children: [
               TextField(
                 controller: _title,
-                decoration: const InputDecoration(labelText: 'المسمّى الوظيفي *'),
+                decoration:
+                    const InputDecoration(labelText: 'المسمّى الوظيفي *'),
               ),
               const SizedBox(height: 12),
               TextField(
@@ -524,14 +528,16 @@ class _ExperienceDialogState extends State<_ExperienceDialog> {
           ElevatedButton(
             onPressed: () {
               if (_title.text.trim().isEmpty || _start == null) {
-                showSnack(context, 'المسمّى وتاريخ البداية مطلوبان', error: true);
+                showSnack(context, 'المسمّى وتاريخ البداية مطلوبان',
+                    error: true);
                 return;
               }
               Navigator.pop(context, {
                 'title': _title.text.trim(),
                 'company': _company.text.trim(),
                 'startDate': _start!.toIso8601String(),
-                if (!_current && _end != null) 'endDate': _end!.toIso8601String(),
+                if (!_current && _end != null)
+                  'endDate': _end!.toIso8601String(),
                 'current': _current,
               });
             },
@@ -577,7 +583,8 @@ class _EducationDialogState extends State<_EducationDialog> {
               const SizedBox(height: 12),
               TextField(
                 controller: _institution,
-                decoration: const InputDecoration(labelText: 'المؤسسة التعليمية'),
+                decoration:
+                    const InputDecoration(labelText: 'المؤسسة التعليمية'),
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(

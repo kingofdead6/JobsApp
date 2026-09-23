@@ -137,9 +137,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: Text(widget.title)),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: Text(widget.title)),
       body: Column(
         children: [
           Expanded(
@@ -188,7 +189,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     maxLength: 2000,
                     textInputAction: TextInputAction.newline,
                     onChanged: (_) {
-                      if (_conversationId != null && widget.otherUserId != null) {
+                      if (_conversationId != null &&
+                          widget.otherUserId != null) {
                         SocketService.instance
                             .emitTyping(_conversationId!, widget.otherUserId!);
                       }

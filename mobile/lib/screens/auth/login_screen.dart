@@ -51,7 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       // الحساب موجود لكن الهاتف غير مؤكّد: ننتقل إلى شاشة الرمز
-      final needsVerify = e.details is Map && e.details['needsVerification'] == true;
+      final needsVerify =
+          e.details is Map && e.details['needsVerification'] == true;
       if (needsVerify) {
         Navigator.push(
           context,
@@ -71,9 +72,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('تسجيل الدخول')),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('تسجيل الدخول')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -85,9 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 12),
                 const Center(child: AppLogo(size: 76, light: false)),
                 const SizedBox(height: 32),
-
                 const Text('رقم الهاتف أو البريد الإلكتروني',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _identifier,
@@ -102,9 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       : null,
                 ),
                 const SizedBox(height: 18),
-
                 const Text('كلمة المرور',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _password,
@@ -119,13 +121,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined),
                       onPressed: () => setState(() => _obscure = !_obscure),
-                      tooltip: _obscure ? 'إظهار كلمة المرور' : 'إخفاء كلمة المرور',
+                      tooltip:
+                          _obscure ? 'إظهار كلمة المرور' : 'إخفاء كلمة المرور',
                     ),
                   ),
                   validator: (v) =>
                       (v == null || v.isEmpty) ? 'أدخل كلمة المرور' : null,
                 ),
-
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: TextButton(
@@ -138,7 +140,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-
                 ElevatedButton(
                   onPressed: _loading ? null : _submit,
                   child: _loading
@@ -151,7 +152,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       : const Text('تسجيل الدخول'),
                 ),
                 const SizedBox(height: 16),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -160,7 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextButton(
                       onPressed: () => Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                        MaterialPageRoute(
+                            builder: (_) => const RegisterScreen()),
                       ),
                       child: const Text('أنشئ حسابًا'),
                     ),

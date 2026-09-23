@@ -94,8 +94,10 @@ class _PressableScaleState extends State<PressableScale> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: widget.onTap == null ? null : (_) => setState(() => _down = true),
-      onTapUp: widget.onTap == null ? null : (_) => setState(() => _down = false),
+      onTapDown:
+          widget.onTap == null ? null : (_) => setState(() => _down = true),
+      onTapUp:
+          widget.onTap == null ? null : (_) => setState(() => _down = false),
       onTapCancel:
           widget.onTap == null ? null : () => setState(() => _down = false),
       onTap: widget.onTap,
@@ -180,8 +182,7 @@ class AppLogo extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Icon(Icons.search_rounded,
-                  size: size * 0.44, color: fg),
+              Icon(Icons.search_rounded, size: size * 0.44, color: fg),
               Positioned(
                 bottom: size * 0.15,
                 left: size * 0.15,
@@ -262,8 +263,20 @@ class SkylinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = color.withValues(alpha: opacity);
     const heights = [
-      0.42, 0.70, 0.33, 0.86, 0.50, 0.64, 0.38, 0.76, 0.28, 0.58, 0.46, 0.80,
-      0.35, 0.68,
+      0.42,
+      0.70,
+      0.33,
+      0.86,
+      0.50,
+      0.64,
+      0.38,
+      0.76,
+      0.28,
+      0.58,
+      0.46,
+      0.80,
+      0.35,
+      0.68,
     ];
     final barWidth = size.width / (heights.length * 1.55);
 
@@ -283,8 +296,8 @@ class SkylinePainter extends CustomPainter {
         final wp = Paint()..color = color.withValues(alpha: opacity * 0.7);
         for (var r = 0; r < 3; r++) {
           canvas.drawRect(
-            Rect.fromLTWH(x + barWidth * 0.28,
-                size.height - h + 10 + r * 14, barWidth * 0.42, 5),
+            Rect.fromLTWH(x + barWidth * 0.28, size.height - h + 10 + r * 14,
+                barWidth * 0.42, 5),
             wp,
           );
         }
@@ -458,8 +471,7 @@ class FeaturedBadge extends StatelessWidget {
         child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.star_rounded,
-                size: 10, color: AppColors.primaryDark),
+            Icon(Icons.star_rounded, size: 10, color: AppColors.primaryDark),
             SizedBox(width: 3),
             Text(
               'مميّز',
@@ -680,15 +692,12 @@ class JobCard extends StatelessWidget {
                       ),
                     ),
                     if (showSaveButton)
-                      _SaveButton(
-                          saved: offer.isSaved, onTap: onSaveToggle),
+                      _SaveButton(saved: offer.isSaved, onTap: onSaveToggle),
                   ],
                 ),
-
                 const SizedBox(height: 12),
                 Container(height: 1, color: AppColors.border),
                 const SizedBox(height: 10),
-
                 Row(
                   children: [
                     const Icon(Icons.location_on_rounded,
@@ -716,7 +725,6 @@ class JobCard extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 if (offer.salaryMin != null || offer.salaryMax != null) ...[
                   const SizedBox(height: 8),
                   Row(
@@ -763,9 +771,7 @@ class _SaveButton extends StatelessWidget {
               transitionBuilder: (child, anim) =>
                   ScaleTransition(scale: anim, child: child),
               child: Icon(
-                saved
-                    ? Icons.bookmark_rounded
-                    : Icons.bookmark_rounded,
+                saved ? Icons.bookmark_rounded : Icons.bookmark_rounded,
                 key: ValueKey(saved),
                 size: 21,
                 color: saved ? AppColors.primary : AppColors.textMuted,
@@ -861,9 +867,7 @@ class ErrorState extends StatelessWidget {
                 width: 190,
                 child: OutlinedButton.icon(
                   onPressed: onRetry,
-                  icon: const Icon(
-                      Icons.refresh_rounded,
-                      size: 18),
+                  icon: const Icon(Icons.refresh_rounded, size: 18),
                   label: const Text('إعادة المحاولة'),
                 ),
               ),
@@ -915,9 +919,7 @@ void showSnack(BuildContext context, String message, {bool error = false}) {
       content: Row(
         children: [
           Icon(
-            error
-                ? Icons.error_rounded
-                : Icons.check_circle_rounded,
+            error ? Icons.error_rounded : Icons.check_circle_rounded,
             color: Colors.white,
             size: 19,
           ),

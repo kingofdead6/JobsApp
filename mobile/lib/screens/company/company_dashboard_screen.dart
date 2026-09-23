@@ -22,8 +22,7 @@ class CompanyDashboardScreen extends StatefulWidget {
   const CompanyDashboardScreen({super.key, this.onNavigateTab});
 
   @override
-  State<CompanyDashboardScreen> createState() =>
-      _CompanyDashboardScreenState();
+  State<CompanyDashboardScreen> createState() => _CompanyDashboardScreenState();
 }
 
 class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
@@ -90,8 +89,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
             child: ElevatedButton.icon(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (_) => const CompanyProfileScreen()),
+                MaterialPageRoute(builder: (_) => const CompanyProfileScreen()),
               ).then((_) => _load()),
               icon: const Icon(Icons.add_business_rounded, size: 19),
               label: const Text('إنشاء الملف'),
@@ -106,8 +104,8 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
     }
 
     final totalOffers = _offers.length;
-    final pendingApplicants = _offers.fold<int>(
-        0, (sum, o) => sum + o.applicationsCount);
+    final pendingApplicants =
+        _offers.fold<int>(0, (sum, o) => sum + o.applicationsCount);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
@@ -118,8 +116,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
         backgroundColor: CompanyColors.primary,
         icon: const Icon(Icons.add_rounded, color: Colors.white),
         label: const Text('عرض جديد',
-            style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
       ),
       body: RefreshIndicator(
         onRefresh: _load,
@@ -135,7 +132,6 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
                 children: [
                   FadeInUp(child: _statsGrid()),
                   const SizedBox(height: 24),
-
                   const FadeInUp(
                     index: 1,
                     child: CompanySectionTitle(
@@ -145,7 +141,6 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
                   ),
                   const SizedBox(height: 12),
                   FadeInUp(index: 2, child: _quickActions(pendingApplicants)),
-
                   const SizedBox(height: 24),
                   FadeInUp(
                     index: 3,
@@ -161,7 +156,6 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
                   ),
                   const SizedBox(height: 12),
                   FadeInUp(index: 4, child: _distribution(totalOffers)),
-
                   const SizedBox(height: 24),
                   FadeInUp(
                     index: 5,
@@ -244,9 +238,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
                               ? Icons.verified_rounded
                               : Icons.gpp_maybe_rounded,
                           size: 13,
-                          color: verified
-                              ? Colors.white
-                              : CompanyColors.accent,
+                          color: verified ? Colors.white : CompanyColors.accent,
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -276,9 +268,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
           const Text(
             'لوحة المؤسسة',
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 19,
-                fontWeight: FontWeight.w900),
+                color: Colors.white, fontSize: 19, fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 4),
           Text(
@@ -362,8 +352,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
             color: CompanyColors.statBlue,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (_) => const CompanyProfileScreen()),
+              MaterialPageRoute(builder: (_) => const CompanyProfileScreen()),
             ).then((_) => _load()),
           ),
         ],
@@ -383,8 +372,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
                 child: Text(
                   'لا توجد عروض بعد',
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontSize: 13, color: AppColors.textMuted),
+                  style: TextStyle(fontSize: 13, color: AppColors.textMuted),
                 ),
               )
             : Column(
@@ -427,8 +415,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
         ),
         child: const Column(
           children: [
-            Icon(Icons.work_off_rounded,
-                size: 38, color: AppColors.textMuted),
+            Icon(Icons.work_off_rounded, size: 38, color: AppColors.textMuted),
             SizedBox(height: 12),
             Text(
               'لم تنشر أي عرض بعد',
@@ -438,8 +425,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
             Text(
               'انشر عرضك الأول ليصل إلى آلاف الباحثين عن عمل',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 12.5, color: AppColors.textSecondary),
+              style: TextStyle(fontSize: 12.5, color: AppColors.textSecondary),
             ),
           ],
         ),
@@ -457,8 +443,8 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => OfferApplicantsScreen(
-              offerId: o.id, offerTitle: o.title),
+          builder: (_) =>
+              OfferApplicantsScreen(offerId: o.id, offerTitle: o.title),
         ),
       ).then((_) => _load()),
       child: Container(
@@ -490,8 +476,7 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
               children: [
                 _metric(Icons.visibility_rounded, o.viewsCount, 'مشاهدة'),
                 const SizedBox(width: 16),
-                _metric(
-                    Icons.people_rounded, o.applicationsCount, 'ترشّح'),
+                _metric(Icons.people_rounded, o.applicationsCount, 'ترشّح'),
                 const Spacer(),
                 const Icon(Icons.chevron_left_rounded,
                     size: 18, color: AppColors.textMuted),
@@ -509,14 +494,12 @@ class _CompanyDashboardScreenState extends State<CompanyDashboardScreen> {
           const SizedBox(width: 4),
           Text(
             '$value',
-            style: const TextStyle(
-                fontSize: 12.5, fontWeight: FontWeight.w800),
+            style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800),
           ),
           const SizedBox(width: 3),
           Text(
             label,
-            style:
-                const TextStyle(fontSize: 11, color: AppColors.textMuted),
+            style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
           ),
         ],
       );

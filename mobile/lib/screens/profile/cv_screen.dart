@@ -125,7 +125,8 @@ class _CvScreenState extends State<CvScreen> {
       appBar: AppBar(
         flexibleSpace: const DecoratedBox(
           decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),        title: const Text('سيرتي الذاتية'),
+        ),
+        title: const Text('سيرتي الذاتية'),
         actions: [
           if (!_loading && _profile != null)
             IconButton(
@@ -268,8 +269,8 @@ class _CvScreenState extends State<CvScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('اكتمال الملف',
-                    style: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700)),
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
                 Text(
                   '$pct%',
                   style: TextStyle(
@@ -291,7 +292,8 @@ class _CvScreenState extends State<CvScreen> {
               const SizedBox(height: 8),
               const Text(
                 'أكمل ملفك لترفع فرص قبول ترشّحك',
-                style: TextStyle(fontSize: 11.5, color: AppColors.textSecondary),
+                style:
+                    TextStyle(fontSize: 11.5, color: AppColors.textSecondary),
               ),
             ],
           ],
@@ -357,7 +359,8 @@ class _CvScreenState extends State<CvScreen> {
             _infoRow('البريد الإلكتروني', _user?.email ?? '-'),
             _infoRow('الولاية', _user?.wilaya ?? '-'),
             _infoRow('المهنة', _profile?.profession ?? '-'),
-            _infoRow('المستوى الدراسي',
+            _infoRow(
+                'المستوى الدراسي',
                 Labels.education(_profile?.educationLevel).isEmpty
                     ? '-'
                     : Labels.education(_profile?.educationLevel)),
@@ -519,8 +522,8 @@ class _CvScreenState extends State<CvScreen> {
             Expanded(
               child: Text(
                 value,
-                style: const TextStyle(
-                    fontSize: 13, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
               ),
             ),
           ],

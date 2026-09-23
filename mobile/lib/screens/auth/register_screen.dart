@@ -43,7 +43,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
     if (!_acceptedTerms) {
-      showSnack(context, 'يجب الموافقة على الشروط وسياسة الخصوصية', error: true);
+      showSnack(context, 'يجب الموافقة على الشروط وسياسة الخصوصية',
+          error: true);
       return;
     }
     FocusScope.of(context).unfocus();
@@ -76,9 +77,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('إنشاء حساب جديد')),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('إنشاء حساب جديد')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -89,7 +91,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 // اختيار نوع الحساب
                 const Text('نوع الحساب',
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
                 const SizedBox(height: 10),
                 Row(
                   children: [
@@ -263,7 +266,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _label(String text) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Text(text,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
+            style:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
       );
 }
 
@@ -317,7 +321,8 @@ class _RoleCard extends StatelessWidget {
               Text(
                 subtitle,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                style: const TextStyle(
+                    fontSize: 11, color: AppColors.textSecondary),
               ),
             ],
           ),

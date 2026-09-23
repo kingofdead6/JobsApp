@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/theme/company_theme.dart';
 import '../../core/utils/labels.dart';
 import '../../models/models.dart';
 import '../../services/api_services.dart';
@@ -31,10 +32,10 @@ class _PostJobScreenState extends State<PostJobScreen> {
   late String? _sector = widget.editing?.sector;
   late String? _wilaya = widget.editing?.wilaya;
   late String _contractType = widget.editing?.contractType ?? 'full_time';
-  late final _salaryMin = TextEditingController(
-      text: widget.editing?.salaryMin?.toString() ?? '');
-  late final _salaryMax = TextEditingController(
-      text: widget.editing?.salaryMax?.toString() ?? '');
+  late final _salaryMin =
+      TextEditingController(text: widget.editing?.salaryMin?.toString() ?? '');
+  late final _salaryMax =
+      TextEditingController(text: widget.editing?.salaryMax?.toString() ?? '');
 
   // الخطوة 2 — تفاصيل إضافية
   late final _description =
@@ -74,7 +75,8 @@ class _PostJobScreenState extends State<PostJobScreen> {
       final min = int.tryParse(_salaryMin.text.trim());
       final max = int.tryParse(_salaryMax.text.trim());
       if (min != null && max != null && min > max) {
-        showSnack(context, 'الراتب الأدنى لا يمكن أن يتجاوز الأقصى', error: true);
+        showSnack(context, 'الراتب الأدنى لا يمكن أن يتجاوز الأقصى',
+            error: true);
         return;
       }
     } else if (_step == 1) {
@@ -186,9 +188,10 @@ class _PostJobScreenState extends State<PostJobScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),          title: Text(_isEditing ? 'تعديل العرض' : 'نشر عرض عمل'),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: CompanyColors.gradient),
+          ),
+          title: Text(_isEditing ? 'تعديل العرض' : 'نشر عرض عمل'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_forward_rounded),
             onPressed: _back,
@@ -269,8 +272,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-                      color:
-                          active ? AppColors.primary : AppColors.textMuted,
+                      color: active ? AppColors.primary : AppColors.textMuted,
                     ),
                   ),
                 ),
@@ -294,7 +296,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   : null,
             ),
             const SizedBox(height: 16),
-
             _label('المهنة *'),
             TextFormField(
               controller: _profession,
@@ -303,7 +304,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   (v == null || v.trim().isEmpty) ? 'المهنة مطلوبة' : null,
             ),
             const SizedBox(height: 16),
-
             _label('القطاع *'),
             DropdownButtonFormField<String>(
               initialValue: _sector,
@@ -316,7 +316,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
               onChanged: (v) => setState(() => _sector = v),
             ),
             const SizedBox(height: 16),
-
             _label('الولاية *'),
             DropdownButtonFormField<String>(
               initialValue: _wilaya,
@@ -328,7 +327,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
               onChanged: (v) => setState(() => _wilaya = v),
             ),
             const SizedBox(height: 16),
-
             _label('نوع العقد *'),
             Wrap(
               spacing: 8,
@@ -339,8 +337,8 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   onTap: () => setState(() => _contractType = e.key),
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     decoration: BoxDecoration(
                       color: selected ? AppColors.primary : AppColors.surface,
                       border: Border.all(
@@ -362,7 +360,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
               }).toList(),
             ),
             const SizedBox(height: 20),
-
             _label('الراتب (اختياري)'),
             Row(
               children: [
@@ -415,7 +412,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
                   : null,
             ),
             const SizedBox(height: 8),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -443,7 +439,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
                     .toList(),
               ),
             const SizedBox(height: 20),
-
             _label('المستوى الدراسي المطلوب'),
             DropdownButtonFormField<String>(
               initialValue: _educationLevel,
@@ -452,13 +447,12 @@ class _PostJobScreenState extends State<PostJobScreen> {
               items: [
                 const DropdownMenuItem<String>(
                     value: null, child: Text('غير محدّد')),
-                ...Labels.educationLevels.entries.map(
-                    (e) => DropdownMenuItem(value: e.key, child: Text(e.value))),
+                ...Labels.educationLevels.entries.map((e) =>
+                    DropdownMenuItem(value: e.key, child: Text(e.value))),
               ],
               onChanged: (v) => setState(() => _educationLevel = v),
             ),
             const SizedBox(height: 16),
-
             _label('مستوى الخبرة المطلوب'),
             DropdownButtonFormField<String>(
               initialValue: _experienceLevel,
@@ -467,13 +461,12 @@ class _PostJobScreenState extends State<PostJobScreen> {
               items: [
                 const DropdownMenuItem<String>(
                     value: null, child: Text('غير محدّد')),
-                ...Labels.experienceLevels.entries.map(
-                    (e) => DropdownMenuItem(value: e.key, child: Text(e.value))),
+                ...Labels.experienceLevels.entries.map((e) =>
+                    DropdownMenuItem(value: e.key, child: Text(e.value))),
               ],
               onChanged: (v) => setState(() => _experienceLevel = v),
             ),
             const SizedBox(height: 16),
-
             _label('عدد المناصب'),
             TextFormField(
               controller: _positions,
@@ -516,7 +509,6 @@ class _PostJobScreenState extends State<PostJobScreen> {
             ),
           ),
           const SizedBox(height: 16),
-
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -664,6 +656,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
   Widget _label(String text) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Text(text,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
+            style:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
       );
 }

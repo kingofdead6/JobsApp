@@ -55,18 +55,20 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
     if (_loading) {
       return Scaffold(
         appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('المؤسسة')),
+            flexibleSpace: const DecoratedBox(
+              decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+            ),
+            title: const Text('المؤسسة')),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
     if (_error != null || _company == null) {
       return Scaffold(
         appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('المؤسسة')),
+            flexibleSpace: const DecoratedBox(
+              decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+            ),
+            title: const Text('المؤسسة')),
         body: ErrorState(message: _error ?? 'غير موجودة', onRetry: _load),
       );
     }
@@ -75,9 +77,10 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: Text(c.name, maxLines: 1, overflow: TextOverflow.ellipsis)),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: Text(c.name, maxLines: 1, overflow: TextOverflow.ellipsis)),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(
@@ -188,15 +191,14 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                                 await launchUrl(Uri.parse(url),
                                     mode: LaunchMode.externalApplication);
                               },
-                              child: _row(Icons.language_rounded, 'الموقع',
-                                  c.website!,
+                              child: _row(
+                                  Icons.language_rounded, 'الموقع', c.website!,
                                   link: true),
                             ),
                         ],
                       ),
                     ),
                   ),
-
                   if (c.description != null && c.description!.isNotEmpty) ...[
                     const SizedBox(height: 16),
                     const Text('عن المؤسسة',
@@ -212,7 +214,6 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                       ),
                     ),
                   ],
-
                   const SizedBox(height: 22),
                   Text(
                     'العروض النشطة (${_offers.length})',
@@ -220,14 +221,13 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                         fontSize: 16, fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 12),
-
                   if (_offers.isEmpty)
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 20),
                       child: Text(
                         'لا توجد عروض نشطة حاليًا',
-                        style: TextStyle(
-                            fontSize: 13, color: AppColors.textMuted),
+                        style:
+                            TextStyle(fontSize: 13, color: AppColors.textMuted),
                       ),
                     )
                   else

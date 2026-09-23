@@ -9,7 +9,8 @@ class SocketService {
 
   io.Socket? _socket;
 
-  final ValueNotifier<Map<String, dynamic>?> onNotification = ValueNotifier(null);
+  final ValueNotifier<Map<String, dynamic>?> onNotification =
+      ValueNotifier(null);
   final ValueNotifier<Map<String, dynamic>?> onMessage = ValueNotifier(null);
   final ValueNotifier<bool> connected = ValueNotifier(false);
 

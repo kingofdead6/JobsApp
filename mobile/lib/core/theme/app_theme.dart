@@ -163,7 +163,11 @@ class AppTheme {
           ),
 
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
+        // لون صريح لا شفّاف: الشاشات التي تضيف flexibleSpace متدرّجًا
+        // تغطّيه، أمّا التي لا تضيفه فتبقى مقروءة (أبيض على أزرق)
+        // بدل أن تصبح نصًّا أبيض على خلفية بيضاء.
+        backgroundColor: AppColors.primary,
+        surfaceTintColor: Colors.transparent,
         foregroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -285,8 +289,8 @@ class AppTheme {
         unselectedLabelStyle: TextStyle(fontSize: 11),
       ),
 
-      dividerTheme:
-          const DividerThemeData(color: AppColors.border, thickness: 1, space: 1),
+      dividerTheme: const DividerThemeData(
+          color: AppColors.border, thickness: 1, space: 1),
 
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
@@ -351,8 +355,7 @@ class _FadeSlideTransitionBuilder extends PageTransitionsBuilder {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    final curved =
-        CurvedAnimation(parent: animation, curve: AppMotion.curve);
+    final curved = CurvedAnimation(parent: animation, curve: AppMotion.curve);
 
     return FadeTransition(
       opacity: curved,

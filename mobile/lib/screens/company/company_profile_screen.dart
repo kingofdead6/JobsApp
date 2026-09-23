@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/theme/company_theme.dart';
 import '../../core/utils/labels.dart';
 import '../../models/models.dart';
 import '../../providers/auth_provider.dart';
@@ -111,8 +112,9 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     };
 
     try {
-      final company =
-          _isNew ? await CompanyService.create(body) : await CompanyService.update(body);
+      final company = _isNew
+          ? await CompanyService.create(body)
+          : await CompanyService.update(body);
       if (!mounted) return;
       setState(() {
         _company = company;
@@ -150,9 +152,10 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     if (_loading) {
       return Scaffold(
         appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('ملف المؤسسة')),
+            flexibleSpace: const DecoratedBox(
+              decoration: BoxDecoration(gradient: CompanyColors.gradient),
+            ),
+            title: const Text('ملف المؤسسة')),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
@@ -160,8 +163,9 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),        title: Text(_isNew ? 'إنشاء ملف المؤسسة' : 'ملف المؤسسة'),
+          decoration: BoxDecoration(gradient: CompanyColors.gradient),
+        ),
+        title: Text(_isNew ? 'إنشاء ملف المؤسسة' : 'ملف المؤسسة'),
       ),
       body: Form(
         key: _formKey,
@@ -175,8 +179,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.warning.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
-                  border:
-                      Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
+                  border: Border.all(
+                      color: AppColors.warning.withValues(alpha: 0.3)),
                 ),
                 child: const Row(
                   children: [
@@ -192,7 +196,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   ],
                 ),
               ),
-
             if (!_isNew && _company != null) ...[
               Center(
                 child: Stack(
@@ -223,7 +226,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               if (_stats != null) _statsCard(),
               const SizedBox(height: 20),
             ],
-
             _label('اسم المؤسسة *'),
             TextFormField(
               controller: _name,
@@ -232,7 +234,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   : null,
             ),
             const SizedBox(height: 16),
-
             _label('القطاع *'),
             DropdownButtonFormField<String>(
               initialValue: _sector,
@@ -245,7 +246,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               onChanged: (v) => setState(() => _sector = v),
             ),
             const SizedBox(height: 16),
-
             _label('الولاية *'),
             DropdownButtonFormField<String>(
               initialValue: _wilaya,
@@ -257,25 +257,21 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               onChanged: (v) => setState(() => _wilaya = v),
             ),
             const SizedBox(height: 16),
-
             _label('نبذة عن المؤسسة'),
             TextFormField(
               controller: _description,
               maxLines: 4,
               maxLength: 2000,
             ),
-
             _label('العنوان'),
             TextFormField(controller: _address),
             const SizedBox(height: 16),
-
             _label('الموقع الإلكتروني'),
             TextFormField(
               controller: _website,
               keyboardType: TextInputType.url,
             ),
             const SizedBox(height: 16),
-
             _label('هاتف التواصل'),
             TextFormField(
               controller: _contactPhone,
@@ -289,14 +285,12 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               },
             ),
             const SizedBox(height: 16),
-
             _label('بريد التواصل'),
             TextFormField(
               controller: _contactEmail,
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16),
-
             _label('عدد العمال'),
             DropdownButtonFormField<String>(
               initialValue: _employeesRange,
@@ -308,7 +302,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
               onChanged: (v) => setState(() => _employeesRange = v),
             ),
             const SizedBox(height: 26),
-
             ElevatedButton(
               onPressed: _saving ? null : _save,
               child: _saving
@@ -331,9 +324,16 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     final status = _company!.verificationStatus;
     final (label, color, icon) = switch (status) {
       'verified' => ('مؤسسة موثّقة', AppColors.success, Icons.verified_rounded),
-      'pending' => ('طلب التوثيق قيد المراجعة', AppColors.warning,
-          Icons.hourglass_top_rounded),
-      'rejected' => ('طلب التوثيق مرفوض', AppColors.danger, Icons.cancel_rounded),
+      'pending' => (
+          'طلب التوثيق قيد المراجعة',
+          AppColors.warning,
+          Icons.hourglass_top_rounded
+        ),
+      'rejected' => (
+          'طلب التوثيق مرفوض',
+          AppColors.danger,
+          Icons.cancel_rounded
+        ),
       _ => ('غير موثّقة', AppColors.textMuted, Icons.gpp_maybe_rounded),
     };
 
@@ -458,6 +458,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   Widget _label(String text) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Text(text,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
+            style:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5)),
       );
 }

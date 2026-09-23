@@ -108,8 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               onSeeAll: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const JobsListScreen(
-                                      featuredOnly: true),
+                                  builder: (_) =>
+                                      const JobsListScreen(featuredOnly: true),
                                 ),
                               ),
                             ),
@@ -188,8 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(width: 9),
                 RichText(
                   text: const TextSpan(
-                    style: TextStyle(
-                        fontSize: 17.5, fontWeight: FontWeight.w900),
+                    style:
+                        TextStyle(fontSize: 17.5, fontWeight: FontWeight.w900),
                     children: [
                       TextSpan(
                           text: 'بحث عن ',
@@ -280,13 +280,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const Expanded(
                 child: Text(
                   'ابحث عن وظيفة، مهنة، شركة...',
-                  style:
-                      TextStyle(color: AppColors.textMuted, fontSize: 13.5),
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 13.5),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 10, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
                   gradient: AppColors.primaryGradient,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -360,8 +359,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 4),
                     Text(
                       banner.subtitle!,
-                      style: const TextStyle(
-                          color: Colors.white70, fontSize: 12),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 12),
                     ),
                   ],
                   const SizedBox(height: 12),
@@ -407,25 +406,23 @@ class _HomeScreenState extends State<HomeScreen> {
   /// المداخل الستة المختصرة — 3.2
   Widget _tiles(bool isCompany) {
     final tiles = <_Tile>[
-      _Tile('البحث عن عمل', Icons.search_rounded,
-          AppColors.tileGreen, _openSearch),
-      _Tile('سيرتي الذاتية', Icons.description_rounded,
-          AppColors.tileBlue, () {
+      _Tile('البحث عن عمل', Icons.search_rounded, AppColors.tileGreen,
+          _openSearch),
+      _Tile('سيرتي الذاتية', Icons.description_rounded, AppColors.tileBlue, () {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => const CvScreen()));
       }),
-      _Tile('الشركات', Icons.business_rounded,
-          AppColors.tilePurple, () {
+      _Tile('الشركات', Icons.business_rounded, AppColors.tilePurple, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const CompaniesScreen()));
       }),
-      _Tile('وظائف حسب الولاية', Icons.location_on_rounded,
-          AppColors.tileOrange, () {
+      _Tile(
+          'وظائف حسب الولاية', Icons.location_on_rounded, AppColors.tileOrange,
+          () {
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const WilayaJobsScreen()));
       }),
-      _Tile('العروض المميّزة', Icons.star_rounded,
-          AppColors.tileRed, () {
+      _Tile('العروض المميّزة', Icons.star_rounded, AppColors.tileRed, () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -433,15 +430,12 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }),
       isCompany
-          ? _Tile('عروضي', Icons.folder_shared_rounded,
-              AppColors.tileTeal, () {
+          ? _Tile('عروضي', Icons.folder_shared_rounded, AppColors.tileTeal, () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const MyJobsScreen()));
             })
-          : _Tile(
-              'العروض المحفوظة',
-              Icons.bookmark_rounded,
-              AppColors.tileTeal, () {
+          : _Tile('العروض المحفوظة', Icons.bookmark_rounded, AppColors.tileTeal,
+              () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const SavedScreen()));
             }),
@@ -450,8 +444,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (isCompany) {
       tiles.insert(
         2,
-        _Tile('نشر عرض عمل', Icons.add_circle_rounded,
-            AppColors.tileTeal, () {
+        _Tile('نشر عرض عمل', Icons.add_circle_rounded, AppColors.tileTeal, () {
           Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const PostJobScreen()))
               .then((_) => _reload());
@@ -555,8 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text('عرض الكل', style: TextStyle(fontSize: 12.5)),
                   SizedBox(width: 2),
-                  Icon(Icons.chevron_left_rounded,
-                      size: 13),
+                  Icon(Icons.chevron_left_rounded, size: 13),
                 ],
               ),
             ),
@@ -593,9 +585,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             CompanyAvatar(
-                                company: o.company,
-                                sector: o.sector,
-                                size: 36),
+                                company: o.company, sector: o.sector, size: 36),
                             const SizedBox(width: 9),
                             Expanded(
                               child: Text(
@@ -654,8 +644,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                    fontSize: 10.5,
-                                    color: AppColors.textMuted),
+                                    fontSize: 10.5, color: AppColors.textMuted),
                               ),
                             ),
                             ContractChip(contractType: o.contractType),
@@ -678,8 +667,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 250,
             decoration: const BoxDecoration(
               gradient: AppColors.primaryGradient,
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(26)),
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(26)),
             ),
           ),
           Padding(

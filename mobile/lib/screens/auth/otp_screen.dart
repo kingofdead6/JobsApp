@@ -95,9 +95,10 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('تأكيد رقم الهاتف')),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('تأكيد رقم الهاتف')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -127,10 +128,11 @@ class _OtpScreenState extends State<OtpScreen> {
                 'أرسلنا رمزًا مكوّنًا من 6 أرقام إلى الرقم\n${widget.phone}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                    fontSize: 13.5, color: AppColors.textSecondary, height: 1.6),
+                    fontSize: 13.5,
+                    color: AppColors.textSecondary,
+                    height: 1.6),
               ),
               const SizedBox(height: 32),
-
               TextField(
                 controller: _code,
                 keyboardType: TextInputType.number,
@@ -153,7 +155,6 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
                 onSubmitted: (_) => _verify(),
               ),
-
               if (widget.devOtp != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
@@ -165,7 +166,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                 ),
               const SizedBox(height: 24),
-
               ElevatedButton(
                 onPressed: _loading ? null : _verify,
                 child: _loading
@@ -178,7 +178,6 @@ class _OtpScreenState extends State<OtpScreen> {
                     : const Text('تأكيد'),
               ),
               const SizedBox(height: 14),
-
               Center(
                 child: _secondsLeft > 0
                     ? Text(

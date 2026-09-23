@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/theme/company_theme.dart';
 import '../../core/utils/labels.dart';
 import '../../models/models.dart';
 import '../../services/api_services.dart';
@@ -159,7 +160,6 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                 ),
               ],
               const SizedBox(height: 20),
-
               _cvRow('الهاتف', '${cv['phone'] ?? '-'}'),
               _cvRow('البريد', '${cv['email'] ?? '-'}'),
               _cvRow('الولاية', '${cv['wilaya'] ?? '-'}'),
@@ -167,7 +167,6 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
               _cvRow('المستوى الدراسي',
                   Labels.education('${cv['educationLevel']}')),
               _cvRow('سنوات الخبرة', '${cv['yearsOfExperience'] ?? 0}'),
-
               if (a.coverLetter != null && a.coverLetter!.isNotEmpty) ...[
                 const SizedBox(height: 18),
                 const Text('الرسالة التحفيزية',
@@ -186,7 +185,6 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                       style: const TextStyle(fontSize: 13, height: 1.7)),
                 ),
               ],
-
               if ((cv['skills'] as List?)?.isNotEmpty ?? false) ...[
                 const SizedBox(height: 18),
                 const Text('المهارات',
@@ -207,7 +205,6 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                       .toList(),
                 ),
               ],
-
               if ((cv['experiences'] as List?)?.isNotEmpty ?? false) ...[
                 const SizedBox(height: 18),
                 const Text('الخبرات المهنية',
@@ -229,7 +226,6 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                   );
                 }),
               ],
-
               if (cv['cvFile'] != null) ...[
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
@@ -277,8 +273,9 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),        title: Text(widget.offerTitle,
+          decoration: BoxDecoration(gradient: CompanyColors.gradient),
+        ),
+        title: Text(widget.offerTitle,
             maxLines: 1, overflow: TextOverflow.ellipsis),
       ),
       body: Column(
@@ -447,14 +444,14 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                       ),
                     ],
                   ),
-
                   const Divider(height: 20),
                   Row(
                     children: [
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () => _showCv(a),
-                          icon: const Icon(Icons.description_outlined, size: 17),
+                          icon:
+                              const Icon(Icons.description_outlined, size: 17),
                           label: const Text('السيرة',
                               style: TextStyle(fontSize: 12)),
                         ),

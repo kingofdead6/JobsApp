@@ -63,9 +63,10 @@ class _WilayaJobsScreenState extends State<WilayaJobsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('وظائف حسب الولاية')),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('وظائف حسب الولاية')),
       body: Column(
         children: [
           Container(
@@ -122,8 +123,7 @@ class _WilayaJobsScreenState extends State<WilayaJobsScreen> {
                                   decoration: BoxDecoration(
                                     color: AppColors.surface,
                                     borderRadius: BorderRadius.circular(14),
-                                    border:
-                                        Border.all(color: AppColors.border),
+                                    border: Border.all(color: AppColors.border),
                                   ),
                                   child: Row(
                                     children: [

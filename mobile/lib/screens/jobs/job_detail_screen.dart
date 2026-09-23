@@ -66,16 +66,14 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
       builder: (ctx) => AlertDialog(
         icon: const Icon(Icons.account_circle_rounded,
             size: 46, color: AppColors.primary),
-        title: const Text('تسجيل الدخول مطلوب',
-            textAlign: TextAlign.center),
+        title: const Text('تسجيل الدخول مطلوب', textAlign: TextAlign.center),
         content: const Text(
           'يجب تسجيل الدخول للقيام بهذا الإجراء.',
           textAlign: TextAlign.center,
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('إلغاء')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء')),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(ctx);
@@ -129,8 +127,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
 
     setState(() => _applying = true);
     try {
-      await ApplicationService.apply(widget.offerId,
-          coverLetter: coverLetter);
+      await ApplicationService.apply(widget.offerId, coverLetter: coverLetter);
       if (!mounted) return;
       setState(() {
         _hasApplied = true;
@@ -245,9 +242,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                   transitionBuilder: (c, a) =>
                       ScaleTransition(scale: a, child: c),
                   child: Icon(
-                    _isSaved
-                        ? Icons.bookmark_rounded
-                        : Icons.bookmark_rounded,
+                    _isSaved ? Icons.bookmark_rounded : Icons.bookmark_rounded,
                     key: ValueKey(_isSaved),
                   ),
                 ),
@@ -258,7 +253,6 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
               background: _headerContent(o),
             ),
           ),
-
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 18, 16, 110),
@@ -269,7 +263,6 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                   const SizedBox(height: 16),
                   FadeInUp(index: 1, child: _quickFacts(o)),
                   const SizedBox(height: 22),
-
                   FadeInUp(
                     index: 2,
                     child: _section(
@@ -285,7 +278,6 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       ),
                     ),
                   ),
-
                   if (o.skills.isNotEmpty) ...[
                     const SizedBox(height: 20),
                     FadeInUp(
@@ -296,17 +288,14 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         child: Column(
                           children: o.skills
                               .map((s) => Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10),
+                                    padding: const EdgeInsets.only(bottom: 10),
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          margin: const EdgeInsets.only(
-                                              top: 2),
-                                          padding:
-                                              const EdgeInsets.all(3),
+                                          margin: const EdgeInsets.only(top: 2),
+                                          padding: const EdgeInsets.all(3),
                                           decoration: const BoxDecoration(
                                             color: AppColors.successSoft,
                                             shape: BoxShape.circle,
@@ -324,8 +313,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                             style: const TextStyle(
                                               fontSize: 13.5,
                                               height: 1.6,
-                                              color:
-                                                  AppColors.textSecondary,
+                                              color: AppColors.textSecondary,
                                             ),
                                           ),
                                         ),
@@ -337,10 +325,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       ),
                     ),
                   ],
-
                   const SizedBox(height: 20),
                   FadeInUp(index: 4, child: _companyCard(o)),
-
                   const SizedBox(height: 22),
                   Center(
                     child: TextButton.icon(
@@ -349,8 +335,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                           size: 16, color: AppColors.danger),
                       label: const Text(
                         'الإبلاغ عن هذا العرض',
-                        style: TextStyle(
-                            color: AppColors.danger, fontSize: 12.5),
+                        style:
+                            TextStyle(color: AppColors.danger, fontSize: 12.5),
                       ),
                     ),
                   ),
@@ -360,7 +346,6 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
           ),
         ],
       ),
-
       bottomSheet: _applyBar(),
     );
   }
@@ -393,8 +378,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.lg),
+                          borderRadius: BorderRadius.circular(AppRadius.lg),
                           boxShadow: AppShadows.lifted,
                         ),
                         child: CompanyAvatar(
@@ -429,10 +413,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         ),
                         if (o.company?.isVerified ?? false) ...[
                           const SizedBox(width: 5),
-                          const Icon(
-                              Icons.verified_rounded,
-                              size: 15,
-                              color: Colors.white),
+                          const Icon(Icons.verified_rounded,
+                              size: 15, color: Colors.white),
                         ],
                       ],
                     ),
@@ -496,8 +478,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             ],
           ),
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          border: Border.all(
-              color: AppColors.success.withValues(alpha: 0.28)),
+          border: Border.all(color: AppColors.success.withValues(alpha: 0.28)),
         ),
         child: Row(
           children: [
@@ -517,8 +498,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
               children: [
                 const Text(
                   'الراتب الشهري',
-                  style: TextStyle(
-                      fontSize: 11.5, color: AppColors.textSecondary),
+                  style:
+                      TextStyle(fontSize: 11.5, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -587,8 +568,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                 const SizedBox(width: 6),
                 Text(
                   label,
-                  style: const TextStyle(
-                      fontSize: 11, color: AppColors.textMuted),
+                  style:
+                      const TextStyle(fontSize: 11, color: AppColors.textMuted),
                 ),
               ],
             ),
@@ -617,8 +598,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
               const SizedBox(width: 8),
               Text(
                 title,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w900),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
               ),
             ],
           ),
@@ -634,8 +615,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
     return PressableScale(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (_) => CompanyDetailScreen(companyId: c.id)),
+        MaterialPageRoute(builder: (_) => CompanyDetailScreen(companyId: c.id)),
       ),
       child: Container(
         padding: const EdgeInsets.all(14),
@@ -707,10 +687,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                        Icons.check_circle_rounded,
-                        color: AppColors.success,
-                        size: 20),
+                    Icon(Icons.check_circle_rounded,
+                        color: AppColors.success, size: 20),
                     SizedBox(width: 8),
                     Text(
                       'تم إرسال طلبك لهذا العرض',
@@ -743,10 +721,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         : const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                  Icons.send_rounded,
-                                  color: Colors.white,
-                                  size: 19),
+                              Icon(Icons.send_rounded,
+                                  color: Colors.white, size: 19),
                               SizedBox(width: 9),
                               Text(
                                 'تقديم الطلب',
@@ -809,15 +785,12 @@ class _CoverLetterSheetState extends State<_CoverLetterSheet> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                      Icons.send_rounded,
-                      color: AppColors.primary,
-                      size: 20),
+                  Icon(Icons.send_rounded, color: AppColors.primary, size: 20),
                   SizedBox(width: 8),
                   Text(
                     'تقديم الطلب',
-                    style: TextStyle(
-                        fontSize: 17.5, fontWeight: FontWeight.w900),
+                    style:
+                        TextStyle(fontSize: 17.5, fontWeight: FontWeight.w900),
                   ),
                 ],
               ),
@@ -841,9 +814,7 @@ class _CoverLetterSheetState extends State<_CoverLetterSheet> {
               const SizedBox(height: 6),
               ElevatedButton.icon(
                 onPressed: () => Navigator.pop(context, _ctrl.text.trim()),
-                icon: const Icon(
-                    Icons.send_rounded,
-                    size: 18),
+                icon: const Icon(Icons.send_rounded, size: 18),
                 label: const Text('إرسال الطلب'),
               ),
               const SizedBox(height: 6),
@@ -893,13 +864,11 @@ class _ReportSheet extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.flag_rounded,
-                    color: AppColors.danger, size: 19),
+                Icon(Icons.flag_rounded, color: AppColors.danger, size: 19),
                 SizedBox(width: 8),
                 Text(
                   'سبب الإبلاغ',
-                  style:
-                      TextStyle(fontSize: 16.5, fontWeight: FontWeight.w900),
+                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w900),
                 ),
               ],
             ),
@@ -913,16 +882,14 @@ class _ReportSheet extends StatelessWidget {
                     color: AppColors.dangerSoft,
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
-                  child: Icon(_iconFor(e.key),
-                      size: 16, color: AppColors.danger),
+                  child:
+                      Icon(_iconFor(e.key), size: 16, color: AppColors.danger),
                 ),
                 title: Text(e.value,
                     style: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w600)),
-                trailing: const Icon(
-                    Icons.chevron_left_rounded,
-                    size: 15,
-                    color: AppColors.textMuted),
+                trailing: const Icon(Icons.chevron_left_rounded,
+                    size: 15, color: AppColors.textMuted),
                 onTap: () => Navigator.pop(context, e.key),
               ),
             ),

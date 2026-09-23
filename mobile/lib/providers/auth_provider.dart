@@ -46,8 +46,10 @@ class AuthProvider extends ChangeNotifier {
   Future<void> _loadMe() async {
     final data = await AuthService.me();
     _user = UserModel.fromJson(data['user']);
-    _profile = data['profile'] != null ? ProfileModel.fromJson(data['profile']) : null;
-    _company = data['company'] != null ? CompanyModel.fromJson(data['company']) : null;
+    _profile =
+        data['profile'] != null ? ProfileModel.fromJson(data['profile']) : null;
+    _company =
+        data['company'] != null ? CompanyModel.fromJson(data['company']) : null;
   }
 
   Future<void> login(String identifier, String password) async {

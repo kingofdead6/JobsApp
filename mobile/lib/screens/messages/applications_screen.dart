@@ -188,8 +188,7 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  fontSize: 12,
-                                  color: AppColors.textSecondary),
+                                  fontSize: 12, color: AppColors.textSecondary),
                             ),
                           ],
                         ),
@@ -219,7 +218,6 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
                       ),
                     ],
                   ),
-
                   if (a.statusNote != null && a.statusNote!.isNotEmpty) ...[
                     const SizedBox(height: 10),
                     Container(
@@ -235,7 +233,6 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
                       ),
                     ),
                   ],
-
                   const SizedBox(height: 10),
                   Row(
                     children: [

@@ -62,8 +62,7 @@ class _CompanyShellState extends State<CompanyShell> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      CompanyDashboardScreen(
-          onNavigateTab: (i) => setState(() => _index = i)),
+      CompanyDashboardScreen(onNavigateTab: (i) => setState(() => _index = i)),
       const MyJobsScreen(embedded: true),
       const ConversationsScreen(),
       const NotificationsScreen(),

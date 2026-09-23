@@ -87,9 +87,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('استرجاع كلمة المرور')),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('استرجاع كلمة المرور')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -118,7 +119,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     fontSize: 14, color: AppColors.textSecondary, height: 1.6),
               ),
               const SizedBox(height: 28),
-
               TextField(
                 controller: _phone,
                 enabled: !_codeSent,
@@ -133,7 +133,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   labelText: 'رقم الهاتف',
                 ),
               ),
-
               if (_codeSent) ...[
                 const SizedBox(height: 16),
                 TextField(
@@ -142,7 +141,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   textAlign: TextAlign.center,
                   maxLength: 6,
                   style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: 10),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 10),
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(6),
@@ -169,7 +170,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ],
               const SizedBox(height: 26),
-
               ElevatedButton(
                 onPressed: _loading ? null : (_codeSent ? _reset : _sendCode),
                 child: _loading
@@ -181,7 +181,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       )
                     : Text(_codeSent ? 'تغيير كلمة المرور' : 'إرسال الرمز'),
               ),
-
               if (_codeSent)
                 TextButton(
                   onPressed: () => setState(() => _codeSent = false),

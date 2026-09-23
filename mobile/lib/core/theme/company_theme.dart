@@ -50,22 +50,23 @@ class CompanyTheme {
         primary: CompanyColors.primary,
         secondary: CompanyColors.accent,
       ),
+      // شريط علوي بلون المؤسسة بدل أزرق الباحث
+      appBarTheme: base.appBarTheme.copyWith(
+        backgroundColor: CompanyColors.primary,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: base.elevatedButtonTheme.style?.copyWith(
-          backgroundColor:
-              WidgetStateProperty.all(CompanyColors.primary),
+          backgroundColor: WidgetStateProperty.all(CompanyColors.primary),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: base.outlinedButtonTheme.style?.copyWith(
-          foregroundColor:
-              WidgetStateProperty.all(CompanyColors.primary),
+          foregroundColor: WidgetStateProperty.all(CompanyColors.primary),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: base.textButtonTheme.style?.copyWith(
-          foregroundColor:
-              WidgetStateProperty.all(CompanyColors.primary),
+          foregroundColor: WidgetStateProperty.all(CompanyColors.primary),
         ),
       ),
       inputDecorationTheme: base.inputDecorationTheme.copyWith(

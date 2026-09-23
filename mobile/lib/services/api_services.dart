@@ -26,7 +26,8 @@ class AuthService {
 
   static Future<(String token, UserModel user)> verifyOtp(
       String phone, String code) async {
-    final res = await _api.post('/auth/verify-otp', {'phone': phone, 'code': code});
+    final res =
+        await _api.post('/auth/verify-otp', {'phone': phone, 'code': code});
     final data = res['data'] as Map<String, dynamic>;
     return ('${data['token']}', UserModel.fromJson(data['user']));
   }
@@ -117,8 +118,9 @@ class JobService {
       'page': page,
     });
     final data = res['data'] as Map<String, dynamic>;
-    final items =
-        (data['items'] as List? ?? []).map((e) => JobOffer.fromJson(e)).toList();
+    final items = (data['items'] as List? ?? [])
+        .map((e) => JobOffer.fromJson(e))
+        .toList();
     return (items, (data['pagination']?['pages'] ?? 1) as int);
   }
 
@@ -141,7 +143,8 @@ class JobService {
 
   static Future<List<Map<String, dynamic>>> byWilaya() async {
     final res = await _api.get('/jobs/by-wilaya');
-    return ((res['data']?['items'] as List?) ?? []).cast<Map<String, dynamic>>();
+    return ((res['data']?['items'] as List?) ?? [])
+        .cast<Map<String, dynamic>>();
   }
 
   /// نشر عرض (3.6) — يُحفظ بحالة «قيد المراجعة»
@@ -156,7 +159,8 @@ class JobService {
   }
 
   static Future<void> changeState(String id, String action, {int? days}) =>
-      _api.patch('/jobs/$id/status', {'action': action, if (days != null) 'days': days});
+      _api.patch('/jobs/$id/status',
+          {'action': action, if (days != null) 'days': days});
 
   static Future<void> remove(String id) => _api.delete('/jobs/$id');
 
@@ -170,10 +174,12 @@ class JobService {
 
 /// الترشّحات (3.4 / 3.7)
 class ApplicationService {
-  static Future<ApplicationModel> apply(String offerId, {String? coverLetter}) async {
+  static Future<ApplicationModel> apply(String offerId,
+      {String? coverLetter}) async {
     final res = await _api.post('/applications', {
       'offerId': offerId,
-      if (coverLetter != null && coverLetter.isNotEmpty) 'coverLetter': coverLetter,
+      if (coverLetter != null && coverLetter.isNotEmpty)
+        'coverLetter': coverLetter,
     });
     return ApplicationModel.fromJson(res['data']['application']);
   }
@@ -185,8 +191,10 @@ class ApplicationService {
         .toList();
   }
 
-  static Future<List<ApplicationModel>> forOffer(String offerId, {String? status}) async {
-    final res = await _api.get('/applications/offer/$offerId', query: {'status': status});
+  static Future<List<ApplicationModel>> forOffer(String offerId,
+      {String? status}) async {
+    final res = await _api
+        .get('/applications/offer/$offerId', query: {'status': status});
     return ((res['data']?['items'] as List?) ?? [])
         .map((e) => ApplicationModel.fromJson(e))
         .toList();
@@ -217,7 +225,8 @@ class ProfileService {
     );
   }
 
-  static Future<(ProfileModel, UserModel)> update(Map<String, dynamic> body) async {
+  static Future<(ProfileModel, UserModel)> update(
+      Map<String, dynamic> body) async {
     final res = await _api.patch('/profile/me', body);
     final data = res['data'] as Map<String, dynamic>;
     return (
@@ -281,7 +290,9 @@ class CompanyService {
     final data = res['data'] as Map<String, dynamic>;
     return (
       CompanyModel.fromJson(data['company']),
-      ((data['offers'] as List?) ?? []).map((e) => JobOffer.fromJson(e)).toList(),
+      ((data['offers'] as List?) ?? [])
+          .map((e) => JobOffer.fromJson(e))
+          .toList(),
     );
   }
 
@@ -328,7 +339,8 @@ class SavedService {
 
   static Future<List<Map<String, dynamic>>> searches() async {
     final res = await _api.get('/saved/searches');
-    return ((res['data']?['items'] as List?) ?? []).cast<Map<String, dynamic>>();
+    return ((res['data']?['items'] as List?) ?? [])
+        .cast<Map<String, dynamic>>();
   }
 
   static Future<void> saveSearch(String label, Map<String, dynamic> criteria) =>
@@ -337,7 +349,8 @@ class SavedService {
   static Future<void> toggleAlert(String id, bool enabled) =>
       _api.patch('/saved/searches/$id', {'alertEnabled': enabled});
 
-  static Future<void> deleteSearch(String id) => _api.delete('/saved/searches/$id');
+  static Future<void> deleteSearch(String id) =>
+      _api.delete('/saved/searches/$id');
 }
 
 /// المراسلة (3.7)
@@ -349,12 +362,15 @@ class MessageService {
         .toList();
   }
 
-  static Future<(ConversationModel, List<MessageModel>)> messages(String id) async {
+  static Future<(ConversationModel, List<MessageModel>)> messages(
+      String id) async {
     final res = await _api.get('/messages/conversations/$id');
     final data = res['data'] as Map<String, dynamic>;
     return (
       ConversationModel.fromJson(data['conversation']),
-      ((data['messages'] as List?) ?? []).map((e) => MessageModel.fromJson(e)).toList(),
+      ((data['messages'] as List?) ?? [])
+          .map((e) => MessageModel.fromJson(e))
+          .toList(),
     );
   }
 
@@ -369,7 +385,10 @@ class MessageService {
       'body': body,
     });
     final data = res['data'] as Map<String, dynamic>;
-    return (MessageModel.fromJson(data['message']), '${data['conversationId']}');
+    return (
+      MessageModel.fromJson(data['message']),
+      '${data['conversationId']}'
+    );
   }
 
   static Future<int> unreadCount() async {

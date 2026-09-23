@@ -19,9 +19,11 @@ class MoreScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),          title: const Text('المزيد'), automaticallyImplyLeading: false),
+          flexibleSpace: const DecoratedBox(
+            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+          ),
+          title: const Text('المزيد'),
+          automaticallyImplyLeading: false),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 8),
         children: [
@@ -55,10 +57,8 @@ class MoreScreen extends StatelessWidget {
                 label: 'المحفوظات',
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const SavedScreen()))),
-
           const Divider(height: 24, indent: 16, endIndent: 16),
           _sectionTitle('عن التطبيق'),
-
           _tile(context,
               icon: Icons.privacy_tip_outlined,
               label: 'سياسة الخصوصية',
@@ -90,7 +90,6 @@ class MoreScreen extends StatelessWidget {
                       ),
                     ],
                   )),
-
           const SizedBox(height: 24),
           const Center(
             child: Text(
@@ -130,8 +129,7 @@ class MoreScreen extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
         leading: Icon(icon, color: AppColors.primary, size: 22),
         title: Text(label,
-            style:
-                const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
         trailing: const Icon(Icons.chevron_left_rounded,
             color: AppColors.textMuted, size: 22),
         onTap: onTap,

@@ -43,7 +43,8 @@ class BahthApp extends StatelessWidget {
         builder: (context, child) {
           // فرض الاتجاه من اليمين إلى اليسار، وتثبيت مقياس الخط
           // ضمن حدود معقولة حتى لا تنكسر الواجهة عند التكبير
-          final scale = MediaQuery.textScalerOf(context).scale(1.0).clamp(0.85, 1.4);
+          final scale =
+              MediaQuery.textScalerOf(context).scale(1.0).clamp(0.85, 1.4);
           return Directionality(
             textDirection: TextDirection.rtl,
             child: MediaQuery(

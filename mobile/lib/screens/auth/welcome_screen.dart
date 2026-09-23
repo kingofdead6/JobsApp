@@ -20,8 +20,7 @@ class WelcomeScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.46,
             decoration: const BoxDecoration(
               gradient: AppColors.primaryGradientDeep,
-              borderRadius:
-                  BorderRadius.vertical(bottom: Radius.circular(34)),
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(34)),
             ),
             clipBehavior: Clip.antiAlias,
             child: Stack(
@@ -100,7 +99,6 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 30),
-
                         FadeInUp(
                           index: 3,
                           child: _PrimaryButton(
@@ -122,17 +120,14 @@ class WelcomeScreen extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (_) => const RegisterScreen()),
                             ),
-                            icon: const Icon(
-                                Icons.person_add_rounded,
-                                size: 19),
+                            icon:
+                                const Icon(Icons.person_add_rounded, size: 19),
                             label: const Text('إنشاء حساب جديد'),
                           ),
                         ),
-
                         const SizedBox(height: 26),
                         FadeInUp(index: 5, child: _divider()),
                         const SizedBox(height: 20),
-
                         FadeInUp(
                           index: 6,
                           child: Row(
@@ -154,17 +149,14 @@ class WelcomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-
                         const SizedBox(height: 28),
                         const FadeInUp(
                           index: 7,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                  Icons.verified_user_rounded,
-                                  size: 15,
-                                  color: AppColors.success),
+                              Icon(Icons.verified_user_rounded,
+                                  size: 15, color: AppColors.success),
                               SizedBox(width: 6),
                               Text(
                                 'آمن وموثوق · مجاني للباحثين عن عمل',
@@ -181,7 +173,6 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const Padding(
                   padding: EdgeInsets.only(bottom: 12),
                   child: Text(

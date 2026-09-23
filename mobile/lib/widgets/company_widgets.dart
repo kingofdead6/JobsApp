@@ -21,9 +21,7 @@ class CompanyHeader extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: deep
-              ? CompanyColors.gradientDeep
-              : CompanyColors.gradient,
+          gradient: deep ? CompanyColors.gradientDeep : CompanyColors.gradient,
           borderRadius:
               const BorderRadius.vertical(bottom: Radius.circular(26)),
         ),
@@ -38,8 +36,7 @@ class CompanyHeader extends StatelessWidget {
             Positioned(
               bottom: -54,
               right: -26,
-              child: _blob(
-                  124, CompanyColors.accent.withValues(alpha: 0.10)),
+              child: _blob(124, CompanyColors.accent.withValues(alpha: 0.10)),
             ),
             Padding(padding: padding, child: child),
           ],
@@ -207,8 +204,7 @@ class QuickAction extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontSize: 11.5,
-                            color: AppColors.textSecondary),
+                            fontSize: 11.5, color: AppColors.textSecondary),
                       ),
                     ],
                   ],
@@ -217,8 +213,8 @@ class QuickAction extends StatelessWidget {
               if (badge != null && badge! > 0)
                 Container(
                   margin: const EdgeInsets.only(left: 8),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 3),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.danger,
                     borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -269,8 +265,7 @@ class StatBar extends StatelessWidget {
               Container(
                 width: 9,
                 height: 9,
-                decoration:
-                    BoxDecoration(color: color, shape: BoxShape.circle),
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
               ),
               const SizedBox(width: 7),
               Text(
@@ -282,9 +277,7 @@ class StatBar extends StatelessWidget {
               Text(
                 '$value',
                 style: TextStyle(
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w800,
-                    color: color),
+                    fontSize: 12.5, fontWeight: FontWeight.w800, color: color),
               ),
             ],
           ),
@@ -336,8 +329,7 @@ class CompanySectionTitle extends StatelessWidget {
           const SizedBox(width: 9),
           Text(
             title,
-            style: const TextStyle(
-                fontSize: 16, fontWeight: FontWeight.w900),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
           ),
           const Spacer(),
           if (trailing != null) trailing!,
