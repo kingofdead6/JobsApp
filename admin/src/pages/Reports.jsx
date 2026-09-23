@@ -8,6 +8,7 @@ import {
   Modal,
   Pagination,
   Spinner,
+  Tabs,
   formatDate,
 } from '../components/ui.jsx';
 
@@ -67,24 +68,18 @@ export default function Reports() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-2">
-        {['open', 'reviewing', 'resolved', 'dismissed', 'all'].map((s) => (
-          <button
-            key={s}
-            onClick={() => {
-              setStatus(s);
-              setPage(1);
-            }}
-            className={`rounded-lg px-4 py-2 text-sm font-bold transition ${
-              status === s
-                ? 'bg-primary text-white'
-                : 'bg-white text-slate-600 hover:bg-slate-100'
-            }`}
-          >
-            {s === 'all' ? 'الكل' : STATUS_LABELS[s]}
-          </button>
-        ))}
-      </div>
+      <Tabs
+        items={['open', 'reviewing', 'resolved', 'dismissed', 'all'].map((k) => ({
+          key: k,
+          label: k === 'all' ? 'الكل' : STATUS_LABELS[k],
+          count: k === 'open' ? data.pagination?.total : 0,
+        }))}
+        value={status}
+        onChange={(k) => {
+          setStatus(k);
+          setPage(1);
+        }}
+      />
 
       {loading ? (
         <Spinner />

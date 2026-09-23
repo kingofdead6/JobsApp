@@ -2,43 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+/* لوحة الإدارة: هوية «غرفة تحكّم» داكنة، مختلفة عن التطبيقين */
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    @apply bg-slate-100 text-slate-900 font-sans antialiased;
   }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { @apply bg-slate-100; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full border-2 border-slate-100; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400; }
 }
 
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5
-           text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed;
+           text-sm font-bold transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-offset-1;
   }
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary-dark;
+    @apply btn bg-admin text-white hover:bg-admin-dark focus:ring-admin/40
+           shadow-sm hover:shadow;
   }
   .btn-outline {
-    @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+    @apply btn border border-slate-300 bg-white text-slate-700
+           hover:bg-slate-50 hover:border-slate-400 focus:ring-slate-300;
   }
   .btn-danger {
-    @apply btn bg-red-600 text-white hover:bg-red-700;
+    @apply btn bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-300;
   }
   .btn-success {
-    @apply btn bg-emerald-600 text-white hover:bg-emerald-700;
+    @apply btn bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-300;
   }
+
+  /* بطاقة داكنة الحافة — طابع لوحات التحكّم */
   .card {
-    @apply rounded-xl border border-slate-200 bg-white;
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm;
   }
+  .card-dark {
+    @apply rounded-xl border border-slate-700 bg-slate-800 text-slate-100;
+  }
+
   .input {
-    @apply w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm
-           outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm
+           outline-none transition focus:border-admin focus:ring-2 focus:ring-admin/15
+           placeholder:text-slate-400;
   }
   .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold;
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold;
   }
+
+  /* جداول كثيفة — المشرف يقرأ صفوفًا كثيرة */
   .th {
-    @apply px-4 py-3 text-right text-xs font-bold uppercase tracking-wide text-slate-500;
+    @apply px-4 py-3 text-right text-[11px] font-extrabold uppercase
+           tracking-wider text-slate-500 bg-slate-50;
   }
   .td {
-    @apply px-4 py-3 text-sm text-slate-700;
+    @apply px-4 py-3 text-sm text-slate-700 align-middle;
+  }
+  .row-hover {
+    @apply transition-colors hover:bg-admin/[0.03];
   }
 }

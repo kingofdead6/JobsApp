@@ -135,7 +135,7 @@ export default function Companies() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {data.items.map((c) => (
-                  <tr key={c._id} className="hover:bg-slate-50">
+                  <tr key={c._id} className="row-hover">
                     <td className="td">
                       <div className="font-bold text-slate-800">{c.name}</div>
                       <div className="text-xs text-slate-500">

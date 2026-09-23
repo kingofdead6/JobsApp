@@ -8,6 +8,7 @@ import {
   Modal,
   Pagination,
   Spinner,
+  Tabs,
   formatDate,
 } from '../components/ui.jsx';
 
@@ -95,23 +96,19 @@ export default function Offers() {
   return (
     <div className="space-y-4">
       {/* التبويبات */}
-      <div className="flex flex-wrap gap-2">
-        {TABS.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => {
-              setStatus(t.key);
-              setPage(1);
-            }}
-            className={`rounded-lg px-4 py-2 text-sm font-bold transition ${
-              status === t.key
-                ? 'bg-primary text-white'
-                : 'bg-white text-slate-600 hover:bg-slate-100'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
+      <div>
+        <Tabs
+          items={TABS.map((t) => ({
+            key: t.key,
+            label: t.label,
+            count: t.key === 'pending' ? data.pagination?.total : 0,
+          }))}
+          value={status}
+          onChange={(k) => {
+            setStatus(k);
+            setPage(1);
+          }}
+        />
       </div>
 
       {loading ? (
@@ -139,7 +136,7 @@ export default function Offers() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {data.items.map((o) => (
-                  <tr key={o._id} className="hover:bg-slate-50">
+                  <tr key={o._id} className="row-hover">
                     <td className="td">
                       <div className="font-bold text-slate-800">{o.title}</div>
                       <div className="text-xs text-slate-500">

@@ -119,7 +119,7 @@ export default function Users() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {data.items.map((u) => (
-                  <tr key={u._id} className="hover:bg-slate-50">
+                  <tr key={u._id} className="row-hover">
                     <td className="td">
                       <div className="font-bold text-slate-800">{u.fullName}</div>
                       <div className="text-xs text-slate-500">{u.email || ''}</div>
