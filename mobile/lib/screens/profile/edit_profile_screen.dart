@@ -39,8 +39,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late String? _wilaya = widget.user.wilaya;
   late String? _sector = widget.profile.sector;
   late String? _educationLevel = widget.profile.educationLevel;
-  late List<String> _skills = [...widget.profile.skills];
-  late List<dynamic> _languages = [...widget.profile.languages];
+  late final List<String> _skills = [...widget.profile.skills];
+  late final List<dynamic> _languages = [...widget.profile.languages];
 
   bool _saving = false;
 

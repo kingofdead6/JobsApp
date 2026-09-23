@@ -39,7 +39,7 @@ class _PostJobScreenState extends State<PostJobScreen> {
   // الخطوة 2 — تفاصيل إضافية
   late final _description =
       TextEditingController(text: widget.editing?.description ?? '');
-  late List<String> _skills = [...(widget.editing?.skills ?? [])];
+  late final List<String> _skills = [...(widget.editing?.skills ?? [])];
   late String? _educationLevel = widget.editing?.educationLevel;
   late String? _experienceLevel = widget.editing?.experienceLevel;
   final _positions = TextEditingController(text: '1');

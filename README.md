@@ -104,23 +104,45 @@ flutter pub get
 flutter run
 ```
 
-### ⚠️ ملاحظة مهمّة عن هذا الجهاز
+### بناء نسخة الإصدار
 
-**شفرة Flutter لم تُترجَم ولم تُشغَّل بعد.** حزمة Flutter مثبّتة في
-`C:\Program Files\flutter`، وهو مسار لا يملك فيه المستخدم صلاحية الكتابة،
-فيتعذّر على الأداة إنشاء ملف `bin\cache\lockfile` وتتوقّف عن الاستجابة.
-
-الحل (أحد الخيارين):
-
-```powershell
-# 1) منح المستخدم صلاحية التعديل (PowerShell كمسؤول)
-icacls "C:\Program Files\flutter" /grant "$env:USERNAME:(OI)(CI)M" /T
-
-# 2) أو نقل الحزمة إلى مسار يملك فيه المستخدم الصلاحية
-#    ثم تحديث متغيّر PATH ليشير إلى C:\flutter\bin
+```bash
+flutter build apk --release
+# الناتج: build/app/outputs/flutter-apk/app-release.apk  (~57 ميغابايت)
 ```
 
-بعدها شغّل `flutter pub get` ثم `flutter analyze` قبل أوّل تشغيل.
+### ⚠️ حزمة Flutter على هذا الجهاز
+
+النسخة المثبّتة في `C:\Program Files\flutter` **غير صالحة للاستعمال**: المسار
+لا يملك فيه المستخدم صلاحية الكتابة، فيفشل إنشاء `bin\cache\lockfile`
+وتتوقّف كل أوامر Flutter عن الاستجابة دون رسالة خطأ.
+
+تُستعمل بدلًا منها النسخة الموجودة في **`C:\flutter`** (نسخة كاملة يملك
+المستخدم صلاحياتها). إمّا تُشغَّل الأوامر بمسارها الكامل:
+
+```powershell
+C:\flutter\bin\flutter.bat build apk --release
+```
+
+أو يُحدَّث متغيّر PATH ليشير إلى `C:\flutter\bin` بدل `C:\Program Files\flutter\bin`.
+
+### تعديلات Gradle اللازمة
+
+- **`compileSdk = 36`** في `android/app/build.gradle.kts`.
+- **فرض `compileSdk` موحّدًا على كل المشاريع الفرعية** في
+  `android/build.gradle.kts`: إضافتا `file_picker` و`share_plus` تُصرَّفان
+  مقابل API 34 بينما تتطلّب تبعياتهما 36، فيفشل البناء دون هذا الفرض.
+  يُسجَّل عبر `afterEvaluate` **قبل** `evaluationDependsOn(":app")`، وإلّا
+  فات الأوان لأن المشاريع تكون قد قُيّمت.
+
+### التوقيع
+
+نسخة الإصدار موقّعة حاليًا **بمفاتيح التطوير (debug)** — كافية للتجريب
+والتثبيت المباشر، لكن Google Play يرفضها. قبل النشر: أنشئ keystore
+وأضف `signingConfig` حقيقيًا في `android/app/build.gradle.kts`.
+
+كذلك معرّف التطبيق هو `com.example.bahth_aan_amal_dz`، و**Google Play يرفض
+أي معرّف يبدأ بـ `com.example`** — يجب تغييره قبل النشر.
 
 ### عنوان الخادم
 

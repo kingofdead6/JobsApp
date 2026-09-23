@@ -57,11 +57,11 @@ class WelcomeScreen extends StatelessWidget {
                         label: const Text('إنشاء حساب جديد'),
                       ),
                       const SizedBox(height: 22),
-                      Row(
+                      const Row(
                         children: [
-                          const Expanded(child: Divider()),
+                          Expanded(child: Divider()),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            padding: EdgeInsets.symmetric(horizontal: 12),
                             child: Text(
                               'أو سجّل عبر',
                               style: TextStyle(
@@ -70,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Expanded(child: Divider()),
+                          Expanded(child: Divider()),
                         ],
                       ),
                       const SizedBox(height: 18),
