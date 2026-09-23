@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +27,9 @@ class CompanyShell extends StatefulWidget {
 class _CompanyShellState extends State<CompanyShell> {
   late int _index = widget.initialIndex;
 
+  StreamSubscription<SocketMessage>? _msgSub;
+  StreamSubscription<Map<String, dynamic>>? _notifSub;
+
   int _unreadMessages = 0;
   int _unreadNotifications = 0;
 
@@ -32,14 +37,15 @@ class _CompanyShellState extends State<CompanyShell> {
   void initState() {
     super.initState();
     _refreshBadges();
-    SocketService.instance.onMessage.addListener(_refreshBadges);
-    SocketService.instance.onNotification.addListener(_refreshBadges);
+    _msgSub = SocketService.instance.messages.listen((_) => _refreshBadges());
+    _notifSub =
+        SocketService.instance.notifications.listen((_) => _refreshBadges());
   }
 
   @override
   void dispose() {
-    SocketService.instance.onMessage.removeListener(_refreshBadges);
-    SocketService.instance.onNotification.removeListener(_refreshBadges);
+    _msgSub?.cancel();
+    _notifSub?.cancel();
     super.dispose();
   }
 

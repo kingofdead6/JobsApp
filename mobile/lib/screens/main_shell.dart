@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,9 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   late int _index = widget.initialIndex;
 
+  StreamSubscription<SocketMessage>? _msgSub;
+  StreamSubscription<Map<String, dynamic>>? _notifSub;
+
   int _unreadMessages = 0;
   int _unreadNotifications = 0;
 
@@ -31,14 +36,15 @@ class _MainShellState extends State<MainShell> {
     _refreshBadges();
 
     // تحديث الشارات فور وصول رسالة أو إشعار
-    SocketService.instance.onMessage.addListener(_refreshBadges);
-    SocketService.instance.onNotification.addListener(_refreshBadges);
+    _msgSub = SocketService.instance.messages.listen((_) => _refreshBadges());
+    _notifSub =
+        SocketService.instance.notifications.listen((_) => _refreshBadges());
   }
 
   @override
   void dispose() {
-    SocketService.instance.onMessage.removeListener(_refreshBadges);
-    SocketService.instance.onNotification.removeListener(_refreshBadges);
+    _msgSub?.cancel();
+    _notifSub?.cancel();
     super.dispose();
   }
 

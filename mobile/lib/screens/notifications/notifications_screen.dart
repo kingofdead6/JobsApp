@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../core/network/api_client.dart';
@@ -21,6 +23,7 @@ class NotificationsScreen extends StatefulWidget {
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
   List<NotificationModel> _items = [];
+  StreamSubscription<Map<String, dynamic>>? _sub;
   bool _loading = true;
   String? _error;
 
@@ -28,12 +31,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   void initState() {
     super.initState();
     _load();
-    SocketService.instance.onNotification.addListener(_load);
+    _sub = SocketService.instance.notifications.listen((_) => _load());
   }
 
   @override
   void dispose() {
-    SocketService.instance.onNotification.removeListener(_load);
+    _sub?.cancel();
     super.dispose();
   }
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,7 @@ class ConversationsScreen extends StatefulWidget {
 
 class _ConversationsScreenState extends State<ConversationsScreen> {
   List<ConversationModel> _items = [];
+  StreamSubscription<SocketMessage>? _sub;
   bool _loading = true;
   String? _error;
 
@@ -29,12 +32,12 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
   void initState() {
     super.initState();
     _load();
-    SocketService.instance.onMessage.addListener(_load);
+    _sub = SocketService.instance.messages.listen((_) => _load());
   }
 
   @override
   void dispose() {
-    SocketService.instance.onMessage.removeListener(_load);
+    _sub?.cancel();
     super.dispose();
   }
 

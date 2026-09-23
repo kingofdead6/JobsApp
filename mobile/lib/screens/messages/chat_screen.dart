@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,54 +36,89 @@ class _ChatScreenState extends State<ChatScreen> {
   final _scrollCtrl = ScrollController();
 
   final List<MessageModel> _messages = [];
+
+  /// معرّفات الرسائل المعروضة — تمنع التكرار بين ردّ الإرسال والمقبس
+  final Set<String> _seenIds = {};
+
+  StreamSubscription<SocketMessage>? _msgSub;
+  StreamSubscription<TypingEvent>? _typingSub;
+  Timer? _typingTimer;
+  Timer? _typingThrottle;
+
   String? _conversationId;
+  String? _otherUserId;
   bool _loading = true;
   bool _sending = false;
+  bool _otherTyping = false;
   String? _error;
 
   @override
   void initState() {
     super.initState();
     _conversationId = widget.conversationId;
+    _otherUserId = widget.otherUserId;
+
     if (_conversationId != null) {
       _load();
     } else {
-      // محادثة جديدة تُنشأ عند إرسال أول رسالة
+      // محادثة جديدة تُنشأ عند إرسال أوّل رسالة
       _loading = false;
     }
-    SocketService.instance.onMessage.addListener(_onSocketMessage);
+
+    _msgSub = SocketService.instance.messages.listen(_onSocketMessage);
+    _typingSub = SocketService.instance.typing.listen(_onTyping);
   }
 
   @override
   void dispose() {
-    SocketService.instance.onMessage.removeListener(_onSocketMessage);
+    _msgSub?.cancel();
+    _typingSub?.cancel();
+    _typingTimer?.cancel();
+    _typingThrottle?.cancel();
     _ctrl.dispose();
     _scrollCtrl.dispose();
     super.dispose();
   }
 
-  void _onSocketMessage() {
-    final data = SocketService.instance.onMessage.value;
-    if (data == null) return;
-    if (data['conversationId'] != _conversationId) return;
+  void _onSocketMessage(SocketMessage event) {
+    if (!mounted) return;
+    if (event.conversationId != _conversationId) return;
 
-    final msg = data['message'];
-    if (msg is! Map) return;
+    final msg = MessageModel.fromJson(event.message);
+    if (_seenIds.contains(msg.id)) return; // وصلت مسبقًا
 
     setState(() {
-      _messages.add(MessageModel.fromJson(Map<String, dynamic>.from(msg)));
+      _seenIds.add(msg.id);
+      _messages.add(msg);
+      _otherTyping = false;
     });
     _scrollToBottom();
   }
 
+  void _onTyping(TypingEvent event) {
+    if (!mounted) return;
+    if (event.conversationId != _conversationId) return;
+
+    setState(() => _otherTyping = true);
+    _typingTimer?.cancel();
+    _typingTimer = Timer(const Duration(seconds: 3), () {
+      if (mounted) setState(() => _otherTyping = false);
+    });
+  }
+
   Future<void> _load() async {
     try {
-      final (_, messages) = await MessageService.messages(_conversationId!);
+      final (conversation, messages) =
+          await MessageService.messages(_conversationId!);
       if (!mounted) return;
       setState(() {
         _messages
           ..clear()
           ..addAll(messages);
+        _seenIds
+          ..clear()
+          ..addAll(messages.map((m) => m.id));
+        _otherUserId ??= conversation.otherParty?.id;
         _loading = false;
       });
       _scrollToBottom();
@@ -99,11 +136,20 @@ class _ChatScreenState extends State<ChatScreen> {
       if (_scrollCtrl.hasClients) {
         _scrollCtrl.animateTo(
           _scrollCtrl.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeOut,
+          duration: AppMotion.normal,
+          curve: AppMotion.curve,
         );
       }
     });
+  }
+
+  /// يُرسل حدث «يكتب» مرّة كل ثانيتين كحدّ أقصى
+  void _notifyTyping() {
+    if (_conversationId == null || _otherUserId == null) return;
+    if (_typingThrottle?.isActive ?? false) return;
+
+    SocketService.instance.emitTyping(_conversationId!, _otherUserId!);
+    _typingThrottle = Timer(const Duration(seconds: 2), () {});
   }
 
   Future<void> _send() async {
@@ -120,7 +166,10 @@ class _ChatScreenState extends State<ChatScreen> {
       if (!mounted) return;
       setState(() {
         _conversationId = convId;
-        _messages.add(message);
+        if (!_seenIds.contains(message.id)) {
+          _seenIds.add(message.id);
+          _messages.add(message);
+        }
         _ctrl.clear();
       });
       _scrollToBottom();
@@ -137,15 +186,39 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
-          flexibleSpace: const DecoratedBox(
-            decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-          ),
-          title: Text(widget.title)),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),
+        title: Column(
+          children: [
+            Text(widget.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+            // مؤشّر «يكتب» أو حالة الاتصال أسفل الاسم
+            ValueListenableBuilder<bool>(
+              valueListenable: SocketService.instance.connected,
+              builder: (_, online, __) {
+                final label = _otherTyping
+                    ? 'يكتب الآن...'
+                    : (online ? 'متّصل' : 'جارٍ إعادة الاتصال...');
+                return Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w600,
+                    color: _otherTyping
+                        ? AppColors.goldLight
+                        : (online ? Colors.white70 : Colors.white54),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
             child: _loading
-                ? const Center(child: CircularProgressIndicator())
+                ? const Loader()
                 : _error != null
                     ? ErrorState(message: _error!, onRetry: _load)
                     : _messages.isEmpty
@@ -156,83 +229,77 @@ class _ChatScreenState extends State<ChatScreen> {
                           )
                         : ListView.builder(
                             controller: _scrollCtrl,
-                            padding: const EdgeInsets.all(16),
-                            itemCount: _messages.length,
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                            itemCount:
+                                _messages.length + (_otherTyping ? 1 : 0),
                             itemBuilder: (_, i) {
+                              if (i >= _messages.length) {
+                                return const _TypingBubble();
+                              }
                               final m = _messages[i];
-                              final isMine = m.senderId == myId;
-                              return _bubble(m, isMine);
+                              return _bubble(m, m.senderId == myId);
                             },
                           ),
           ),
-
-          // حقل الإرسال
-          Container(
-            padding: EdgeInsets.fromLTRB(
-              12,
-              10,
-              12,
-              10 + MediaQuery.of(context).padding.bottom,
-            ),
-            decoration: const BoxDecoration(
-              color: AppColors.surface,
-              border: Border(top: BorderSide(color: AppColors.border)),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _ctrl,
-                    maxLines: 4,
-                    minLines: 1,
-                    maxLength: 2000,
-                    textInputAction: TextInputAction.newline,
-                    onChanged: (_) {
-                      if (_conversationId != null &&
-                          widget.otherUserId != null) {
-                        SocketService.instance
-                            .emitTyping(_conversationId!, widget.otherUserId!);
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      hintText: 'اكتب رسالتك...',
-                      counterText: '',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Material(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(24),
-                  child: InkWell(
-                    onTap: _sending ? null : _send,
-                    borderRadius: BorderRadius.circular(24),
-                    child: Container(
-                      width: 48,
-                      height: 48,
-                      alignment: Alignment.center,
-                      child: _sending
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                  strokeWidth: 2.2, color: Colors.white),
-                            )
-                          : const Icon(Icons.send_rounded,
-                              color: Colors.white, size: 21),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _composer(),
         ],
       ),
     );
   }
+
+  Widget _composer() => Container(
+        padding: EdgeInsets.fromLTRB(
+            12, 10, 12, 10 + MediaQuery.of(context).padding.bottom),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          border: const Border(top: BorderSide(color: AppColors.border)),
+          boxShadow: AppShadows.lifted,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _ctrl,
+                maxLines: 4,
+                minLines: 1,
+                maxLength: 2000,
+                textInputAction: TextInputAction.newline,
+                onChanged: (_) => _notifyTyping(),
+                decoration: const InputDecoration(
+                  hintText: 'اكتب رسالتك...',
+                  counterText: '',
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            PressableScale(
+              onTap: _sending ? null : _send,
+              child: Container(
+                width: 48,
+                height: 48,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: AppColors.primaryGradient,
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
+                  boxShadow: AppShadows.colored(AppColors.primary),
+                ),
+                child: _sending
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                            strokeWidth: 2.2, color: Colors.white),
+                      )
+                    : const Icon(Icons.send_rounded,
+                        color: Colors.white, size: 21),
+              ),
+            ),
+          ],
+        ),
+      );
 
   Widget _bubble(MessageModel m, bool isMine) => Align(
         alignment: isMine ? Alignment.centerLeft : Alignment.centerRight,
@@ -243,7 +310,8 @@ class _ChatScreenState extends State<ChatScreen> {
             maxWidth: MediaQuery.of(context).size.width * 0.75,
           ),
           decoration: BoxDecoration(
-            color: isMine ? AppColors.primary : AppColors.surface,
+            gradient: isMine ? AppColors.primaryGradient : null,
+            color: isMine ? null : AppColors.surface,
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(16),
               topRight: const Radius.circular(16),
@@ -251,6 +319,7 @@ class _ChatScreenState extends State<ChatScreen> {
               bottomRight: Radius.circular(isMine ? 16 : 4),
             ),
             border: isMine ? null : Border.all(color: AppColors.border),
+            boxShadow: isMine ? null : AppShadows.soft,
           ),
           child: Column(
             crossAxisAlignment:
@@ -265,17 +334,100 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
               const SizedBox(height: 4),
-              Text(
-                m.createdAt == null
-                    ? ''
-                    : '${m.createdAt!.hour.toString().padLeft(2, '0')}:'
-                        '${m.createdAt!.minute.toString().padLeft(2, '0')}',
-                style: TextStyle(
-                  fontSize: 9.5,
-                  color: isMine ? Colors.white60 : AppColors.textMuted,
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    m.createdAt == null
+                        ? ''
+                        : '${m.createdAt!.hour.toString().padLeft(2, '0')}:'
+                            '${m.createdAt!.minute.toString().padLeft(2, '0')}',
+                    style: TextStyle(
+                      fontSize: 9.5,
+                      color: isMine ? Colors.white60 : AppColors.textMuted,
+                    ),
+                  ),
+                  if (isMine) ...[
+                    const SizedBox(width: 4),
+                    Icon(
+                      m.readAt != null
+                          ? Icons.done_all_rounded
+                          : Icons.done_rounded,
+                      size: 12,
+                      color: m.readAt != null
+                          ? AppColors.goldLight
+                          : Colors.white60,
+                    ),
+                  ],
+                ],
               ),
             ],
+          ),
+        ),
+      );
+}
+
+/// فقاعة «يكتب الآن» بثلاث نقاط متحرّكة
+class _TypingBubble extends StatefulWidget {
+  const _TypingBubble();
+
+  @override
+  State<_TypingBubble> createState() => _TypingBubbleState();
+}
+
+class _TypingBubbleState extends State<_TypingBubble>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _c = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1100),
+  )..repeat();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Align(
+        alignment: Alignment.centerRight,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+              bottomLeft: Radius.circular(16),
+              bottomRight: Radius.circular(4),
+            ),
+            border: Border.all(color: AppColors.border),
+          ),
+          child: AnimatedBuilder(
+            animation: _c,
+            builder: (_, __) => Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(3, (i) {
+                // كل نقطة تتأخّر عن سابقتها
+                final t = (_c.value + i * 0.22) % 1.0;
+                final scale = 0.6 + 0.4 * (t < 0.5 ? t * 2 : (1 - t) * 2);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                  child: Transform.scale(
+                    scale: scale,
+                    child: Container(
+                      width: 7,
+                      height: 7,
+                      decoration: const BoxDecoration(
+                        color: AppColors.textMuted,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
           ),
         ),
       );
