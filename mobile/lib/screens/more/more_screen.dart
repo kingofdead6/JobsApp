@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
@@ -28,12 +27,12 @@ class MoreScreen extends StatelessWidget {
         children: [
           _sectionTitle('التصفّح'),
           _tile(context,
-              icon: PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold),
+              icon: Icons.search_rounded,
               label: 'البحث عن عمل',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const JobsListScreen()))),
           _tile(context,
-              icon: PhosphorIcons.star(PhosphorIconsStyle.fill),
+              icon: Icons.star_rounded,
               label: 'العروض المميّزة',
               onTap: () => Navigator.push(
                   context,
@@ -41,18 +40,18 @@ class MoreScreen extends StatelessWidget {
                       builder: (_) =>
                           const JobsListScreen(featuredOnly: true)))),
           _tile(context,
-              icon: PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
+              icon: Icons.location_on_rounded,
               label: 'وظائف حسب الولاية',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const WilayaJobsScreen()))),
           _tile(context,
-              icon: PhosphorIcons.buildings(PhosphorIconsStyle.fill),
+              icon: Icons.business_rounded,
               label: 'الشركات',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const CompaniesScreen()))),
           if (auth.isSeeker)
             _tile(context,
-                icon: PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.fill),
+                icon: Icons.bookmark_rounded,
                 label: 'المحفوظات',
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const SavedScreen()))),
@@ -61,19 +60,19 @@ class MoreScreen extends StatelessWidget {
           _sectionTitle('عن التطبيق'),
 
           _tile(context,
-              icon: PhosphorIcons.shieldCheck(PhosphorIconsStyle.regular),
+              icon: Icons.privacy_tip_outlined,
               label: 'سياسة الخصوصية',
               onTap: () => _showPolicy(context)),
           _tile(context,
-              icon: PhosphorIcons.scales(PhosphorIconsStyle.fill),
+              icon: Icons.gavel_rounded,
               label: 'الشروط والأحكام',
               onTap: () => _showTerms(context)),
           _tile(context,
-              icon: PhosphorIcons.headset(PhosphorIconsStyle.fill),
+              icon: Icons.support_agent_rounded,
               label: 'تواصل معنا',
               onTap: () => _showContact(context)),
           _tile(context,
-              icon: PhosphorIcons.info(PhosphorIconsStyle.bold),
+              icon: Icons.info_outline_rounded,
               label: 'عن التطبيق',
               onTap: () => showAboutDialog(
                     context: context,
@@ -133,7 +132,7 @@ class MoreScreen extends StatelessWidget {
         title: Text(label,
             style:
                 const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-        trailing: Icon(PhosphorIcons.caretLeft(PhosphorIconsStyle.bold),
+        trailing: const Icon(Icons.chevron_left_rounded,
             color: AppColors.textMuted, size: 22),
         onTap: onTap,
       );

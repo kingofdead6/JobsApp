@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -94,9 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _identifier,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '0555 12 34 56',
-                    prefixIcon: Icon(PhosphorIcons.user(PhosphorIconsStyle.regular)),
+                    prefixIcon: Icon(Icons.person_outline_rounded),
                   ),
                   validator: (v) => (v == null || v.trim().isEmpty)
                       ? 'أدخل رقم الهاتف أو البريد الإلكتروني'
@@ -114,11 +113,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   onFieldSubmitted: (_) => _submit(),
                   decoration: InputDecoration(
                     hintText: '••••••',
-                    prefixIcon: Icon(PhosphorIcons.lock(PhosphorIconsStyle.bold)),
+                    prefixIcon: const Icon(Icons.lock_outline_rounded),
                     suffixIcon: IconButton(
                       icon: Icon(_obscure
-                          ? PhosphorIcons.eye(PhosphorIconsStyle.bold)
-                          : PhosphorIcons.eyeSlash(PhosphorIconsStyle.bold)),
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined),
                       onPressed: () => setState(() => _obscure = !_obscure),
                       tooltip: _obscure ? 'إظهار كلمة المرور' : 'إخفاء كلمة المرور',
                     ),

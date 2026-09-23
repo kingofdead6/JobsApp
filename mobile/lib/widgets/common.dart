@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../core/theme/app_theme.dart';
@@ -181,7 +180,7 @@ class AppLogo extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Icon(PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold),
+              Icon(Icons.search_rounded,
                   size: size * 0.44, color: fg),
               Positioned(
                 bottom: size * 0.15,
@@ -193,7 +192,7 @@ class AppLogo extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    PhosphorIcons.briefcase(PhosphorIconsStyle.fill),
+                    Icons.work_rounded,
                     size: size * 0.2,
                     color: AppColors.primaryDark,
                   ),
@@ -378,7 +377,7 @@ class VerifiedBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Icon(
-        PhosphorIcons.sealCheck(PhosphorIconsStyle.fill),
+        Icons.verified_rounded,
         size: size,
         color: AppColors.info,
         semanticLabel: 'مؤسسة موثّقة',
@@ -406,13 +405,13 @@ class ContractChip extends StatelessWidget {
   };
 
   static IconData iconFor(String key) => switch (key) {
-        'full_time' => PhosphorIcons.clock(PhosphorIconsStyle.fill),
-        'part_time' => PhosphorIcons.clockCountdown(PhosphorIconsStyle.fill),
-        'cdd' => PhosphorIcons.calendarBlank(PhosphorIconsStyle.fill),
-        'internship' => PhosphorIcons.graduationCap(PhosphorIconsStyle.fill),
-        'seasonal' => PhosphorIcons.sun(PhosphorIconsStyle.fill),
-        'remote' => PhosphorIcons.house(PhosphorIconsStyle.fill),
-        _ => PhosphorIcons.briefcase(PhosphorIconsStyle.fill),
+        'full_time' => Icons.schedule_rounded,
+        'part_time' => Icons.timelapse_rounded,
+        'cdd' => Icons.calendar_today_rounded,
+        'internship' => Icons.school_rounded,
+        'seasonal' => Icons.wb_sunny_rounded,
+        'remote' => Icons.home_rounded,
+        _ => Icons.work_rounded,
       };
 
   @override
@@ -456,13 +455,13 @@ class FeaturedBadge extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.pill),
           boxShadow: AppShadows.colored(AppColors.gold, opacity: 0.30),
         ),
-        child: Row(
+        child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(PhosphorIcons.star(PhosphorIconsStyle.fill),
+            Icon(Icons.star_rounded,
                 size: 10, color: AppColors.primaryDark),
-            const SizedBox(width: 3),
-            const Text(
+            SizedBox(width: 3),
+            Text(
               'مميّز',
               style: TextStyle(
                 fontSize: 9.5,
@@ -530,18 +529,18 @@ class CompanyAvatar extends StatelessWidget {
   });
 
   static IconData sectorIcon(String? sector) => switch (sector) {
-        'construction' => PhosphorIcons.hammer(PhosphorIconsStyle.duotone),
-        'transport' => PhosphorIcons.truck(PhosphorIconsStyle.duotone),
-        'hospitality' => PhosphorIcons.forkKnife(PhosphorIconsStyle.duotone),
-        'industry' => PhosphorIcons.factory(PhosphorIconsStyle.duotone),
-        'commerce' => PhosphorIcons.storefront(PhosphorIconsStyle.duotone),
-        'it' => PhosphorIcons.desktopTower(PhosphorIconsStyle.duotone),
-        'health' => PhosphorIcons.firstAidKit(PhosphorIconsStyle.duotone),
-        'education' => PhosphorIcons.student(PhosphorIconsStyle.duotone),
-        'agriculture' => PhosphorIcons.plant(PhosphorIconsStyle.duotone),
-        'services' => PhosphorIcons.headset(PhosphorIconsStyle.duotone),
-        'crafts' => PhosphorIcons.wrench(PhosphorIconsStyle.duotone),
-        _ => PhosphorIcons.buildings(PhosphorIconsStyle.duotone),
+        'construction' => Icons.handyman_rounded,
+        'transport' => Icons.local_shipping_rounded,
+        'hospitality' => Icons.restaurant_rounded,
+        'industry' => Icons.factory_rounded,
+        'commerce' => Icons.storefront_rounded,
+        'it' => Icons.computer_rounded,
+        'health' => Icons.local_hospital_rounded,
+        'education' => Icons.school_rounded,
+        'agriculture' => Icons.agriculture_rounded,
+        'services' => Icons.support_agent_rounded,
+        'crafts' => Icons.build_rounded,
+        _ => Icons.business_rounded,
       };
 
   @override
@@ -692,7 +691,7 @@ class JobCard extends StatelessWidget {
 
                 Row(
                   children: [
-                    Icon(PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
+                    const Icon(Icons.location_on_rounded,
                         size: 13, color: AppColors.tileGreen),
                     const SizedBox(width: 3),
                     Flexible(
@@ -722,7 +721,7 @@ class JobCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(PhosphorIcons.money(PhosphorIconsStyle.fill),
+                      const Icon(Icons.payments_rounded,
                           size: 13, color: AppColors.success),
                       const SizedBox(width: 4),
                       Text(
@@ -765,8 +764,8 @@ class _SaveButton extends StatelessWidget {
                   ScaleTransition(scale: anim, child: child),
               child: Icon(
                 saved
-                    ? PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.fill)
-                    : PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.regular),
+                    ? Icons.bookmark_rounded
+                    : Icons.bookmark_rounded,
                 key: ValueKey(saved),
                 size: 21,
                 color: saved ? AppColors.primary : AppColors.textMuted,
@@ -853,7 +852,7 @@ class ErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => EmptyState(
-        icon: PhosphorIcons.wifiSlash(PhosphorIconsStyle.duotone),
+        icon: Icons.wifi_off_rounded,
         title: 'تعذّر تحميل البيانات',
         subtitle: message,
         action: onRetry == null
@@ -862,8 +861,8 @@ class ErrorState extends StatelessWidget {
                 width: 190,
                 child: OutlinedButton.icon(
                   onPressed: onRetry,
-                  icon: Icon(
-                      PhosphorIcons.arrowClockwise(PhosphorIconsStyle.bold),
+                  icon: const Icon(
+                      Icons.refresh_rounded,
                       size: 18),
                   label: const Text('إعادة المحاولة'),
                 ),
@@ -917,8 +916,8 @@ void showSnack(BuildContext context, String message, {bool error = false}) {
         children: [
           Icon(
             error
-                ? PhosphorIcons.warningCircle(PhosphorIconsStyle.fill)
-                : PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
+                ? Icons.error_rounded
+                : Icons.check_circle_rounded,
             color: Colors.white,
             size: 19,
           ),

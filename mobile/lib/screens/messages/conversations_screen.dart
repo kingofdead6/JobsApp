@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -101,8 +100,8 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
       return ErrorState(message: _error!, onRetry: _load);
     }
     if (_items.isEmpty) {
-      return EmptyState(
-        icon: PhosphorIcons.chatsCircle(PhosphorIconsStyle.regular),
+      return const EmptyState(
+        icon: Icons.forum_outlined,
         title: 'لا توجد محادثات',
         subtitle: 'تبدأ المحادثة بعد تقديم طلب توظيف أو استلامه',
       );
@@ -129,8 +128,8 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
               child: c.otherParty?.avatarUrl == null
                   ? Icon(
                       c.otherParty?.isCompany ?? false
-                          ? PhosphorIcons.buildings(PhosphorIconsStyle.fill)
-                          : PhosphorIcons.user(PhosphorIconsStyle.fill),
+                          ? Icons.business_rounded
+                          : Icons.person_rounded,
                       color: AppColors.primary,
                       size: 22,
                     )

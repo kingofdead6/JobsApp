@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -117,8 +116,8 @@ class _SavedScreenState extends State<SavedScreen> {
 
   Widget _offersTab() {
     if (_offers.isEmpty) {
-      return EmptyState(
-        icon: PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.regular),
+      return const EmptyState(
+        icon: Icons.bookmark_border_rounded,
         title: 'لا توجد عروض محفوظة',
         subtitle: 'احفظ العروض التي تهمّك للعودة إليها لاحقًا',
       );
@@ -142,7 +141,7 @@ class _SavedScreenState extends State<SavedScreen> {
               ),
               alignment: AlignmentDirectional.centerStart,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Icon(PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.duotone),
+              child: const Icon(Icons.bookmark_remove_rounded,
                   color: Colors.white),
             ),
             onDismissed: (_) => _unsave(o),
@@ -162,8 +161,8 @@ class _SavedScreenState extends State<SavedScreen> {
 
   Widget _searchesTab() {
     if (_searches.isEmpty) {
-      return EmptyState(
-        icon: PhosphorIcons.bellRinging(PhosphorIconsStyle.regular),
+      return const EmptyState(
+        icon: Icons.notifications_active_outlined,
         title: 'لا توجد عمليات بحث محفوظة',
         subtitle: 'احفظ بحثك لتصلك تنبيهات عند ظهور عرض مطابق',
       );
@@ -251,8 +250,8 @@ class _SavedScreenState extends State<SavedScreen> {
                     children: [
                       Icon(
                         alertOn
-                            ? PhosphorIcons.bellRinging(PhosphorIconsStyle.fill)
-                            : PhosphorIcons.bellSlash(PhosphorIconsStyle.fill),
+                            ? Icons.notifications_active_rounded
+                            : Icons.notifications_off_rounded,
                         size: 18,
                         color: alertOn
                             ? AppColors.primary
@@ -281,14 +280,14 @@ class _SavedScreenState extends State<SavedScreen> {
                               ),
                             ),
                           ),
-                          icon: Icon(PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold), size: 17),
+                          icon: const Icon(Icons.search_rounded, size: 17),
                           label: const Text('عرض النتائج',
                               style: TextStyle(fontSize: 12.5)),
                         ),
                       ),
                       TextButton.icon(
                         onPressed: () => _deleteSearch(s),
-                        icon: Icon(PhosphorIcons.trash(PhosphorIconsStyle.bold),
+                        icon: const Icon(Icons.delete_outline_rounded,
                             size: 17, color: AppColors.danger),
                         label: const Text('حذف',
                             style: TextStyle(

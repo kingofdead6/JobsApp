@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -130,14 +129,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   static (IconData, Color) _visual(String type) => switch (type) {
-        'matching_offer' => (PhosphorIcons.briefcase(PhosphorIconsStyle.fill), AppColors.tileGreen),
-        'application_status' => (PhosphorIcons.clipboardText(PhosphorIconsStyle.fill), AppColors.info),
-        'new_message' => (PhosphorIcons.chatCircle(PhosphorIconsStyle.fill), AppColors.tilePurple),
-        'offer_approved' => (PhosphorIcons.checkCircle(PhosphorIconsStyle.fill), AppColors.success),
-        'offer_rejected' => (PhosphorIcons.xCircle(PhosphorIconsStyle.fill), AppColors.danger),
-        'new_application' => (PhosphorIcons.userPlus(PhosphorIconsStyle.fill), AppColors.tileOrange),
-        'company_verified' => (PhosphorIcons.sealCheck(PhosphorIconsStyle.fill), AppColors.info),
-        _ => (PhosphorIcons.megaphone(PhosphorIconsStyle.fill), AppColors.primary),
+        'matching_offer' => (Icons.work_rounded, AppColors.tileGreen),
+        'application_status' => (Icons.assignment_turned_in_rounded, AppColors.info),
+        'new_message' => (Icons.chat_bubble_rounded, AppColors.tilePurple),
+        'offer_approved' => (Icons.check_circle_rounded, AppColors.success),
+        'offer_rejected' => (Icons.cancel_rounded, AppColors.danger),
+        'new_application' => (Icons.person_add_rounded, AppColors.tileOrange),
+        'company_verified' => (Icons.verified_rounded, AppColors.info),
+        _ => (Icons.campaign_rounded, AppColors.primary),
       };
 
   @override
@@ -164,8 +163,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           : _error != null
               ? ErrorState(message: _error!, onRetry: _load)
               : _items.isEmpty
-                  ? EmptyState(
-                      icon: PhosphorIcons.bell(PhosphorIconsStyle.regular),
+                  ? const EmptyState(
+                      icon: Icons.notifications_none_rounded,
                       title: 'لا توجد إشعارات',
                       subtitle: 'ستصلك هنا تنبيهات العروض والطلبات والرسائل',
                     )
@@ -187,7 +186,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               alignment: AlignmentDirectional.centerStart,
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20),
-                              child: Icon(PhosphorIcons.trash(PhosphorIconsStyle.fill),
+                              child: const Icon(Icons.delete_rounded,
                                   color: Colors.white),
                             ),
                             onDismissed: (_) {

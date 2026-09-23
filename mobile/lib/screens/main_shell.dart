@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../providers/auth_provider.dart';
 import '../services/api_services.dart';
@@ -79,41 +78,41 @@ class _MainShellState extends State<MainShell> {
           if (i == 1 || i == 3) _refreshBadges();
         },
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(PhosphorIcons.user(PhosphorIconsStyle.regular)),
-            activeIcon: Icon(PhosphorIcons.user(PhosphorIconsStyle.fill)),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline_rounded),
+            activeIcon: Icon(Icons.person_rounded),
             label: 'حسابي',
           ),
           BottomNavigationBarItem(
             icon: _Badge(
               count: _unreadMessages,
-              child: Icon(PhosphorIcons.envelopeSimple(PhosphorIconsStyle.regular)),
+              child: const Icon(Icons.mail_outline_rounded),
             ),
             activeIcon: _Badge(
               count: _unreadMessages,
-              child: Icon(PhosphorIcons.envelopeSimple(PhosphorIconsStyle.fill)),
+              child: const Icon(Icons.mail_rounded),
             ),
             label: 'الرسائل',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(PhosphorIcons.house(PhosphorIconsStyle.regular)),
-            activeIcon: Icon(PhosphorIcons.house(PhosphorIconsStyle.fill)),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home_rounded),
             label: 'الرئيسية',
           ),
           BottomNavigationBarItem(
             icon: _Badge(
               count: _unreadNotifications,
-              child: Icon(PhosphorIcons.bell(PhosphorIconsStyle.regular)),
+              child: const Icon(Icons.notifications_outlined),
             ),
             activeIcon: _Badge(
               count: _unreadNotifications,
-              child: Icon(PhosphorIcons.bell(PhosphorIconsStyle.fill)),
+              child: const Icon(Icons.notifications_rounded),
             ),
             label: 'الإشعارات',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(PhosphorIcons.squaresFour(PhosphorIconsStyle.regular)),
-            activeIcon: Icon(PhosphorIcons.squaresFour(PhosphorIconsStyle.fill)),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.grid_view_outlined),
+            activeIcon: Icon(Icons.grid_view_rounded),
             label: 'المزيد',
           ),
         ],

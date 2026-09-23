@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -58,9 +57,9 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
       };
 
   static IconData statusIcon(String status) => switch (status) {
-        'accepted' => PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
-        'rejected' => PhosphorIcons.xCircle(PhosphorIconsStyle.fill),
-        _ => PhosphorIcons.hourglassMedium(PhosphorIconsStyle.fill),
+        'accepted' => Icons.check_circle_rounded,
+        'rejected' => Icons.cancel_rounded,
+        _ => Icons.hourglass_top_rounded,
       };
 
   @override
@@ -68,7 +67,7 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
     // جانب المؤسسة: الترشّحات تُتابَع من داخل كل عرض
     if (widget.isCompany) {
       return EmptyState(
-        icon: PhosphorIcons.folderOpen(PhosphorIconsStyle.fill),
+        icon: Icons.folder_shared_rounded,
         title: 'الترشّحات المستلمة',
         subtitle: 'تابع الترشّحات من صفحة كل عرض من عروضك',
         action: SizedBox(
@@ -141,8 +140,8 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
     if (_error != null) return ErrorState(message: _error!, onRetry: _load);
 
     if (_items.isEmpty) {
-      return EmptyState(
-        icon: PhosphorIcons.clipboardText(PhosphorIconsStyle.regular),
+      return const EmptyState(
+        icon: Icons.assignment_outlined,
         title: 'لا توجد طلبات',
         subtitle: 'ابحث عن عرض يناسبك وقدّم طلبك',
       );
@@ -256,7 +255,7 @@ class _ApplicationsScreenState extends State<ApplicationsScreen> {
                             ),
                           ),
                         ),
-                        icon: Icon(PhosphorIcons.chatCircle(PhosphorIconsStyle.regular),
+                        icon: const Icon(Icons.chat_bubble_outline_rounded,
                             size: 16),
                         label: const Text('مراسلة',
                             style: TextStyle(fontSize: 12.5)),

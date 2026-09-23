@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -149,8 +148,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 : _error != null
                     ? ErrorState(message: _error!, onRetry: _load)
                     : _messages.isEmpty
-                        ? EmptyState(
-                            icon: PhosphorIcons.chatCircle(PhosphorIconsStyle.regular),
+                        ? const EmptyState(
+                            icon: Icons.chat_bubble_outline_rounded,
                             title: 'ابدأ المحادثة',
                             subtitle: 'اكتب رسالتك الأولى في الأسفل',
                           )
@@ -220,7 +219,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: CircularProgressIndicator(
                                   strokeWidth: 2.2, color: Colors.white),
                             )
-                          : Icon(PhosphorIcons.paperPlaneTilt(PhosphorIconsStyle.fill),
+                          : const Icon(Icons.send_rounded,
                               color: Colors.white, size: 21),
                     ),
                   ),

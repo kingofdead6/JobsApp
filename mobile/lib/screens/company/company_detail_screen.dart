@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -122,7 +121,7 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                       ),
                       if (c.isVerified) ...[
                         const SizedBox(width: 6),
-                        Icon(PhosphorIcons.sealCheck(PhosphorIconsStyle.fill),
+                        const Icon(Icons.verified_rounded,
                             color: Colors.white, size: 19),
                       ],
                     ],
@@ -141,13 +140,13 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                         color: Colors.white.withValues(alpha: 0.18),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(PhosphorIcons.sealCheck(PhosphorIconsStyle.fill),
+                          Icon(Icons.verified_rounded,
                               size: 14, color: Colors.white),
-                          const SizedBox(width: 5),
-                          const Text(
+                          SizedBox(width: 5),
+                          Text(
                             'مؤسسة موثّقة',
                             style: TextStyle(
                               color: Colors.white,
@@ -174,10 +173,10 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _row(PhosphorIcons.mapPin(PhosphorIconsStyle.fill), 'الولاية',
+                          _row(Icons.location_on_rounded, 'الولاية',
                               c.wilaya ?? '-'),
                           if (c.employeesRange != null)
-                            _row(PhosphorIcons.usersThree(PhosphorIconsStyle.fill), 'عدد العمال',
+                            _row(Icons.groups_rounded, 'عدد العمال',
                                 c.employeesRange!),
                           if (c.website != null && c.website!.isNotEmpty)
                             InkWell(
@@ -189,7 +188,7 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                                 await launchUrl(Uri.parse(url),
                                     mode: LaunchMode.externalApplication);
                               },
-                              child: _row(PhosphorIcons.globe(PhosphorIconsStyle.bold), 'الموقع',
+                              child: _row(Icons.language_rounded, 'الموقع',
                                   c.website!,
                                   link: true),
                             ),

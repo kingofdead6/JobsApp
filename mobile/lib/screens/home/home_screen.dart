@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/network/api_client.dart';
@@ -104,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             index: 2,
                             child: _sectionHeader(
                               'العروض المميّزة',
-                              PhosphorIcons.star(PhosphorIconsStyle.fill),
+                              Icons.star_rounded,
                               AppColors.gold,
                               onSeeAll: () => Navigator.push(
                                 context,
@@ -123,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           index: 4,
                           child: _sectionHeader(
                             'أحدث عروض العمل',
-                            PhosphorIcons.lightning(PhosphorIconsStyle.fill),
+                            Icons.bolt_rounded,
                             AppColors.tileOrange,
                             onSeeAll: _openSearch,
                           ),
@@ -134,12 +133,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 if (latest.isEmpty)
-                  SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      padding: EdgeInsets.symmetric(vertical: 40),
                       child: EmptyState(
-                        icon: PhosphorIcons.briefcase(
-                            PhosphorIconsStyle.duotone),
+                        icon: Icons.work_rounded,
                         title: 'لا توجد عروض منشورة بعد',
                         subtitle: 'عُد لاحقًا، تُضاف عروض جديدة يوميًا',
                       ),
@@ -181,8 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white.withValues(alpha: 0.16),
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
-                  child: Icon(
-                    PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold),
+                  child: const Icon(
+                    Icons.search_rounded,
                     color: Colors.white,
                     size: 19,
                   ),
@@ -204,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const Spacer(),
                 _iconButton(
-                  PhosphorIcons.bell(PhosphorIconsStyle.regular),
+                  Icons.notifications_none_rounded,
                   () => widget.onNavigateTab?.call(3),
                   tooltip: 'الإشعارات',
                 ),
@@ -276,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Row(
             children: [
-              Icon(PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold),
+              const Icon(Icons.search_rounded,
                   color: AppColors.primary, size: 20),
               const SizedBox(width: 10),
               const Expanded(
@@ -293,8 +291,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   gradient: AppColors.primaryGradient,
                   borderRadius: BorderRadius.circular(AppRadius.sm),
                 ),
-                child: Icon(
-                  PhosphorIcons.slidersHorizontal(PhosphorIconsStyle.bold),
+                child: const Icon(
+                  Icons.tune_rounded,
                   color: Colors.white,
                   size: 15,
                 ),
@@ -323,7 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
               left: -14,
               bottom: -20,
               child: Icon(
-                PhosphorIcons.hardHat(PhosphorIconsStyle.fill),
+                Icons.engineering_rounded,
                 size: 132,
                 color: Colors.white.withValues(alpha: 0.12),
               ),
@@ -390,10 +388,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(width: 5),
-                          Icon(
-                            PhosphorIcons.arrowLeft(PhosphorIconsStyle.bold),
+                          const Icon(
+                            Icons.arrow_back_rounded,
                             size: 13,
-                            color: const Color(0xFF3D2E00),
+                            color: Color(0xFF3D2E00),
                           ),
                         ],
                       ),
@@ -409,24 +407,24 @@ class _HomeScreenState extends State<HomeScreen> {
   /// المداخل الستة المختصرة — 3.2
   Widget _tiles(bool isCompany) {
     final tiles = <_Tile>[
-      _Tile('البحث عن عمل', PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold),
+      _Tile('البحث عن عمل', Icons.search_rounded,
           AppColors.tileGreen, _openSearch),
-      _Tile('سيرتي الذاتية', PhosphorIcons.fileText(PhosphorIconsStyle.fill),
+      _Tile('سيرتي الذاتية', Icons.description_rounded,
           AppColors.tileBlue, () {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => const CvScreen()));
       }),
-      _Tile('الشركات', PhosphorIcons.buildings(PhosphorIconsStyle.fill),
+      _Tile('الشركات', Icons.business_rounded,
           AppColors.tilePurple, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const CompaniesScreen()));
       }),
-      _Tile('وظائف حسب الولاية', PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
+      _Tile('وظائف حسب الولاية', Icons.location_on_rounded,
           AppColors.tileOrange, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const WilayaJobsScreen()));
       }),
-      _Tile('العروض المميّزة', PhosphorIcons.star(PhosphorIconsStyle.fill),
+      _Tile('العروض المميّزة', Icons.star_rounded,
           AppColors.tileRed, () {
         Navigator.push(
           context,
@@ -435,14 +433,14 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }),
       isCompany
-          ? _Tile('عروضي', PhosphorIcons.folderOpen(PhosphorIconsStyle.fill),
+          ? _Tile('عروضي', Icons.folder_shared_rounded,
               AppColors.tileTeal, () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const MyJobsScreen()));
             })
           : _Tile(
               'العروض المحفوظة',
-              PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.fill),
+              Icons.bookmark_rounded,
               AppColors.tileTeal, () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const SavedScreen()));
@@ -452,7 +450,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (isCompany) {
       tiles.insert(
         2,
-        _Tile('نشر عرض عمل', PhosphorIcons.plusCircle(PhosphorIconsStyle.fill),
+        _Tile('نشر عرض عمل', Icons.add_circle_rounded,
             AppColors.tileTeal, () {
           Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const PostJobScreen()))
@@ -552,12 +550,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 minimumSize: const Size(44, 36),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('عرض الكل', style: TextStyle(fontSize: 12.5)),
-                  const SizedBox(width: 2),
-                  Icon(PhosphorIcons.caretLeft(PhosphorIconsStyle.bold),
+                  Text('عرض الكل', style: TextStyle(fontSize: 12.5)),
+                  SizedBox(width: 2),
+                  Icon(Icons.chevron_left_rounded,
                       size: 13),
                 ],
               ),
@@ -627,7 +625,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Spacer(),
                         Row(
                           children: [
-                            Icon(PhosphorIcons.money(PhosphorIconsStyle.fill),
+                            const Icon(Icons.payments_rounded,
                                 size: 13, color: AppColors.success),
                             const SizedBox(width: 4),
                             Expanded(
@@ -647,7 +645,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 7),
                         Row(
                           children: [
-                            Icon(PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
+                            const Icon(Icons.location_on_rounded,
                                 size: 11, color: AppColors.textMuted),
                             const SizedBox(width: 3),
                             Expanded(

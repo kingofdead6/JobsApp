@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../widgets/common.dart';
@@ -106,8 +105,7 @@ class WelcomeScreen extends StatelessWidget {
                           index: 3,
                           child: _PrimaryButton(
                             label: 'تسجيل الدخول',
-                            icon: PhosphorIcons.signIn(
-                                PhosphorIconsStyle.bold),
+                            icon: Icons.login_rounded,
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -124,9 +122,8 @@ class WelcomeScreen extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (_) => const RegisterScreen()),
                             ),
-                            icon: Icon(
-                                PhosphorIcons.userPlus(
-                                    PhosphorIconsStyle.bold),
+                            icon: const Icon(
+                                Icons.person_add_rounded,
                                 size: 19),
                             label: const Text('إنشاء حساب جديد'),
                           ),
@@ -144,16 +141,14 @@ class WelcomeScreen extends StatelessWidget {
                               _SocialButton(
                                 label: 'Google',
                                 color: const Color(0xFFDB4437),
-                                icon: PhosphorIcons.googleLogo(
-                                    PhosphorIconsStyle.bold),
+                                icon: Icons.g_mobiledata_rounded,
                                 onTap: () => _notAvailable(context),
                               ),
                               const SizedBox(width: 14),
                               _SocialButton(
                                 label: 'Facebook',
                                 color: const Color(0xFF1877F2),
-                                icon: PhosphorIcons.facebookLogo(
-                                    PhosphorIconsStyle.fill),
+                                icon: Icons.facebook_rounded,
                                 onTap: () => _notAvailable(context),
                               ),
                             ],
@@ -161,18 +156,17 @@ class WelcomeScreen extends StatelessWidget {
                         ),
 
                         const SizedBox(height: 28),
-                        FadeInUp(
+                        const FadeInUp(
                           index: 7,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                  PhosphorIcons.shieldCheck(
-                                      PhosphorIconsStyle.fill),
+                                  Icons.verified_user_rounded,
                                   size: 15,
                                   color: AppColors.success),
-                              const SizedBox(width: 6),
-                              const Text(
+                              SizedBox(width: 6),
+                              Text(
                                 'آمن وموثوق · مجاني للباحثين عن عمل',
                                 style: TextStyle(
                                   fontSize: 11.5,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -220,7 +219,7 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
                     dense: true,
-                    leading: Icon(PhosphorIcons.briefcase(PhosphorIconsStyle.fill),
+                    leading: const Icon(Icons.work_rounded,
                         size: 18, color: AppColors.primary),
                     title: Text('${m['title'] ?? ''}',
                         style: const TextStyle(
@@ -241,7 +240,7 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                           mode: LaunchMode.externalApplication);
                     }
                   },
-                  icon: Icon(PhosphorIcons.filePdf(PhosphorIconsStyle.fill), size: 19),
+                  icon: const Icon(Icons.picture_as_pdf_rounded, size: 19),
                   label: const Text('فتح ملف السيرة الذاتية'),
                 ),
               ],
@@ -339,8 +338,8 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
     if (_error != null) return ErrorState(message: _error!, onRetry: _load);
 
     if (_items.isEmpty) {
-      return EmptyState(
-        icon: PhosphorIcons.users(PhosphorIconsStyle.regular),
+      return const EmptyState(
+        icon: Icons.people_outline_rounded,
         title: 'لا توجد ترشّحات',
         subtitle: 'لم يترشّح أحد لهذا العرض بعد',
       );
@@ -371,7 +370,7 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                             ? NetworkImage(a.applicant!.avatarUrl!)
                             : null,
                         child: a.applicant?.avatarUrl == null
-                            ? Icon(PhosphorIcons.user(PhosphorIconsStyle.fill),
+                            ? const Icon(Icons.person_rounded,
                                 color: AppColors.primary, size: 22)
                             : null,
                       ),
@@ -455,7 +454,7 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () => _showCv(a),
-                          icon: Icon(PhosphorIcons.fileText(PhosphorIconsStyle.regular), size: 17),
+                          icon: const Icon(Icons.description_outlined, size: 17),
                           label: const Text('السيرة',
                               style: TextStyle(fontSize: 12)),
                         ),
@@ -472,7 +471,7 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                               ),
                             ),
                           ),
-                          icon: Icon(PhosphorIcons.chatCircle(PhosphorIconsStyle.regular),
+                          icon: const Icon(Icons.chat_bubble_outline_rounded,
                               size: 17),
                           label: const Text('مراسلة',
                               style: TextStyle(fontSize: 12)),
@@ -481,13 +480,13 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
                       if (pending) ...[
                         IconButton(
                           onPressed: () => _decide(a, 'accepted'),
-                          icon: Icon(PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
+                          icon: const Icon(Icons.check_circle_rounded,
                               color: AppColors.success),
                           tooltip: 'قبول',
                         ),
                         IconButton(
                           onPressed: () => _decide(a, 'rejected'),
-                          icon: Icon(PhosphorIcons.xCircle(PhosphorIconsStyle.fill),
+                          icon: const Icon(Icons.cancel_rounded,
                               color: AppColors.danger),
                           tooltip: 'رفض',
                         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -31,7 +30,7 @@ class AccountScreen extends StatelessWidget {
           decoration: BoxDecoration(gradient: AppColors.primaryGradient),
         ),            title: const Text('حسابي'), automaticallyImplyLeading: false),
         body: EmptyState(
-          icon: PhosphorIcons.user(PhosphorIconsStyle.regular),
+          icon: Icons.person_outline_rounded,
           title: 'لم تسجّل الدخول بعد',
           subtitle: 'سجّل الدخول للوصول إلى حسابك',
           action: SizedBox(
@@ -79,8 +78,8 @@ class AccountScreen extends StatelessWidget {
                   child: user.avatarUrl == null
                       ? Icon(
                           user.isCompany
-                              ? PhosphorIcons.buildings(PhosphorIconsStyle.fill)
-                              : PhosphorIcons.user(PhosphorIconsStyle.fill),
+                              ? Icons.business_rounded
+                              : Icons.person_rounded,
                           size: 32,
                           color: AppColors.primary,
                         )
@@ -130,7 +129,7 @@ class AccountScreen extends StatelessWidget {
           if (auth.isSeeker) ...[
             _tile(
               context,
-              icon: PhosphorIcons.user(PhosphorIconsStyle.regular),
+              icon: Icons.person_outline_rounded,
               label: 'الملف الشخصي',
               onTap: () {
                 final profile = auth.profile;
@@ -149,7 +148,7 @@ class AccountScreen extends StatelessWidget {
             ),
             _tile(
               context,
-              icon: PhosphorIcons.fileText(PhosphorIconsStyle.regular),
+              icon: Icons.description_outlined,
               label: 'سيرتي الذاتية',
               onTap: () => Navigator.push(
                 context,
@@ -158,7 +157,7 @@ class AccountScreen extends StatelessWidget {
             ),
             _tile(
               context,
-              icon: PhosphorIcons.clipboardText(PhosphorIconsStyle.regular),
+              icon: Icons.assignment_outlined,
               label: 'طلبات التوظيف',
               onTap: () => Navigator.push(
                 context,
@@ -175,7 +174,7 @@ class AccountScreen extends StatelessWidget {
             ),
             _tile(
               context,
-              icon: PhosphorIcons.bookmarkSimple(PhosphorIconsStyle.regular),
+              icon: Icons.bookmark_border_rounded,
               label: 'العروض المحفوظة',
               onTap: () => Navigator.push(
                 context,
@@ -188,7 +187,7 @@ class AccountScreen extends StatelessWidget {
           if (auth.isCompany) ...[
             _tile(
               context,
-              icon: PhosphorIcons.buildings(PhosphorIconsStyle.regular),
+              icon: Icons.business_outlined,
               label: 'ملف المؤسسة',
               onTap: () => Navigator.push(
                 context,
@@ -197,7 +196,7 @@ class AccountScreen extends StatelessWidget {
             ),
             _tile(
               context,
-              icon: PhosphorIcons.folderOpen(PhosphorIconsStyle.regular),
+              icon: Icons.folder_shared_outlined,
               label: 'عروضي',
               onTap: () => Navigator.push(
                 context,
@@ -210,20 +209,20 @@ class AccountScreen extends StatelessWidget {
 
           _tile(
             context,
-            icon: PhosphorIcons.lock(PhosphorIconsStyle.bold),
+            icon: Icons.lock_outline_rounded,
             label: 'تغيير كلمة المرور',
             onTap: () => _changePassword(context),
           ),
           _tile(
             context,
-            icon: PhosphorIcons.signOut(PhosphorIconsStyle.bold),
+            icon: Icons.logout_rounded,
             label: 'تسجيل الخروج',
             color: AppColors.danger,
             onTap: () => _logout(context),
           ),
           _tile(
             context,
-            icon: PhosphorIcons.trash(PhosphorIconsStyle.bold),
+            icon: Icons.delete_forever_outlined,
             label: 'حذف الحساب نهائيًا',
             color: AppColors.danger,
             onTap: () => _deleteAccount(context),
@@ -264,7 +263,7 @@ class AccountScreen extends StatelessWidget {
             color: color ?? AppColors.textPrimary,
           ),
         ),
-        trailing: Icon(PhosphorIcons.caretLeft(PhosphorIconsStyle.bold),
+        trailing: const Icon(Icons.chevron_left_rounded,
             color: AppColors.textMuted, size: 22),
         onTap: onTap,
       );

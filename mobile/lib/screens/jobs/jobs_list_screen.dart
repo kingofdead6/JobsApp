@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
@@ -229,11 +228,11 @@ class _JobsListScreenState extends State<JobsListScreen> {
                   onSubmitted: (_) => _load(reset: true),
                   decoration: InputDecoration(
                     hintText: 'ابحث عن وظيفة...',
-                    prefixIcon: Icon(PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.bold)),
+                    prefixIcon: const Icon(Icons.search_rounded),
                     suffixIcon: _searchCtrl.text.isEmpty
                         ? null
                         : IconButton(
-                            icon: Icon(PhosphorIcons.x(PhosphorIconsStyle.bold), size: 20),
+                            icon: const Icon(Icons.close_rounded, size: 20),
                             onPressed: () {
                               _searchCtrl.clear();
                               _load(reset: true);
@@ -251,14 +250,14 @@ class _JobsListScreenState extends State<JobsListScreen> {
                     children: [
                       _filterChip(
                         label: activeCount > 0 ? 'تصفية ($activeCount)' : 'تصفية',
-                        icon: PhosphorIcons.slidersHorizontal(PhosphorIconsStyle.bold),
+                        icon: Icons.tune_rounded,
                         active: activeCount > 0,
                         onTap: _openFilters,
                       ),
                       const SizedBox(width: 8),
                       _filterChip(
                         label: _filters.wilaya ?? 'الولاية',
-                        icon: PhosphorIcons.mapPin(PhosphorIconsStyle.regular),
+                        icon: Icons.location_on_outlined,
                         active: _filters.wilaya != null,
                         onTap: _openFilters,
                       ),
@@ -267,7 +266,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
                         label: _filters.sector != null
                             ? Labels.sector(_filters.sector)
                             : 'المهنة',
-                        icon: PhosphorIcons.briefcase(PhosphorIconsStyle.regular),
+                        icon: Icons.work_outline_rounded,
                         active: _filters.sector != null,
                         onTap: _openFilters,
                       ),
@@ -276,7 +275,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
                         label: _filters.contractType != null
                             ? Labels.contract(_filters.contractType)
                             : 'نوع العقد',
-                        icon: PhosphorIcons.clock(PhosphorIconsStyle.bold),
+                        icon: Icons.schedule_rounded,
                         active: _filters.contractType != null,
                         onTap: _openFilters,
                       ),
@@ -310,7 +309,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
 
     if (_items.isEmpty) {
       return EmptyState(
-        icon: PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.duotone),
+        icon: Icons.search_off_rounded,
         title: 'لا توجد نتائج',
         subtitle: 'جرّب تغيير كلمات البحث أو معايير التصفية',
         action: _filters.activeCount > 0

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -65,7 +64,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        icon: Icon(PhosphorIcons.userCircle(PhosphorIconsStyle.duotone),
+        icon: const Icon(Icons.account_circle_rounded,
             size: 46, color: AppColors.primary),
         title: const Text('تسجيل الدخول مطلوب',
             textAlign: TextAlign.center),
@@ -154,7 +153,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
               color: AppColors.successSoft,
               shape: BoxShape.circle,
             ),
-            child: Icon(PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
+            child: const Icon(Icons.check_circle_rounded,
                 size: 42, color: AppColors.success),
           ),
           title: const Text('تم إرسال طلبك', textAlign: TextAlign.center),
@@ -230,14 +229,13 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             leading: IconButton(
-              icon: Icon(PhosphorIcons.arrowRight(PhosphorIconsStyle.bold)),
+              icon: const Icon(Icons.arrow_forward_rounded),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
               IconButton(
                 onPressed: _share,
-                icon: Icon(PhosphorIcons.shareNetwork(
-                    PhosphorIconsStyle.bold)),
+                icon: const Icon(Icons.share_rounded),
                 tooltip: 'مشاركة',
               ),
               IconButton(
@@ -248,10 +246,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       ScaleTransition(scale: a, child: c),
                   child: Icon(
                     _isSaved
-                        ? PhosphorIcons.bookmarkSimple(
-                            PhosphorIconsStyle.fill)
-                        : PhosphorIcons.bookmarkSimple(
-                            PhosphorIconsStyle.regular),
+                        ? Icons.bookmark_rounded
+                        : Icons.bookmark_rounded,
                     key: ValueKey(_isSaved),
                   ),
                 ),
@@ -278,7 +274,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                     index: 2,
                     child: _section(
                       'وصف الوظيفة',
-                      PhosphorIcons.textAlignRight(PhosphorIconsStyle.bold),
+                      Icons.notes_rounded,
                       child: Text(
                         o.description,
                         style: const TextStyle(
@@ -296,7 +292,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       index: 3,
                       child: _section(
                         'المهارات المطلوبة',
-                        PhosphorIcons.checkSquare(PhosphorIconsStyle.bold),
+                        Icons.checklist_rounded,
                         child: Column(
                           children: o.skills
                               .map((s) => Padding(
@@ -315,9 +311,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                             color: AppColors.successSoft,
                                             shape: BoxShape.circle,
                                           ),
-                                          child: Icon(
-                                            PhosphorIcons.check(
-                                                PhosphorIconsStyle.bold),
+                                          child: const Icon(
+                                            Icons.check_rounded,
                                             size: 11,
                                             color: AppColors.success,
                                           ),
@@ -350,7 +345,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                   Center(
                     child: TextButton.icon(
                       onPressed: _report,
-                      icon: Icon(PhosphorIcons.flag(PhosphorIconsStyle.bold),
+                      icon: const Icon(Icons.flag_rounded,
                           size: 16, color: AppColors.danger),
                       label: const Text(
                         'الإبلاغ عن هذا العرض',
@@ -434,9 +429,8 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                         ),
                         if (o.company?.isVerified ?? false) ...[
                           const SizedBox(width: 5),
-                          Icon(
-                              PhosphorIcons.sealCheck(
-                                  PhosphorIconsStyle.fill),
+                          const Icon(
+                              Icons.verified_rounded,
                               size: 15,
                               color: Colors.white),
                         ],
@@ -447,7 +441,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _headerPill(
-                          PhosphorIcons.mapPin(PhosphorIconsStyle.fill),
+                          Icons.location_on_rounded,
                           o.wilaya,
                         ),
                         const SizedBox(width: 8),
@@ -514,7 +508,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                 borderRadius: BorderRadius.circular(AppRadius.sm),
                 boxShadow: AppShadows.colored(AppColors.success),
               ),
-              child: Icon(PhosphorIcons.money(PhosphorIconsStyle.fill),
+              child: const Icon(Icons.payments_rounded,
                   color: Colors.white, size: 20),
             ),
             const SizedBox(width: 13),
@@ -546,7 +540,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
           if (o.educationLevel != null)
             Expanded(
               child: _factCard(
-                PhosphorIcons.graduationCap(PhosphorIconsStyle.fill),
+                Icons.school_rounded,
                 'المستوى',
                 Labels.education(o.educationLevel),
                 AppColors.tilePurple,
@@ -557,7 +551,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
           if (o.experienceLevel != null)
             Expanded(
               child: _factCard(
-                PhosphorIcons.briefcase(PhosphorIconsStyle.fill),
+                Icons.work_rounded,
                 'الخبرة',
                 Labels.experience(o.experienceLevel),
                 AppColors.tileBlue,
@@ -566,7 +560,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
           if (o.educationLevel == null && o.experienceLevel == null)
             Expanded(
               child: _factCard(
-                PhosphorIcons.tag(PhosphorIconsStyle.fill),
+                Icons.category_rounded,
                 'القطاع',
                 Labels.sector(o.sector),
                 AppColors.tileOrange,
@@ -684,7 +678,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                 ],
               ),
             ),
-            Icon(PhosphorIcons.caretLeft(PhosphorIconsStyle.bold),
+            const Icon(Icons.chevron_left_rounded,
                 size: 17, color: AppColors.textMuted),
           ],
         ),
@@ -710,15 +704,15 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                   border: Border.all(
                       color: AppColors.success.withValues(alpha: 0.3)),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                        PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
+                        Icons.check_circle_rounded,
                         color: AppColors.success,
                         size: 20),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'تم إرسال طلبك لهذا العرض',
                       style: TextStyle(
                         color: AppColors.success,
@@ -746,16 +740,15 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                             child: CircularProgressIndicator(
                                 strokeWidth: 2.4, color: Colors.white),
                           )
-                        : Row(
+                        : const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                  PhosphorIcons.paperPlaneTilt(
-                                      PhosphorIconsStyle.fill),
+                                  Icons.send_rounded,
                                   color: Colors.white,
                                   size: 19),
-                              const SizedBox(width: 9),
-                              const Text(
+                              SizedBox(width: 9),
+                              Text(
                                 'تقديم الطلب',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -813,15 +806,15 @@ class _CoverLetterSheetState extends State<_CoverLetterSheet> {
                   ),
                 ),
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                      PhosphorIcons.paperPlaneTilt(PhosphorIconsStyle.fill),
+                      Icons.send_rounded,
                       color: AppColors.primary,
                       size: 20),
-                  const SizedBox(width: 8),
-                  const Text(
+                  SizedBox(width: 8),
+                  Text(
                     'تقديم الطلب',
                     style: TextStyle(
                         fontSize: 17.5, fontWeight: FontWeight.w900),
@@ -848,8 +841,8 @@ class _CoverLetterSheetState extends State<_CoverLetterSheet> {
               const SizedBox(height: 6),
               ElevatedButton.icon(
                 onPressed: () => Navigator.pop(context, _ctrl.text.trim()),
-                icon: Icon(
-                    PhosphorIcons.paperPlaneTilt(PhosphorIconsStyle.fill),
+                icon: const Icon(
+                    Icons.send_rounded,
                     size: 18),
                 label: const Text('إرسال الطلب'),
               ),
@@ -869,13 +862,12 @@ class _ReportSheet extends StatelessWidget {
   const _ReportSheet();
 
   static IconData _iconFor(String key) => switch (key) {
-        'fake' => PhosphorIcons.prohibit(PhosphorIconsStyle.bold),
-        'scam' => PhosphorIcons.warningOctagon(PhosphorIconsStyle.bold),
-        'money_request' => PhosphorIcons.currencyCircleDollar(
-            PhosphorIconsStyle.bold),
-        'offensive' => PhosphorIcons.smileyXEyes(PhosphorIconsStyle.bold),
-        'duplicate' => PhosphorIcons.copy(PhosphorIconsStyle.bold),
-        _ => PhosphorIcons.dotsThreeCircle(PhosphorIconsStyle.bold),
+        'fake' => Icons.block_rounded,
+        'scam' => Icons.report_rounded,
+        'money_request' => Icons.monetization_on_rounded,
+        'offensive' => Icons.sentiment_very_dissatisfied_rounded,
+        'duplicate' => Icons.content_copy_rounded,
+        _ => Icons.more_horiz_rounded,
       };
 
   @override
@@ -898,13 +890,13 @@ class _ReportSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(PhosphorIcons.flag(PhosphorIconsStyle.fill),
+                Icon(Icons.flag_rounded,
                     color: AppColors.danger, size: 19),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'سبب الإبلاغ',
                   style:
                       TextStyle(fontSize: 16.5, fontWeight: FontWeight.w900),
@@ -927,8 +919,8 @@ class _ReportSheet extends StatelessWidget {
                 title: Text(e.value,
                     style: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w600)),
-                trailing: Icon(
-                    PhosphorIcons.caretLeft(PhosphorIconsStyle.bold),
+                trailing: const Icon(
+                    Icons.chevron_left_rounded,
                     size: 15,
                     color: AppColors.textMuted),
                 onTap: () => Navigator.pop(context, e.key),
