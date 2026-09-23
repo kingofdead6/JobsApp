@@ -5,7 +5,7 @@ import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/common.dart';
-import '../main_shell.dart';
+import '../home_router.dart';
 import 'otp_screen.dart';
 import 'register_screen.dart';
 import 'forgot_password_screen.dart';
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const MainShell()),
+        MaterialPageRoute(builder: (_) => const HomeRouter()),
         (_) => false,
       );
     } on ApiException catch (e) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/network/api_client.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/theme/company_theme.dart';
 import '../../core/utils/labels.dart';
 import '../../models/models.dart';
 import '../../services/api_services.dart';
@@ -11,7 +12,9 @@ import 'offer_applicants_screen.dart';
 
 /// تسيير العروض: تعديل، إيقاف، تمديد، إعادة نشر، عرض الترشّحات (3.6)
 class MyJobsScreen extends StatefulWidget {
-  const MyJobsScreen({super.key});
+  /// عند عرضها كتبويب داخل هيكل المؤسسة: بلا زر رجوع
+  final bool embedded;
+  const MyJobsScreen({super.key, this.embedded = false});
 
   @override
   State<MyJobsScreen> createState() => _MyJobsScreenState();
@@ -122,9 +125,12 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: !widget.embedded,
         flexibleSpace: const DecoratedBox(
-          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
-        ),title: const Text('عروضي')),
+          decoration: BoxDecoration(gradient: CompanyColors.gradient),
+        ),
+        title: const Text('عروضي'),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.push(
           context,

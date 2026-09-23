@@ -5,7 +5,7 @@ import '../core/theme/app_theme.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/common.dart';
 import 'auth/welcome_screen.dart';
-import 'main_shell.dart';
+import 'home_router.dart';
 
 /// شاشة البداية — الشعار يدخل بتكبير لطيف فوق تدرّج أزرق
 class SplashScreen extends StatefulWidget {
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
     Navigator.of(context).pushReplacement(PageRouteBuilder(
       transitionDuration: AppMotion.slow,
       pageBuilder: (_, __, ___) =>
-          auth.isAuthenticated ? const MainShell() : const WelcomeScreen(),
+          auth.isAuthenticated ? const HomeRouter() : const WelcomeScreen(),
       transitionsBuilder: (_, anim, __, child) => FadeTransition(
         opacity: CurvedAnimation(parent: anim, curve: Curves.easeOut),
         child: child,

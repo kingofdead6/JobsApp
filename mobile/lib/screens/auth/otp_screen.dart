@@ -8,7 +8,7 @@ import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
 import '../../services/api_services.dart';
 import '../../widgets/common.dart';
-import '../main_shell.dart';
+import '../home_router.dart';
 
 /// تأكيد رقم الهاتف برمز SMS (3.1)
 class OtpScreen extends StatefulWidget {
@@ -69,7 +69,7 @@ class _OtpScreenState extends State<OtpScreen> {
       await context.read<AuthProvider>().verifyOtp(widget.phone, code);
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const MainShell()),
+        MaterialPageRoute(builder: (_) => const HomeRouter()),
         (_) => false,
       );
     } on ApiException catch (e) {
