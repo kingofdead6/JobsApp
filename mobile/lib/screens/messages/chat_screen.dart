@@ -137,7 +137,10 @@ class _ChatScreenState extends State<ChatScreen> {
     final myId = context.read<AuthProvider>().user?.id;
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: Text(widget.title)),
       body: Column(
         children: [
           Expanded(

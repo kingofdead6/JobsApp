@@ -277,7 +277,9 @@ class _OfferApplicantsScreenState extends State<OfferApplicantsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.offerTitle,
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),        title: Text(widget.offerTitle,
             maxLines: 1, overflow: TextOverflow.ellipsis),
       ),
       body: Column(

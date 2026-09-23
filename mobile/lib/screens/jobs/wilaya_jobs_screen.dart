@@ -63,7 +63,10 @@ class _WilayaJobsScreenState extends State<WilayaJobsScreen> {
         : Labels.wilayas.where((w) => w.contains(query)).toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('وظائف حسب الولاية')),
+      appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: const Text('وظائف حسب الولاية')),
       body: Column(
         children: [
           Container(

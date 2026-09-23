@@ -89,7 +89,9 @@ class _SavedScreenState extends State<SavedScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('المحفوظات'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),          title: const Text('المحفوظات'),
           bottom: const TabBar(
             indicatorColor: AppColors.gold,
             indicatorWeight: 3,
@@ -146,6 +148,7 @@ class _SavedScreenState extends State<SavedScreen> {
             onDismissed: (_) => _unsave(o),
             child: JobCard(
               offer: o,
+              index: i,
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (_) => JobDetailScreen(offerId: o.id)),

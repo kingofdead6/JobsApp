@@ -146,7 +146,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('الإشعارات'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),        title: const Text('الإشعارات'),
         automaticallyImplyLeading: false,
         actions: [
           if (hasUnread)

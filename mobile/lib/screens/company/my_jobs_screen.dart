@@ -122,7 +122,10 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('عروضي')),
+      appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: const Text('عروضي')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.push(
           context,

@@ -209,7 +209,9 @@ class _JobsListScreenState extends State<JobsListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.companyName ??
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),        title: Text(widget.companyName ??
             (widget.featuredOnly ? 'العروض المميّزة' : 'عروض العمل')),
       ),
       body: Column(
@@ -343,6 +345,7 @@ class _JobsListScreenState extends State<JobsListScreen> {
           final offer = _items[i];
           return JobCard(
             offer: offer,
+            index: i,
             showSaveButton: true,
             onSaveToggle: () => _toggleSave(offer),
             onTap: () => Navigator.push(

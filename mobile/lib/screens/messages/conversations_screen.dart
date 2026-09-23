@@ -66,7 +66,9 @@ class _ConversationsScreenState extends State<ConversationsScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('الرسائل'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),          title: const Text('الرسائل'),
           automaticallyImplyLeading: false,
           bottom: const TabBar(
             indicatorColor: AppColors.gold,

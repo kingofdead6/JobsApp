@@ -187,7 +187,9 @@ class _PostJobScreenState extends State<PostJobScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(_isEditing ? 'تعديل العرض' : 'نشر عرض عمل'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),          title: Text(_isEditing ? 'تعديل العرض' : 'نشر عرض عمل'),
           leading: IconButton(
             icon: Icon(PhosphorIcons.arrowRight(PhosphorIconsStyle.bold)),
             onPressed: _back,

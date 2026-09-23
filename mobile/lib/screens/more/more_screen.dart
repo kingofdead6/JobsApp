@@ -20,7 +20,9 @@ class MoreScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text('المزيد'), automaticallyImplyLeading: false),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),          title: const Text('المزيد'), automaticallyImplyLeading: false),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 8),
         children: [

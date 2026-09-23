@@ -165,7 +165,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تعديل الملف الشخصي'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),        title: const Text('تعديل الملف الشخصي'),
         actions: [
           TextButton(
             onPressed: _saving ? null : _save,

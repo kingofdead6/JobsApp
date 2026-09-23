@@ -124,7 +124,9 @@ class _CvScreenState extends State<CvScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('سيرتي الذاتية'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),        title: const Text('سيرتي الذاتية'),
         actions: [
           if (!_loading && _profile != null)
             IconButton(

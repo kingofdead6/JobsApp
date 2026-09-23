@@ -55,13 +55,19 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   Widget build(BuildContext context) {
     if (_loading) {
       return Scaffold(
-        appBar: AppBar(title: const Text('المؤسسة')),
+        appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: const Text('المؤسسة')),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
     if (_error != null || _company == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('المؤسسة')),
+        appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: const Text('المؤسسة')),
         body: ErrorState(message: _error ?? 'غير موجودة', onRetry: _load),
       );
     }
@@ -69,7 +75,10 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
     final c = _company!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(c.name, maxLines: 1, overflow: TextOverflow.ellipsis)),
+      appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: Text(c.name, maxLines: 1, overflow: TextOverflow.ellipsis)),
       body: RefreshIndicator(
         onRefresh: _load,
         child: ListView(

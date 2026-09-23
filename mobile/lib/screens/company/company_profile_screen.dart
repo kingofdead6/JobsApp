@@ -150,14 +150,19 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   Widget build(BuildContext context) {
     if (_loading) {
       return Scaffold(
-        appBar: AppBar(title: const Text('ملف المؤسسة')),
+        appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: const Text('ملف المؤسسة')),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isNew ? 'إنشاء ملف المؤسسة' : 'ملف المؤسسة'),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),        title: Text(_isNew ? 'إنشاء ملف المؤسسة' : 'ملف المؤسسة'),
       ),
       body: Form(
         key: _formKey,

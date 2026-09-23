@@ -27,7 +27,9 @@ class AccountScreen extends StatelessWidget {
     if (user == null) {
       return Scaffold(
         appBar: AppBar(
-            title: const Text('حسابي'), automaticallyImplyLeading: false),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),            title: const Text('حسابي'), automaticallyImplyLeading: false),
         body: EmptyState(
           icon: PhosphorIcons.user(PhosphorIconsStyle.regular),
           title: 'لم تسجّل الدخول بعد',
@@ -49,7 +51,9 @@ class AccountScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text('حسابي'), automaticallyImplyLeading: false),
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),          title: const Text('حسابي'), automaticallyImplyLeading: false),
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -160,7 +164,10 @@ class AccountScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (_) => Scaffold(
-                    appBar: AppBar(title: const Text('طلبات التوظيف')),
+                    appBar: AppBar(
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+        ),title: const Text('طلبات التوظيف')),
                     body: const ApplicationsScreen(),
                   ),
                 ),
