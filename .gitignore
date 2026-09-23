@@ -15,3 +15,6 @@ mobile/android/.gradle/
 # الملفات المرفوعة من المستخدمين
 backend/uploads/*/*
 !backend/uploads/*/.gitkeep
+
+# موقع التحميل
+website/dist/

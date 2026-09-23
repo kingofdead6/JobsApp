@@ -1,13 +1,14 @@
 # بحث عن عمل DZ — منصّة التشغيل الجزائرية
 
 تنفيذ كامل لدفتر الشروط: تطبيق محمول بـ Flutter، واجهة خلفية REST بـ Express،
-ولوحة إدارة بـ React + Tailwind.
+لوحة إدارة وموقع تحميل بـ React + Tailwind.
 
 ```
 JobsPlatdorm/
 ├── backend/   ← Express + MongoDB (REST API + Socket.IO)
 ├── mobile/    ← تطبيق Flutter (عربي، RTL)
-└── admin/     ← لوحة الإدارة (React + Vite + Tailwind)
+├── admin/     ← لوحة الإدارة (React + Vite + Tailwind)
+└── website/   ← صفحة تحميل التطبيق (React + Vite + Tailwind)
 ```
 
 ---
@@ -171,6 +172,27 @@ flutter run --dart-define=API_URL=http://192.168.1.X:5000
 [Google Fonts](https://fonts.google.com/specimen/Cairo)، ضع الملفات في
 `mobile/assets/fonts/`، ثم أزل التعليق عن كتلة `fonts:` في
 [`pubspec.yaml`](mobile/pubspec.yaml). بدونه يعمل التطبيق بالخط الافتراضي.
+
+---
+
+## 4. موقع التحميل (website)
+
+```bash
+cd website
+npm install
+npm run dev              # http://localhost:5174
+npm run build            # الناتج في dist/
+```
+
+صفحة هبوط عربية (RTL) يحمّل منها المستخدمون ملف APK.
+
+> ⚠️ **رابط التحميل فارغ حاليًا.** ارفع
+> `mobile/build/app/outputs/flutter-apk/app-release.apk` إلى GitHub Releases
+> أو Google Drive، ثم ضع الرابط في
+> [`website/src/config.js`](website/src/config.js). ما دام فارغًا يعرض
+> الموقع زرًّا معطّلًا «سيتوفّر التحميل قريبًا» بدل رابط مكسور.
+
+التفاصيل الكاملة في [`website/README.md`](website/README.md).
 
 ---
 
